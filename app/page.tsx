@@ -4,11 +4,11 @@ import { Logo } from "@/app/ui/pokolenie-logo"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import Link from "next/link"
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-linear-160 from-gray-200 to-gray-30">
-
       <header className="hidden md:block">
         <div className="container mx-auto p-7">
           <div className="bg-white mx-auto flex justify-between align-center px-8 py-6 rounded-4xl shadow-md">
@@ -16,9 +16,9 @@ export default function Home() {
               <Logo />
             </div>
             <Button asChild>
-              <a href="/login" target="_blank">
+              <Link href="/login">
                 Войти
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function Home() {
                   </div>
 
                   <Button className="w-full h-12" asChild>
-                    <a href="/login">Войти в систему</a>
+                    <Link href="/login">Войти в систему</Link>
                   </Button>
                 </div>
               </CardContent>
