@@ -1,12 +1,19 @@
-'use client'
+// 'use client'
+'use server'
 import { Logo } from "@/app/ui/pokolenie-logo"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { auth } from "@/lib/auth"
+import { redirect } from "next/navigation"
 import Link from "next/link"
 
-export default function Home() {
+redirect
+
+export default async function Home() {
+  const session = await auth()
+
   return (
     <div className="min-h-screen flex flex-col justify-between bg-linear-160 from-gray-200 to-gray-30">
       <header className="hidden md:block">
@@ -16,9 +23,7 @@ export default function Home() {
               <Logo />
             </div>
             <Button asChild>
-              <Link href="/login">
-                Войти
-              </Link>
+              {session?.user ? <Link href="/profile">Перейти в профиль</Link> : <Link href="/login">Войти</Link>}
             </Button>
           </div>
         </div>
@@ -46,36 +51,49 @@ export default function Home() {
           </div>
 
           {/* Правая часть - карточка входа */}
-          <div className="lg:w-1/2 w-full max-w-md">
-            <Card className="border shadow-lg">
-              <CardContent className="pt-4">
-                <div className="space-y-6">
-                  <div className="text-center space-y-2">
-                    <h3 className="font-semibold">Уже являетесь участником?</h3>
+          {session?.user ?
+            (<div className="lg:w-1/2 w-full max-w-md">
+              <Card className="border shadow-lg">
+                <CardContent>
+                  <div className="space-y-6">
+                    <Button className="w-full h-12" asChild>
+                      <Link href="/profile">Перейти в профиль</Link>
+                    </Button>
                   </div>
+                </CardContent>
+              </Card>
+            </div>)
+            :
+            (<div className="lg:w-1/2 w-full max-w-md">
+              <Card className="border shadow-lg">
+                <CardContent className="pt-4">
+                  <div className="space-y-6">
+                    <div className="text-center space-y-2">
+                      <h3 className="font-semibold">Уже являетесь участником?</h3>
+                    </div>
 
-                  <Button className="w-full h-12" asChild>
-                    <Link href="/login">Войти в систему</Link>
-                  </Button>
-                </div>
-              </CardContent>
+                    <Button className="w-full h-12" asChild>
+                      <Link href="/login">Войти</Link>
+                    </Button>
+                  </div>
+                </CardContent>
 
-              <Separator />
+                <Separator />
 
-              <CardFooter className="pt-4">
-                <div className="text-center w-full space-y-3">
-                  <p className="text-sm text-gray-600">
-                    Хотите присоединиться к сообществу?
-                  </p>
-                  <Button variant="outline" className="w-full" asChild>
-                    <a href="https://pokolenie.info/участникам/" target="_blank">
-                      Узнать об отборе на сайте
-                    </a>
-                  </Button>
-                </div>
-              </CardFooter>
-            </Card>
-          </div>
+                <CardFooter className="pt-4">
+                  <div className="text-center w-full space-y-3">
+                    <p className="text-sm text-gray-600">
+                      Хотите присоединиться к сообществу?
+                    </p>
+                    <Button variant="outline" className="w-full" asChild>
+                      <a href="https://pokolenie.info/участникам/" target="_blank">
+                        Узнать об отборе на сайте
+                      </a>
+                    </Button>
+                  </div>
+                </CardFooter>
+              </Card>
+            </div>)}
         </div>
       </div>
 
@@ -84,7 +102,7 @@ export default function Home() {
           <div className="flex justify-between items-center text-sm text-gray-500 p-8">
             <div>© 2026 Проект «Поколение». Все права защищены.</div>
             <div className="flex gap-6">
-              <a href="" className="hover:text-gray-700" onClick={(e) => {
+              {/* <a href="" className="hover:text-gray-700" onClick={(e) => {
                 e.preventDefault()
                 alert("Здесь будет ссылка на контакты")
               }}>Контакты</a>
@@ -95,14 +113,14 @@ export default function Home() {
               <a href="" className="hover:text-gray-700" onClick={(e) => {
                 e.preventDefault()
                 alert("Здесь будет ссылка на политику конфиденциальности")
-              }}>Политика конфиденциальности</a>
+              }}>Политика конфиденциальности</a> */}
             </div>
           </div>
         </div>
       </footer>
 
       {/* Мобильный футер */}
-      <footer className="md:hidden py-6">
+      {/* <footer className="md:hidden py-6">
         <div className="container">
           <div className="text-center space-y-4">
             <div className="text-sm text-gray-500">
@@ -120,7 +138,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   )
 }

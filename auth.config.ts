@@ -17,8 +17,6 @@ export const authConfig = {
 
             if (isProtected && !isLoggedIn) return false
 
-            if (isPublic && isLoggedIn) return Response.redirect(new URL('/profile', nextUrl))
-
             return true
         }
     },

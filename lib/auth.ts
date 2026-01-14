@@ -13,6 +13,7 @@ export const authConfig: NextAuthConfig = {
                 password: { label: 'Password', type: 'password' }
             },
             async authorize(credentials) {
+                console.log('authorize:', credentials?.email)
                 try {
                     if (!credentials?.email || !credentials?.password) {
                         console.log('Отсутствует email или пароль')
@@ -59,6 +60,12 @@ export const authConfig: NextAuthConfig = {
                 }
                 return session
             },
+
+
+            async redirect({ url, baseUrl }) {
+                // Разрешаем редирект
+                return url.startsWith(baseUrl) ? url : `${baseUrl}/profile`
+            }
         },
     session: {
         strategy: 'jwt',
@@ -66,4 +73,4 @@ export const authConfig: NextAuthConfig = {
     },
 }
 
-export const { auth, signIn, signOut } = NextAuth(authConfig)
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig)
