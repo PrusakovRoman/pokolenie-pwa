@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Suspense } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -14,7 +15,9 @@ export default function LoginPage() {
                 </CardHeader>
 
                 <CardContent>
-                    <LoginForm />
+                    <Suspense>
+                        <LoginForm />
+                    </Suspense>
                 </CardContent>
 
                 <CardFooter className="flex-col space-y-4 border-t pt-6">
