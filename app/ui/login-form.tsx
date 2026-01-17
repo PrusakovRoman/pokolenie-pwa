@@ -13,7 +13,7 @@ import { authenticate } from "@/app/lib/actions"
 
 export default function LoginForm() {
     const searchParams = useSearchParams()
-    const callbackUrl = searchParams.get('callbackUrl') || '/profile'
+    const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
     const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined)
 
     return (
@@ -49,6 +49,7 @@ export default function LoginForm() {
                             variant="link"
                             className="h-auto p-0 text-xs"
                             type="button"
+                            onClick={() => alert('Логика восстановления пароль скоро будет реализована! Для восстановления пароля напишите на почту lalala@ro.ru')}
                         >
                             Забыли пароль?
                         </Button>

@@ -63,8 +63,7 @@ export const authConfig: NextAuthConfig = {
 
 
             async redirect({ url, baseUrl }) {
-                // Разрешаем редирект
-                return url.startsWith(baseUrl) ? url : `${baseUrl}/profile`
+                return url.startsWith(baseUrl) ? url : `${baseUrl}/dashboard`
             }
         },
     session: {

@@ -1,12 +1,21 @@
 import Link from "next/link"
 import { Suspense } from "react"
 
+// import { auth } from "@/lib/auth"
+// import { redirect } from "next/navigation"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 
 import LoginForm from "@/app/ui/login-form"
 
-export default function LoginPage() {
+export default async function LoginPage() {
+    // const session = await auth()
+
+    // if (session?.user) {
+    //     redirect('/')
+    // }
+
     return (
         <main className="min-h-screen flex items-center justify-center p-4 bg-linear-100 from-gray-200 to-gray-30">
             <Card className="w-full max-w-md">

@@ -1,30 +1,21 @@
 'use server'
-import { Logo } from "@/app/ui/pokolenie-logo"
+
+import { auth } from "@/lib/auth"
+import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { auth } from "@/lib/auth"
-import Link from "next/link"
+
 import Footer from "@/app/ui/footer"
+import Header from "@/app/ui/header"
 
 export default async function Home() {
   const session = await auth()
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-linear-160 from-gray-200 to-gray-30">
-      <header className="hidden md:block">
-        <div className="container mx-auto p-6">
-          <div className="bg-white mx-auto flex justify-between align-center px-8 py-6 rounded-4xl shadow-md">
-            <div className="flex items-center gap-3">
-              <Logo />
-            </div>
-            <Button asChild>
-              {session?.user ? <Link href="/profile">Перейти в профиль</Link> : <Link href="/login">Войти</Link>}
-            </Button>
-          </div>
-        </div>
-      </header>
+    <>
+      <Header />
 
       <main>
         <div className="container mx-auto p-6 md:py-16">
@@ -48,7 +39,6 @@ export default async function Home() {
 
             </div>
 
-            {/* Правая часть - карточка входа */}
             {session?.user ?
               (
                 <div className="lg:w-1/2 w-full max-w-md">
@@ -56,7 +46,7 @@ export default async function Home() {
                     <CardContent>
                       <div className="space-y-6">
                         <Button className="w-full h-12" asChild>
-                          <Link href="/profile">Перейти в профиль</Link>
+                          <Link href="/dashboard">Перейти в профиль</Link>
                         </Button>
                       </div>
                     </CardContent>
@@ -99,6 +89,6 @@ export default async function Home() {
       </main>
 
       <Footer />
-    </div>
+    </>
   )
 }

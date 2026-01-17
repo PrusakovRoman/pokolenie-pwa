@@ -6,9 +6,7 @@ import { redirect } from 'next/navigation';
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
     try {
-        // console.log('📨 FormData keys:', Array.from(formData.keys()))
-
-        const result = await signIn('credentials',
+        await signIn('credentials',
             {
                 email: formData.get('email') as string,
                 password: formData.get('password') as string,
@@ -16,8 +14,7 @@ export async function authenticate(prevState: string | undefined, formData: Form
             }
         )
 
-        // console.log('signIn result:', result)
-        const customRedirect = formData.get('customRedirect') as string || '/profile'
+        const customRedirect = formData.get('customRedirect') as string || '/dashboard'
         redirect(customRedirect)
     } catch (error) {
         if (error instanceof AuthError) {
