@@ -1,3 +1,5 @@
+'use client'
+
 import { Search, Filter, X, ChevronDown, ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -29,15 +31,15 @@ export function MaterialsFiltersAlt() {
         <div className="space-y-6 mb-8">
             {/* Поиск */}
             <div className="relative group">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground group-hover:text-primary group-focus-within:text-primary transition-colors duration-200" />
                 <Input
                     placeholder="Найти материал..."
-                    className="pl-12 pr-12 h-14 text-lg rounded-xl border-2 focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:shadow-[0_0_0_3px_hsl(var(--primary)/0.15)] transition-all duration-200"
+                    className="pl-12 pr-12 h-14 text-lg rounded-xl border-2 transition-all duration-200 focus-visible:border-primary focus-visible:ring-0 focus-visible:ring-offset-0"
                 />
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 h-10 w-10 hover:bg-transparent"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 h-10 w-10 hover:bg-primary/5"
                 >
                     <X className="h-5 w-5" />
                 </Button>
@@ -50,7 +52,7 @@ export function MaterialsFiltersAlt() {
                         <Filter className="h-5 w-5" />
                         <h3 className="text-lg font-semibold">Фильтры</h3>
                     </div>
-                    <Button variant="ghost" size="sm">
+                    <Button className="hover:bg-primary/5" variant="ghost" size="sm">
                         Сбросить всё
                     </Button>
                 </div>
@@ -171,7 +173,7 @@ function SelectedFilters() {
         <div className="mt-4 pt-4 border-t">
             <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium">Выбранные фильтры:</span>
-                <Button variant="ghost" size="sm" className="h-7 text-xs">
+                <Button variant="ghost" size="sm" className="h-7 text-xs hover:bg-primary/5">
                     Очистить все
                 </Button>
             </div>

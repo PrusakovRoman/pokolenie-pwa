@@ -1,20 +1,6 @@
-// components/materials/MaterialsSection.tsx
-'use client'
-
-import { useState } from "react"
-import { Search, Filter, Calendar, User, BookOpen, ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
 import { MaterialsGrid } from "@/app/ui/materials/materials-grid"
 import { MaterialsFiltersAlt } from "@/app/ui/materials/filters"
-import { MaterialsPagination, MaterialsPaginationMinimal, SimplePagination } from "@/app/ui/materials/pagination"
-
+import { MaterialsPagination } from "@/app/ui/materials/pagination"
 
 export default function Materials() {
     return (
@@ -31,9 +17,6 @@ export default function Materials() {
                 <MaterialsGrid />
 
                 <MaterialsPagination />
-                {/* эта вроде самая адекватная */}
-                {/* <MaterialsPaginationMinimal /> */}
-                {/* <SimplePagination /> */}
             </div>
         </div>
     )
