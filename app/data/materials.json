@@ -1,0 +1,89 @@
+{
+    "materials": [
+        {
+            "id": "material-001",
+            "title": "Развитие эмоционального интеллекта",
+            "previewUrl": "@/public/materials-previews/emotional-intelligence-1.jpg",
+            "author": "Иванова Мария",
+            "date": "2024-03-15",
+            "type": "Эмоциональный интеллект",
+            "typeColor": "#4CAF50",
+            "isLiked": true,
+            "content": {
+                "type": "article",
+                "url": "https://example.com/article-eq",
+                "introduction": "Эмоциональный интеллект - ключевой навык современности...",
+                "explanation": "Развитие EQ помогает в карьере и личной жизни...",
+                "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
+            }
+        },
+        {
+            "id": "material-002",
+            "title": "Эффективное планирование задач",
+            "previewUrl": "@/public/materials-previews/planning-1.jpg",
+            "author": "Петров Алексей",
+            "date": "2024-03-10",
+            "type": "Планирование",
+            "typeColor": "#2196F3",
+            "isLiked": false,
+            "content": {
+                "type": "video",
+                "embedUrl": "https://www.youtube.com/embed/example1",
+                "introduction": "Планирование - основа продуктивности.",
+                "explanation": "Рассматриваем методы тайм-менеджмента.",
+                "conclusion": "Внедрение методов повышает эффективность."
+            }
+        },
+        {
+            "id": "material-003",
+            "title": "Гармония в семейных отношениях",
+            "previewUrl": "@/public/materials-previews/family-1.jpg",
+            "author": "Смирнова Анна",
+            "date": "2024-02-28",
+            "type": "Семья",
+            "typeColor": "#FF9800",
+            "isLiked": true,
+            "content": {
+                "type": "book",
+                "url": "https://example.com/family-book.pdf",
+                "introduction": "Книга о гармонии в семье.",
+                "explanation": "Техники общения и решения конфликтов.",
+                "conclusion": "Применение принципов улучшает отношения."
+            }
+        },
+        {
+            "id": "material-004",
+            "title": "Качество сна и продуктивность",
+            "previewUrl": "@/public/materials-previews/sleep-1.jpg",
+            "author": "Козлов Дмитрий",
+            "date": "2024-02-20",
+            "type": "Сон",
+            "typeColor": "#9C27B0",
+            "isLiked": false,
+            "content": {
+                "type": "article",
+                "url": "https://example.com/sleep-article",
+                "introduction": "Сон влияет на все сферы жизни.",
+                "explanation": "Как улучшить качество сна.",
+                "conclusion": "Здоровый сон - основа здоровья."
+            }
+        },
+        {
+            "id": "material-005",
+            "title": "Мастерство коммуникации",
+            "previewUrl": "@/public/materials-previews/communication-art-1.jpg",
+            "author": "Николаев Владимир",
+            "date": "2024-02-15",
+            "type": "Искусство коммуникации",
+            "typeColor": "#F44336",
+            "isLiked": true,
+            "content": {
+                "type": "video",
+                "embedUrl": "https://www.youtube.com/embed/example2",
+                "introduction": "Коммуникация - важный социальный навык.",
+                "explanation": "Техники эффективного общения.",
+                "conclusion": "Практика делает общение эффективным."
+            }
+        }
+    ]
+}

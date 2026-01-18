@@ -11,20 +11,20 @@ interface MaterialPageProps {
     material: {
         id: string
         title: string
+        previewUrl: string
         author: string
         date: string
         type: string
         typeColor?: string
-        shortDescription: string
+        isLiked: boolean
         content: {
             type: 'video' | 'article' | 'link' | 'none'
             url?: string
             embedUrl?: string
-            title?: string
-            description?: string
+            introduction?: string
+            explanation: string
+            conclusion: string
         }
-        explanation: string
-        conclusion: string
     }
 }
 
