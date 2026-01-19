@@ -3,11 +3,11 @@
         {
             "id": "material-001",
             "title": "Развитие эмоционального интеллекта",
-            "previewUrl": "@/public/materials-previews/emotional-intelligence-1.jpg",
+            "imageUrl": "/emotional-intelligence-1.jpg",
             "author": "Иванова Мария",
             "date": "2024-03-15",
             "type": "Эмоциональный интеллект",
-            "typeColor": "#4CAF50",
+            "typeColor": "bg-pink-500",
             "isLiked": true,
             "content": {
                 "type": "article",
@@ -20,11 +20,11 @@
         {
             "id": "material-002",
             "title": "Эффективное планирование задач",
-            "previewUrl": "@/public/materials-previews/planning-1.jpg",
+            "imageUrl": "/planning-1.png",
             "author": "Петров Алексей",
             "date": "2024-03-10",
             "type": "Планирование",
-            "typeColor": "#2196F3",
+            "typeColor": "bg-emerald-500",
             "isLiked": false,
             "content": {
                 "type": "video",
@@ -37,11 +37,11 @@
         {
             "id": "material-003",
             "title": "Гармония в семейных отношениях",
-            "previewUrl": "@/public/materials-previews/family-1.jpg",
+            "imageUrl": "/family-1.jpg",
             "author": "Смирнова Анна",
             "date": "2024-02-28",
             "type": "Семья",
-            "typeColor": "#FF9800",
+            "typeColor": "bg-amber-500",
             "isLiked": true,
             "content": {
                 "type": "book",
@@ -54,11 +54,11 @@
         {
             "id": "material-004",
             "title": "Качество сна и продуктивность",
-            "previewUrl": "@/public/materials-previews/sleep-1.jpg",
+            "imageUrl": "/sleepping-1.jpg",
             "author": "Козлов Дмитрий",
             "date": "2024-02-20",
             "type": "Сон",
-            "typeColor": "#9C27B0",
+            "typeColor": "bg-blue-500",
             "isLiked": false,
             "content": {
                 "type": "article",
@@ -71,11 +71,11 @@
         {
             "id": "material-005",
             "title": "Мастерство коммуникации",
-            "previewUrl": "@/public/materials-previews/communication-art-1.jpg",
+            "imageUrl": "/communication-art-1.jpg",
             "author": "Николаев Владимир",
             "date": "2024-02-15",
             "type": "Искусство коммуникации",
-            "typeColor": "#F44336",
+            "typeColor": "bg-purple-500",
             "isLiked": true,
             "content": {
                 "type": "video",

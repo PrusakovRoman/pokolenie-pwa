@@ -49,16 +49,16 @@ export function UserProfileDropdown() {
         }
     }, [isOpen])
 
-    useEffect(() => {
-        const handleEscape = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' && isOpen) {
-                setIsOpen(false)
-            }
-        }
+    // useEffect(() => {
+    //     const handleEscape = (e: KeyboardEvent) => {
+    //         if (e.key === 'Escape' && isOpen) {
+    //             setIsOpen(false)
+    //         }
+    //     }
 
-        document.addEventListener('keydown', handleEscape)
-        return () => document.removeEventListener('keydown', handleEscape)
-    }, [isOpen])
+    //     document.addEventListener('keydown', handleEscape)
+    //     return () => document.removeEventListener('keydown', handleEscape)
+    // }, [isOpen])
 
     return (
         <div className="relative" ref={dropdownRef}>

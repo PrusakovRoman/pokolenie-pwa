@@ -2,6 +2,7 @@
 import { Calendar, User, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import Image from "next/image"
 
 interface MaterialCardProps {
     title: string
@@ -45,11 +46,7 @@ export function MaterialCard({
                 </div>
                 {/* Изображение */}
                 <div className="relative h-48 overflow-hidden flex-shrink-0">
-                    <img
-                        src={imageUrl}
-                        alt={title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                    <Image src={imageUrl} alt={title} sizes="(width: 100%) (height: 100%)" className="object-cover transition-transform duration-500 group-hover:scale-110" fill={true} priority />
                     {/* Градиент поверх изображения */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                 </div>

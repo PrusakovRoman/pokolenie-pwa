@@ -1,12 +1,7 @@
 import Footer from "@/app/ui/footer"
 import Header from "@/app/ui/header"
 
-import { Calendar, User, ExternalLink, Play, FileText, Link as LinkIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Badge } from "@/components/ui/badge"
-
-import { MaterialPageExample, MaterialPageContent } from "../ui/materials/material"
+import { MaterialPageContent } from "@/app/ui/materials/material"
 
 
 interface MaterialPageProps {
@@ -34,7 +29,6 @@ export default function Page({ material }: MaterialPageProps) {
     return (
         <>
             <Header />
-            {/* <MaterialPageExample/> */}
             <MaterialPageContent />
             <Footer />
         </>

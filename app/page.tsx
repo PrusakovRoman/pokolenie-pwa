@@ -3,12 +3,12 @@
 import { auth } from "@/lib/auth"
 import Link from "next/link"
 
+import Header from "@/app/ui/header"
+import Footer from "@/app/ui/footer"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-
-import Footer from "@/app/ui/footer"
-import Header from "@/app/ui/header"
 
 export default async function Home() {
   const session = await auth()
@@ -16,7 +16,6 @@ export default async function Home() {
   return (
     <>
       <Header />
-
       <main>
         <div className="container mx-auto p-6 md:py-16">
           <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24">
@@ -87,7 +86,6 @@ export default async function Home() {
           </div>
         </div>
       </main>
-
       <Footer />
     </>
   )
