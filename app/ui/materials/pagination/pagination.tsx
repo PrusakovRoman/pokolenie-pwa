@@ -7,7 +7,7 @@ export function MaterialsPagination() {
             {/* Информация */}
             <div className="text-sm text-muted-foreground">
                 Показано <span className="font-semibold text-foreground">1-9</span> из{" "}
-                <span className="font-semibold text-foreground">54</span> материалов
+                <span className="font-semibold text-foreground">56</span> материалов
             </div>
 
             {/* Пагинация */}

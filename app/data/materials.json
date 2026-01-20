@@ -6,7 +6,7 @@
             "imageUrl": "/emotional-intelligence-1.jpg",
             "author": "Иванова Мария",
             "date": "2024-03-15",
-            "type": "Эмоциональный интеллект",
+            "category": "softSkills",
             "typeColor": "bg-pink-500",
             "isLiked": true,
             "content": {
@@ -23,7 +23,7 @@
             "imageUrl": "/planning-1.png",
             "author": "Петров Алексей",
             "date": "2024-03-10",
-            "type": "Планирование",
+            "category": "Business",
             "typeColor": "bg-emerald-500",
             "isLiked": false,
             "content": {
@@ -40,7 +40,7 @@
             "imageUrl": "/family-1.jpg",
             "author": "Смирнова Анна",
             "date": "2024-02-28",
-            "type": "Семья",
+            "category": "Family",
             "typeColor": "bg-amber-500",
             "isLiked": true,
             "content": {
@@ -57,7 +57,7 @@
             "imageUrl": "/sleepping-1.jpg",
             "author": "Козлов Дмитрий",
             "date": "2024-02-20",
-            "type": "Сон",
+            "category": "Health",
             "typeColor": "bg-blue-500",
             "isLiked": false,
             "content": {
@@ -74,7 +74,7 @@
             "imageUrl": "/communication-art-1.jpg",
             "author": "Николаев Владимир",
             "date": "2024-02-15",
-            "type": "Искусство коммуникации",
+            "category": "softSkills",
             "typeColor": "bg-purple-500",
             "isLiked": true,
             "content": {

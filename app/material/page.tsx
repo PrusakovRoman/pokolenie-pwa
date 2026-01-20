@@ -1,7 +1,7 @@
 import Footer from "@/app/ui/footer"
 import Header from "@/app/ui/header"
 
-import { MaterialPageContent } from "@/app/ui/materials/material"
+import { MaterialPageContent } from "@/app/ui/material/material"
 
 
 interface MaterialPageProps {
