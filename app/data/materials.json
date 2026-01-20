@@ -7,7 +7,7 @@
             "author": "Иванова Мария",
             "date": "2024-03-15",
             "category": "softSkills",
-            "typeColor": "bg-pink-500",
+            "categoryColor": "bg-pink-500",
             "isLiked": true,
             "content": {
                 "type": "article",
@@ -24,7 +24,7 @@
             "author": "Петров Алексей",
             "date": "2024-03-10",
             "category": "Business",
-            "typeColor": "bg-emerald-500",
+            "categoryColor": "bg-emerald-500",
             "isLiked": false,
             "content": {
                 "type": "video",
@@ -41,7 +41,7 @@
             "author": "Смирнова Анна",
             "date": "2024-02-28",
             "category": "Family",
-            "typeColor": "bg-amber-500",
+            "categoryColor": "bg-amber-500",
             "isLiked": true,
             "content": {
                 "type": "book",
@@ -58,7 +58,7 @@
             "author": "Козлов Дмитрий",
             "date": "2024-02-20",
             "category": "Health",
-            "typeColor": "bg-blue-500",
+            "categoryColor": "bg-blue-500",
             "isLiked": false,
             "content": {
                 "type": "article",
@@ -75,7 +75,7 @@
             "author": "Николаев Владимир",
             "date": "2024-02-15",
             "category": "softSkills",
-            "typeColor": "bg-purple-500",
+            "categoryColor": "bg-purple-500",
             "isLiked": true,
             "content": {
                 "type": "video",

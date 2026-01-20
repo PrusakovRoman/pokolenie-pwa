@@ -23,16 +23,14 @@ export default function Materials() {
         goToPage,
         resetFilters } = useMaterials()
 
-
     return (
         <div className="min-h-screen bg-background p-4 md:p-6">
             <div className="container mx-auto">
-                {/* если не сработает pathname, можно просто прокидывать пропс */}
                 <SectionHeader />
 
-                <MaterialsNav />
+                <MaterialsNav metadata={metadata} selectedCategories={selectedCategories} searchQuery={searchQuery} toggleCategory={toggleCategory} setSearchQuery={setSearchQuery} resetFilters={resetFilters} />
 
-                <MaterialsGrid />
+                <MaterialsGrid materials={materials} isLoading={isLoading} />
 
                 {/* <MaterialsPagination /> */}
             </div>

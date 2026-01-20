@@ -2,10 +2,18 @@
 
 import { useState, useEffect, useCallback } from "react"
 
+interface Metadata {
+    total: number,
+    page: number,
+    limit: number,
+    totalPages: number
+}
+
 export function useMaterials() {
     const [materials, setMaterials] = useState([])
-    const [metadata, setMetadata] = useState(null)
+    const [metadata, setMetadata] = useState<Metadata | null>(null)
     const [selectedCategories, setSelectedCategories] = useState(['all'])
+    // const [selectedCategoriesLabels, setSelectedCategoriesLabels] = useState('')
     const [searchQuery, setSearchQuery] = useState('')
     const [page, setPage] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
