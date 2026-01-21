@@ -1,4 +1,3 @@
-// import FilterButton from "@/app/ui/materials/filters/mobile/filter-button"
 import { CategoryStat } from "@/lib/types/materials"
 import FilterButton from "@/app/ui/materials/filters/filter-button"
 

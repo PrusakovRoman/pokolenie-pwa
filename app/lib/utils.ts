@@ -4,12 +4,6 @@ interface PluralForms {
     many: string
 }
 
-/**
- * Универсальная функция для склонения слов по числам
- * @param count - количество
- * @param forms - формы слова {one, few, many}
- * @returns правильная форма слова
- */
 function pluralize(count: number, forms: PluralForms): string {
     if (count === 0) return forms.many
 
@@ -37,3 +31,30 @@ export const materialsWord = (count: number) =>
         few: 'материала',
         many: 'материалов'
     })
+
+export function generatePagination(totalPages: number, currentPage: number) {
+    const pages: (number | string)[] = []
+
+    if (totalPages <= 4) {
+        for (let i = 1; i <= totalPages; i++) {
+            pages.push(i)
+        }
+    } else {
+        if (currentPage <= 2) {
+            pages.push(1, 2)
+            pages.push('...')
+            pages.push(totalPages)
+        } else if (currentPage >= totalPages - 1) {
+            pages.push(1)
+            pages.push('...')
+            pages.push(totalPages - 1, totalPages)
+        } else {
+            pages.push(1)
+            pages.push('...')
+            pages.push(currentPage)
+            pages.push('...')
+            pages.push(totalPages)
+        }
+    }
+    return pages
+}

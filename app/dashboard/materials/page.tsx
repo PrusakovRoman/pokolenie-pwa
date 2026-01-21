@@ -35,7 +35,13 @@ export default function Materials() {
 
                 <MaterialsGrid materials={materials} isLoading={isLoading} />
 
-                {/* <MaterialsPagination /> */}
+                {metadata && metadata.totalPages > 1 && (
+                    <MaterialsPagination
+                        currentPage={page}
+                        totalPages={metadata.totalPages}
+                        onPageChange={goToPage}
+                    />)}
+
             </div>
         </div>
     )
