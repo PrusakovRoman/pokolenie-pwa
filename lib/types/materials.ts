@@ -24,3 +24,16 @@ export interface Metadata {
     hasNextPage: boolean
     hasPrevPage: boolean
 }
+
+export interface CategoryStat {
+    id: string
+    name: string
+    count: number
+}
+
+export interface MaterialsResponse {
+    data: Material[]
+    meta: Metadata
+    allCategories: string[]
+    categoryStats: CategoryStat[]
+} 

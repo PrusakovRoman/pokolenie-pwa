@@ -23,9 +23,37 @@ export async function GET(request: NextRequest) {
 
         if (searchQuery.trim() !== '') {
             const searchLower = searchQuery.toLowerCase()
-            filtered = filtered.filter(material => material.title.toLowerCase().includes(searchLower))
+            filtered = filtered.filter(material =>
+                material.title.toLowerCase().includes(searchLower)
+            )
         }
 
+        const uniqueCategories = Array.from(new Set(data.materials.map(m => m.category)))
+
+        const categoryStats = uniqueCategories.map(category => {
+            const materialsInCategory = data.materials.filter(m => m.category === category)
+
+            let filteredInCategory = [...materialsInCategory]
+
+            if (searchQuery.trim() !== '') {
+                const searchLower = searchQuery.toLowerCase()
+                filteredInCategory = filteredInCategory.filter(material => material.title.toLowerCase().includes(searchLower))
+            }
+
+            return {
+                id: category,
+                name: category,
+                count: filteredInCategory.length
+            }
+        })
+
+        const allCategory = {
+            id: 'Все',
+            name: 'Все',
+            count: searchQuery.trim() !== '' ? data.materials.filter(m => m.title.toLowerCase().includes(searchQuery.toLowerCase())).length : data.materials.length
+        }
+
+        const categoriesStats = [allCategory, ...categoryStats]
 
         const total = filtered.length
         const totalPages = Math.ceil(total / limit)
@@ -36,8 +64,6 @@ export async function GET(request: NextRequest) {
         const end = start + limit
         const paginated = filtered.slice(start, end)
 
-        const allCategories = Array.from(new Set(data.materials.map(m => m.category)))
-
         return Response.json({
             data: paginated, // Материалы для текущей страницы
             meta: {          // Метаданные для ВСЕХ отфильтрованных материалов
@@ -45,11 +71,10 @@ export async function GET(request: NextRequest) {
                 page: validPage, // Текущая страница
                 limit,       // Лимит на странице
                 totalPages,  // Всего страниц
-                // Дополнительно 
                 hasNextPage: validPage < totalPages,
                 hasPrevPage: validPage > 1
             },
-            allCategories: ['Все', ...allCategories]
+            filteredCategoryStats: categoriesStats
         }, {
             status: 200,
             headers: {
@@ -57,9 +82,6 @@ export async function GET(request: NextRequest) {
                 'Cache-Control': 'no-cache'
             }
         })
-
-
-
     } catch (error) {
         console.error('API error: ', error)
 

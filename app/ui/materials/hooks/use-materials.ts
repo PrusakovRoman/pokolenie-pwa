@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react"
 
-import { Material, Metadata } from "@/lib/types/materials"
+import { CategoryStat, Material, Metadata } from "@/lib/types/materials"
 
 export function useMaterials() {
     const [materials, setMaterials] = useState<Material[]>([])
     const [metadata, setMetadata] = useState<Metadata | null>(null)
     const [selectedCategories, setSelectedCategories] = useState<string[]>(['Все'])
-    const [allCategories, setAllCategories] = useState<string[]>(['Все'])
+    const [categoryStats, setCategoryStats] = useState<CategoryStat[]>([])
     const [searchQuery, setSearchQuery] = useState('')
     const [page, setPage] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
@@ -31,10 +31,7 @@ export function useMaterials() {
             const data = await res.json()
             setMaterials(data.data)
             setMetadata(data.meta)
-
-            if (data.allCategories) {
-                setAllCategories(data.allCategories)
-            }
+            setCategoryStats(data.filteredCategoryStats || [])
         } catch (error) {
             console.log('ошибка в useMaterials: ', error)
         } finally {
@@ -86,8 +83,8 @@ export function useMaterials() {
         materials,
         metadata,
 
-        allCategories,
         selectedCategories,
+        categoryStats,
         searchQuery,
         page,
         isLoading,

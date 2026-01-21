@@ -1,11 +1,13 @@
-interface FilterButton {
+import { materialsWord } from "@/app/lib/utils"
+
+interface FilterButtonProps {
     category: string
-    selectedCategories: string[]
-    toggleCategory: (category: string) => void
+    count: number
+    isSelected: boolean
+    onClick: () => void
 }
 
-export default function FilterButton({ category, selectedCategories, toggleCategory }: FilterButton) {
-    const isSelected = selectedCategories.includes(category)
+export default function FilterButton({ category, count, isSelected, onClick }: FilterButtonProps) {
     return (
         <button
             className={`
@@ -13,7 +15,7 @@ export default function FilterButton({ category, selectedCategories, toggleCateg
         hover:border-primary hover:bg-primary/5
         ${isSelected ? "border-primary bg-primary/5" : "border-border"}
         flex flex-col items-center justify-center text-center min-h-[80px]
-      `} onClick={() => toggleCategory(category)}
+      `} onClick={onClick}
         >
             <div className="flex items-center gap-2 mb-1">
                 <div className={`
@@ -33,7 +35,8 @@ export default function FilterButton({ category, selectedCategories, toggleCateg
             </div>
             {category !== "Все" && (
                 <div className="text-xs text-muted-foreground mt-1">
-                    { }n материалов
+
+                    {count} {' '} {materialsWord(count)}
                 </div>
             )}
         </button>

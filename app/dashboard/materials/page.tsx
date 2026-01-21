@@ -13,8 +13,8 @@ export default function Materials() {
         materials,
         metadata,
 
-        allCategories,
         selectedCategories,
+        categoryStats,
         searchQuery,
         page,
         isLoading,
@@ -26,13 +26,13 @@ export default function Materials() {
         removeFilter,
         fetchMaterials
     } = useMaterials()
-
+    console.log(categoryStats)
     return (
         <div className="min-h-screen bg-background p-4 md:p-6">
             <div className="container mx-auto">
                 <SectionHeader />
 
-                <MaterialsNav metadata={metadata} selectedCategories={selectedCategories} allCategories={allCategories} searchQuery={searchQuery} toggleCategory={toggleCategory} setSearchQuery={setSearchQuery} resetFilters={resetFilters} removeFilter={removeFilter} />
+                <MaterialsNav metadata={metadata} selectedCategories={selectedCategories} categoryStats={categoryStats} searchQuery={searchQuery} toggleCategory={toggleCategory} setSearchQuery={setSearchQuery} resetFilters={resetFilters} removeFilter={removeFilter} />
 
                 <MaterialsGrid materials={materials} isLoading={isLoading} />
 

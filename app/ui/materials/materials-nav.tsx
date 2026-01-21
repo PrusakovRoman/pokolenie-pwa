@@ -2,12 +2,13 @@ import Search from "@/app/ui/materials/search/search"
 import DesktopFilters from "@/app/ui/materials/filters/desktop/filters"
 import MobileFilters from "@/app/ui/materials/filters/mobile/filters"
 
-import { Metadata } from "@/lib/types/materials"
+import { CategoryStat, Metadata } from "@/lib/types/materials"
+import { materialsWord } from "@/app/lib/utils"
 
 interface MaterialsNavProps {
     metadata: Metadata | null
-    allCategories: string[]
     selectedCategories: string[]
+    categoryStats: CategoryStat[]
     searchQuery: string
     toggleCategory: (category: string) => void
     setSearchQuery: (query: string) => void
@@ -15,18 +16,19 @@ interface MaterialsNavProps {
     removeFilter: (category: string) => void
 }
 
-export function MaterialsNav({ metadata, selectedCategories, allCategories, searchQuery, toggleCategory, setSearchQuery, resetFilters, removeFilter }: MaterialsNavProps) {
+export function MaterialsNav({ metadata, selectedCategories, categoryStats, searchQuery, toggleCategory, setSearchQuery, resetFilters, removeFilter }: MaterialsNavProps) {
+    const count = metadata?.total || 0
     return (
         <div className="space-y-6 mb-8">
-            <Search />
+            <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-            <DesktopFilters selectedCategories={selectedCategories} allCategories={allCategories} toggleCategory={toggleCategory} resetFilters={resetFilters} removeFilter={removeFilter} />
+            <DesktopFilters selectedCategories={selectedCategories} categoryStats={categoryStats} toggleCategory={toggleCategory} resetFilters={resetFilters} removeFilter={removeFilter} />
 
             <MobileFilters />
 
             <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <div>
-                    Найдено{' '}<span className="font-semibold text-foreground">{metadata?.total || 0}</span>{' '}материала(ов)
+                    Найдено{' '}<span className="font-semibold text-foreground">{count}</span>{' '}{materialsWord(count)}
                 </div>
             </div>
         </div>
