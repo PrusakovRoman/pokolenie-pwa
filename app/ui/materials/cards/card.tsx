@@ -2,7 +2,7 @@ import { Calendar, User } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
-import { Material } from "@/lib/types/material"
+import { Material } from "@/lib/types/materials"
 
 interface MaterialCardProps {
     material: Material

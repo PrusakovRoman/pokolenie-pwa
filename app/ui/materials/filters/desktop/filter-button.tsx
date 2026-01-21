@@ -1,16 +1,11 @@
-interface Category {
-    id: string
-    label: string
-}
-
 interface FilterButton {
-    category: Category
+    category: string
     selectedCategories: string[]
-    toggleCategory: (categoryId: string) => void
+    toggleCategory: (category: string) => void
 }
 
 export default function FilterButton({ category, selectedCategories, toggleCategory }: FilterButton) {
-    const isSelected = selectedCategories.includes(category.id)
+    const isSelected = selectedCategories.includes(category)
     return (
         <button
             className={`
@@ -18,7 +13,7 @@ export default function FilterButton({ category, selectedCategories, toggleCateg
         hover:border-primary hover:bg-primary/5
         ${isSelected ? "border-primary bg-primary/5" : "border-border"}
         flex flex-col items-center justify-center text-center min-h-[80px]
-      `} onClick={() => toggleCategory(category.id)}
+      `} onClick={() => toggleCategory(category)}
         >
             <div className="flex items-center gap-2 mb-1">
                 <div className={`
@@ -33,12 +28,12 @@ export default function FilterButton({ category, selectedCategories, toggleCateg
           text-sm font-medium truncate max-w-full
           ${isSelected ? "text-primary" : "text-foreground"}
         `}>
-                    {category.label}
+                    {category}
                 </span>
             </div>
-            {category.id !== "all" && (
+            {category !== "Все" && (
                 <div className="text-xs text-muted-foreground mt-1">
-                    {/* {} материалов */}
+                    { }n материалов
                 </div>
             )}
         </button>

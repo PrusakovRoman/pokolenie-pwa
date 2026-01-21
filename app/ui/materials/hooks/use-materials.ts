@@ -2,18 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react"
 
-interface Metadata {
-    total: number,
-    page: number,
-    limit: number,
-    totalPages: number
-}
+import { Material, Metadata } from "@/lib/types/materials"
 
 export function useMaterials() {
-    const [materials, setMaterials] = useState([])
+    const [materials, setMaterials] = useState<Material[]>([])
     const [metadata, setMetadata] = useState<Metadata | null>(null)
-    const [selectedCategories, setSelectedCategories] = useState(['all'])
-    // const [selectedCategoriesLabels, setSelectedCategoriesLabels] = useState('')
+    const [selectedCategories, setSelectedCategories] = useState<string[]>(['Все'])
+    const [allCategories, setAllCategories] = useState<string[]>(['Все'])
     const [searchQuery, setSearchQuery] = useState('')
     const [page, setPage] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
@@ -23,7 +18,7 @@ export function useMaterials() {
 
         const params = new URLSearchParams({ page: page.toString(), limit: '6' })
 
-        if (!selectedCategories.includes('all') && selectedCategories.length) {
+        if (!selectedCategories.includes('Все') && selectedCategories.length) {
             params.append('category', selectedCategories.join(','))
         }
 
@@ -36,6 +31,10 @@ export function useMaterials() {
             const data = await res.json()
             setMaterials(data.data)
             setMetadata(data.meta)
+
+            if (data.allCategories) {
+                setAllCategories(data.allCategories)
+            }
         } catch (error) {
             console.log('ошибка в useMaterials: ', error)
         } finally {
@@ -49,12 +48,12 @@ export function useMaterials() {
     }, [fetchMaterials])
 
 
-    const toggleCategory = (categoryId: string) => {
-        if (categoryId === 'all') {
-            setSelectedCategories(['all'])
+    const toggleCategory = (category: string) => {
+        if (category === 'Все') {
+            setSelectedCategories(['Все'])
         } else {
-            const newCategories = selectedCategories.includes(categoryId) ? selectedCategories.filter(c => c !== categoryId) : [...selectedCategories.filter(c => c !== 'all'), categoryId]
-            setSelectedCategories(newCategories.length ? newCategories : ['all'])
+            const newCategories = selectedCategories.includes(category) ? selectedCategories.filter(c => c !== category) : [...selectedCategories.filter(c => c !== 'Все'), category]
+            setSelectedCategories(newCategories.length ? newCategories : ['Все'])
         }
         setPage(1)
     }
@@ -67,9 +66,19 @@ export function useMaterials() {
         }
     }
 
-    const resetFilters = () => {
-        setSelectedCategories(['all'])
+    const resetFilters = (isAllSelected: boolean) => {
+        if (isAllSelected) return
+        setSelectedCategories(['Все'])
         setSearchQuery('')
+        setPage(1)
+    }
+
+    const removeFilter = (category: string) => {
+        if (category === 'Все') return
+
+        const newCategories = selectedCategories.filter(c => c != category)
+
+        setSelectedCategories(newCategories.length > 0 ? newCategories : ['Все'])
         setPage(1)
     }
 
@@ -77,6 +86,7 @@ export function useMaterials() {
         materials,
         metadata,
 
+        allCategories,
         selectedCategories,
         searchQuery,
         page,
@@ -86,6 +96,7 @@ export function useMaterials() {
         setSearchQuery,
         goToPage,
         resetFilters,
+        removeFilter,
         fetchMaterials
     }
 }

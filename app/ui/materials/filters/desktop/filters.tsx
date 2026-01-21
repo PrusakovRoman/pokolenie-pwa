@@ -3,19 +3,21 @@ import FiltersGrid from "@/app/ui/materials/filters/desktop/filters-grid"
 import SelectedFilters from "@/app/ui/materials/filters/desktop/selected-filters"
 
 interface DesctopFiltersProps {
+    allCategories: string[]
     selectedCategories: string[]
-    toggleCategory: (categoryId: string) => void
-    resetFilters: () => void
+    toggleCategory: (category: string) => void
+    resetFilters: (isAllSelected: boolean) => void
+    removeFilter: (category: string) => void
 }
 
-export default function DesktopFilters({ selectedCategories, toggleCategory, resetFilters }: DesctopFiltersProps) {
+export default function DesktopFilters({ selectedCategories, allCategories, toggleCategory, resetFilters, removeFilter }: DesctopFiltersProps) {
     return (
         <div className="hidden lg:block bg-muted/50 rounded-xl p-4">
-            <FiltersNav resetFilters={resetFilters} />
+            <FiltersNav selectedCategories={selectedCategories} resetFilters={resetFilters} />
 
-            <FiltersGrid selectedCategories={selectedCategories} toggleCategory={toggleCategory} />
+            <FiltersGrid selectedCategories={selectedCategories} allCategories={allCategories} toggleCategory={toggleCategory} />
 
-            <SelectedFilters selectedCategories={selectedCategories} resetFilters={resetFilters} />
+            <SelectedFilters selectedCategories={selectedCategories} resetFilters={resetFilters} removeFilter={removeFilter} />
         </div>
     )
 }

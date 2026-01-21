@@ -1,6 +1,6 @@
 import { MaterialCard } from "./card"
 
-import { Material } from "@/lib/types/material"
+import { Material } from "@/lib/types/materials"
 
 interface MaterialsGridProps {
     materials: Material[],

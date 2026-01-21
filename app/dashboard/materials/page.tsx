@@ -13,6 +13,7 @@ export default function Materials() {
         materials,
         metadata,
 
+        allCategories,
         selectedCategories,
         searchQuery,
         page,
@@ -21,14 +22,17 @@ export default function Materials() {
         toggleCategory,
         setSearchQuery,
         goToPage,
-        resetFilters } = useMaterials()
+        resetFilters,
+        removeFilter,
+        fetchMaterials
+    } = useMaterials()
 
     return (
         <div className="min-h-screen bg-background p-4 md:p-6">
             <div className="container mx-auto">
                 <SectionHeader />
 
-                <MaterialsNav metadata={metadata} selectedCategories={selectedCategories} searchQuery={searchQuery} toggleCategory={toggleCategory} setSearchQuery={setSearchQuery} resetFilters={resetFilters} />
+                <MaterialsNav metadata={metadata} selectedCategories={selectedCategories} allCategories={allCategories} searchQuery={searchQuery} toggleCategory={toggleCategory} setSearchQuery={setSearchQuery} resetFilters={resetFilters} removeFilter={removeFilter} />
 
                 <MaterialsGrid materials={materials} isLoading={isLoading} />
 

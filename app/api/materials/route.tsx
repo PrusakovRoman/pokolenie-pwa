@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 
         const limit = Math.max(1, parseInt(searchParams.get('limit') || '6'))
 
-        const categoryParam = searchParams.get('type') || ''
+        const categoryParam = searchParams.get('category') || ''
         const selectedCategories = categoryParam ? categoryParam.split(',').filter(c => c.trim() !== '') : []
 
         const searchQuery = searchParams.get('search') || ''
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
         let materials = data.materials
         let filtered = [...materials]
 
-        if (selectedCategories.length > 0 && !selectedCategories.includes('all')) {
+        if (selectedCategories.length > 0 && !selectedCategories.includes('Все')) {
             filtered = filtered.filter(material => selectedCategories.includes(material.category))
         }
 
@@ -36,6 +36,7 @@ export async function GET(request: NextRequest) {
         const end = start + limit
         const paginated = filtered.slice(start, end)
 
+        const allCategories = Array.from(new Set(data.materials.map(m => m.category)))
 
         return Response.json({
             data: paginated, // Материалы для текущей страницы
@@ -47,7 +48,8 @@ export async function GET(request: NextRequest) {
                 // Дополнительно 
                 hasNextPage: validPage < totalPages,
                 hasPrevPage: validPage > 1
-            }
+            },
+            allCategories: ['Все', ...allCategories]
         }, {
             status: 200,
             headers: {

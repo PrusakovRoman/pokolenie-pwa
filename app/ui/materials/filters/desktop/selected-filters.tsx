@@ -4,53 +4,32 @@ import { X } from "lucide-react"
 
 interface SelectedFiltersProps {
     selectedCategories: string[]
-    resetFilters: () => void
+    resetFilters: (isAllSelected: boolean) => void
+    removeFilter: (category: string) => void
 }
 
-const materialCategories = [
-    { id: "all", label: "Все" },
-    { id: "family", label: "Семья" },
-    { id: "health", label: "Здоровье" },
-    { id: "softSkills", label: "Soft skills" },
-    { id: "business", label: "Бизнес" },
-    // { id: "sport", label: "Спорт" },
-    // { id: "education", label: "Образование" },
-    // { id: "technology", label: "Технологии" },
-    // { id: "finance", label: "Финансы" },
-    // { id: "creativity", label: "Творчество" },
-    // { id: "art", label: "Искусство" },
-    // { id: "science", label: "Наука" },
-]
-
-export default function SelectedFilters({ selectedCategories, resetFilters }: SelectedFiltersProps) {
-    return (<div className="mt-4 pt-4 border-t">
-        <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium">Выбранные фильтры:</span>
-            <Button variant="ghost" size="sm" className="h-7 text-xs hover:bg-primary/5" onClick={resetFilters}>
-                Очистить все
-            </Button>
+export default function SelectedFilters({ selectedCategories, resetFilters, removeFilter }: SelectedFiltersProps) {
+    const isAllSelected = selectedCategories.includes('all')
+    return (
+        <div className="mt-4 pt-4 border-t">
+            <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-medium">Выбранные фильтры:</span>
+                <Button variant="ghost" size="sm" className="h-7 text-xs hover:bg-primary/5" onClick={() => resetFilters(isAllSelected)}>
+                    Очистить все
+                </Button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+                {selectedCategories.map(category => category !== 'Все' ?
+                    <Badge key={category} className="gap-1 pl-3 pr-2 py-1.5">
+                        {category}
+                        <Button variant="ghost" className="h-3 w-3 ml-1" onClick={() => removeFilter(category)}>
+                            <X className="h-3 w-3" />
+                        </Button>
+                    </Badge> : <Badge key={category} className="gap-1 px-3 py-1.5">
+                        {category}
+                    </Badge>
+                )}
+            </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-            {/* {selectedCategories.map(c => {
-                return (<Badge key={c} className="gap-1 pl-3 pr-2 py-1.5">
-                    {c}
-                    <X className="h-3 w-3 ml-1" />
-                </Badge>)
-            }
-
-            )} */}
-            <Badge className="gap-1 pl-3 pr-2 py-1.5">
-                Спорт
-                <X className="h-3 w-3 ml-1" />
-            </Badge>
-            <Badge className="gap-1 pl-3 pr-2 py-1.5">
-                Образование
-                <X className="h-3 w-3 ml-1" />
-            </Badge>
-            <Badge className="gap-1 pl-3 pr-2 py-1.5">
-                Здоровье
-                <X className="h-3 w-3 ml-1" />
-            </Badge>
-        </div>
-    </div>)
+    )
 }

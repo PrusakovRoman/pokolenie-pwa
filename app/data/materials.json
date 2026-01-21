@@ -6,7 +6,7 @@
             "imageUrl": "/emotional-intelligence-1.jpg",
             "author": "Иванова Мария",
             "date": "2024-03-15",
-            "category": "softSkills",
+            "category": "Soft-skills",
             "categoryColor": "bg-pink-500",
             "isLiked": true,
             "content": {
@@ -18,12 +18,29 @@
             }
         },
         {
+            "id": "material-005",
+            "title": "Мастерство коммуникации",
+            "imageUrl": "/communication-art-1.jpg",
+            "author": "Николаев Владимир",
+            "date": "2024-02-15",
+            "category": "Soft-skills",
+            "categoryColor": "bg-pink-500",
+            "isLiked": true,
+            "content": {
+                "type": "video",
+                "embedUrl": "https://www.youtube.com/embed/example2",
+                "introduction": "Коммуникация - важный социальный навык.",
+                "explanation": "Техники эффективного общения.",
+                "conclusion": "Практика делает общение эффективным."
+            }
+        },
+        {
             "id": "material-002",
             "title": "Эффективное планирование задач",
             "imageUrl": "/planning-1.png",
             "author": "Петров Алексей",
             "date": "2024-03-10",
-            "category": "Business",
+            "category": "Бизнес",
             "categoryColor": "bg-emerald-500",
             "isLiked": false,
             "content": {
@@ -40,7 +57,7 @@
             "imageUrl": "/family-1.jpg",
             "author": "Смирнова Анна",
             "date": "2024-02-28",
-            "category": "Family",
+            "category": "Семья",
             "categoryColor": "bg-amber-500",
             "isLiked": true,
             "content": {
@@ -57,7 +74,7 @@
             "imageUrl": "/sleepping-1.jpg",
             "author": "Козлов Дмитрий",
             "date": "2024-02-20",
-            "category": "Health",
+            "category": "Здоровье",
             "categoryColor": "bg-blue-500",
             "isLiked": false,
             "content": {
@@ -66,23 +83,6 @@
                 "introduction": "Сон влияет на все сферы жизни.",
                 "explanation": "Как улучшить качество сна.",
                 "conclusion": "Здоровый сон - основа здоровья."
-            }
-        },
-        {
-            "id": "material-005",
-            "title": "Мастерство коммуникации",
-            "imageUrl": "/communication-art-1.jpg",
-            "author": "Николаев Владимир",
-            "date": "2024-02-15",
-            "category": "softSkills",
-            "categoryColor": "bg-purple-500",
-            "isLiked": true,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://www.youtube.com/embed/example2",
-                "introduction": "Коммуникация - важный социальный навык.",
-                "explanation": "Техники эффективного общения.",
-                "conclusion": "Практика делает общение эффективным."
             }
         }
     ]
