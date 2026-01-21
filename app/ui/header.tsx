@@ -8,8 +8,8 @@ export default async function Header() {
 
     return (
         <header className="block">
-            <div className="container mx-auto p-6">
-                <div className="bg-white mx-auto flex justify-between align-center px-8 py-6 rounded-4xl shadow-md">
+            <div className="container mx-auto p-4 xs:p-6">
+                <div className="bg-white mx-auto flex justify-between align-center px-8 py-6 rounded-4xl shadow-md gap-4">
                     <div className="flex items-center gap-3">
                         <Logo />
                     </div>

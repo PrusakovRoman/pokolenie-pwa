@@ -17,7 +17,7 @@ export function MaterialsPagination({
     const pagination = generatePagination(totalPages, currentPage)
 
     return (
-        <div className="flex items-center justify-center gap-4 mt-12 pt-8 border-t">
+        <div className="flex items-center justify-center gap-4 mt-6 xs:mt-12 pt-8 border-t">
             <div className="flex items-center gap-1">
                 <Button
                     variant="outline"

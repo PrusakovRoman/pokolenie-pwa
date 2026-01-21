@@ -28,7 +28,7 @@ export default async function Page({ params }: MaterialPageProps) {
     return (
         <>
             <Header />
-            <main className="container mx-auto px-4 md:px-6 py-8 max-w-4xl">
+            <main className="container mx-auto p-4 xs:py-8 md:px-6 max-w-4xl">
                 <div className="mb-8">
                     <Button
                         variant="ghost"

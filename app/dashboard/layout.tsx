@@ -13,7 +13,7 @@ export default function DashboardLayout({
         <>
             <Header />
             <main>
-                <div className="container mx-auto p-6">
+                <div className="container mx-auto p-4 xs:p-6">
 
                     <div className="border rounded-lg bg-white shadow-md ">
                         <div className="flex gap-2 p-4">

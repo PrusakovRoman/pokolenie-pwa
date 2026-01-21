@@ -13,7 +13,7 @@ export default function Footer() {
 
     return (
         <footer>
-            <div className="container mx-auto p-6 md:py-8">
+            <div className="container mx-auto p-4 p-xs-6 md:py-8">
                 <div className="md:flex justify-between items-center text-center text-sm text-gray-500">
                     <div className="mb-4 md:mb-0">© 2026 Проект «Поколение»</div>
                     <div className="flex gap-6 justify-center md:justify-start">

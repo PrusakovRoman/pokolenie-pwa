@@ -63,8 +63,7 @@ export function useMaterials() {
         }
     }
 
-    const resetFilters = (isAllSelected: boolean) => {
-        if (isAllSelected) return
+    const resetFilters = () => {
         setSelectedCategories(['Все'])
         setSearchQuery('')
         setPage(1)

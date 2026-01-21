@@ -7,7 +7,7 @@ interface DesctopFiltersProps {
     selectedCategories: string[]
     categoryStats: CategoryStat[]
     toggleCategory: (category: string) => void
-    resetFilters: (isAllSelected: boolean) => void
+    resetFilters: () => void
     removeFilter: (category: string) => void
 }
 
