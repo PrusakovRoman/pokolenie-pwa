@@ -11,7 +11,7 @@ interface MaterialCardProps {
 
 export function MaterialCard({ material }: MaterialCardProps) {
     return (
-        <Link href="/material">
+        <Link href={`/material/${material.id}`}>
             <article className=
                 "group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full flex-col">
                 <div className="absolute top-4 right-4 z-10">

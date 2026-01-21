@@ -26,3 +26,26 @@ export async function authenticate(prevState: string | undefined, formData: Form
         throw error
     }
 }
+
+export async function fetchMaterial(id: string) {
+    try {
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || ''
+        const apiUrl = `${baseUrl}/api/material/${id}`
+
+        const response = await fetch(apiUrl, {
+            next: { revalidate: 3600 }
+        })
+
+        if (!response.ok) {
+            if (response.status === 404) {
+                return null
+            }
+            throw new Error('Ошибка загрузки материала')
+        }
+
+        return await response.json()
+    } catch (error) {
+        console.error('Error fetching material:', error)
+        return null
+    }
+}
