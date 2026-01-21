@@ -53,8 +53,8 @@
   --primary: rgb(255, 78, 0);
   --primary-foreground: rgb(255, 255, 255);
 
-  --secondary: #5a2aae;
-  --secondary-foreground: #3fa343;
+  --secondary: rgb(255, 255, 255);
+  --secondary-foreground: rgb(255, 78, 0);
 
   --radius: 0.625rem;
   --card: oklch(1 0 0);

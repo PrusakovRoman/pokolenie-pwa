@@ -26,7 +26,6 @@ export default function Materials() {
         removeFilter,
         fetchMaterials
     } = useMaterials()
-    console.log(categoryStats)
     return (
         <div className="min-h-screen bg-background p-4 md:p-6">
             <div className="container mx-auto">

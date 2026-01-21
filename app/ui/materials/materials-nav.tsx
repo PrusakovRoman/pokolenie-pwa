@@ -24,7 +24,7 @@ export function MaterialsNav({ metadata, selectedCategories, categoryStats, sear
 
             <DesktopFilters selectedCategories={selectedCategories} categoryStats={categoryStats} toggleCategory={toggleCategory} resetFilters={resetFilters} removeFilter={removeFilter} />
 
-            <MobileFilters />
+            <MobileFilters selectedCategories={selectedCategories} categoryStats={categoryStats} toggleCategory={toggleCategory} resetFilters={resetFilters} removeFilter={removeFilter} />
 
             <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <div>

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 
-import { MaterialPageExample, MaterialPageContent } from "../ui/materials/material"
+import { MaterialPageContent } from "@/app/ui/material/material"
 
 
 interface MaterialPageProps {
@@ -30,11 +30,10 @@ interface MaterialPageProps {
     }
 }
 
-export default function Page({ material }: MaterialPageProps) {
+export default function Page() {
     return (
         <>
             <Header />
-            {/* <MaterialPageExample/> */}
             <MaterialPageContent />
             <Footer />
         </>

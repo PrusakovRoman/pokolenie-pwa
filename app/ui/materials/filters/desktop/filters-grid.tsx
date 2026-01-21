@@ -1,5 +1,6 @@
-import FilterButton from "@/app/ui/materials/filters/desktop/filter-button"
+// import FilterButton from "@/app/ui/materials/filters/desktop/filter-button"
 import { CategoryStat } from "@/lib/types/materials"
+import FilterButton from "@/app/ui/materials/filters/filter-button"
 
 interface FiltersGridProps {
     selectedCategories: string[]
@@ -15,6 +16,7 @@ export default function FiltersGrid({ selectedCategories, categoryStats, toggleC
                 return (
                     <FilterButton
                         key={id}
+                        variant="desktop"
                         category={name}
                         count={count}
                         isSelected={selectedCategories.includes(id)}
