@@ -9,7 +9,7 @@ export const authConfig = {
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user
 
-            const protectedPaths = ['/dashboard', '/materials']
+            const protectedPaths = ['/dashboard', '/material', '/mentor']
             const isProtected = protectedPaths.some(path => nextUrl.pathname.startsWith(path))
 
             if (isProtected && !isLoggedIn) return false

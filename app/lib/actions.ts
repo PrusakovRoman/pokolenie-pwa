@@ -3,6 +3,7 @@
 import { signIn } from "@/lib/auth"
 import { AuthError } from "next-auth"
 import { redirect } from 'next/navigation';
+import { signOut } from "@/lib/auth";
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
     try {
@@ -48,4 +49,9 @@ export async function fetchMaterial(id: string) {
         console.error('Error fetching material:', error)
         return null
     }
+}
+
+export async function logout() {
+    await signOut({ redirect: false })
+    redirect('/')
 }

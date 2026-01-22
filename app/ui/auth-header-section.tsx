@@ -13,9 +13,10 @@ interface AuthHeaderSectionProps {
 export default function AuthSection({ session }: AuthHeaderSectionProps) {
     return (
         <>
-            {session?.user ? (<UserProfileDropdown />) : (<Button asChild>
-                <Link href="/login">Войти</Link>
-            </Button>)
+            {session?.user ? (<UserProfileDropdown user={session.user} />) : (
+                <Button asChild>
+                    <Link href="/login">Войти</Link>
+                </Button>)
             }
         </>
     )
