@@ -8,8 +8,9 @@ export interface Material {
     categoryColor: string
     isLiked: boolean
     content: {
-        type: string
+        type: 'video' | 'article' | 'book'
         url?: string
+        embedUrl?: string
         introduction?: string
         explanation: string
         conclusion: string

@@ -30,8 +30,16 @@ export async function authenticate(prevState: string | undefined, formData: Form
 
 export async function fetchMaterial(id: string) {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || ''
-        const apiUrl = `${baseUrl}/api/material/${id}`
+        const isVercel = !!process.env.VERCEL;
+        let baseUrl = 'http://localhost:3000';
+
+        if (isVercel) {
+            const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+                process.env.VERCEL_URL;
+            baseUrl = `https://${vercelUrl}`;
+        }
+
+        const apiUrl = `${baseUrl}/api/material/${id}`;
 
         const response = await fetch(apiUrl, {
             next: { revalidate: 3600 }

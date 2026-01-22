@@ -4,9 +4,10 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import MaterialNotFound from '@/app/material/[id]/not-found'
+import { MediaContent } from "@/app/ui/material/media-content"
 import { fetchMaterial } from "@/app/lib/actions"
 
-import { Calendar, User, Play, Link as LinkIcon } from "lucide-react"
+import { Calendar, User, Link as LinkIcon } from "lucide-react"
 import { ChevronLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -24,6 +25,9 @@ export default async function Page({ params }: MaterialPageProps) {
     const material = await fetchMaterial(id)
 
     if (!material) return <MaterialNotFound />
+
+    const contentType = material.content?.type || 'article'
+    const contentUrl = material.content?.url || material.content?.embedUrl
 
     return (
         <>
@@ -60,7 +64,7 @@ export default async function Page({ params }: MaterialPageProps) {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <User className="h-5 w-5 text-gray-500 text-primary" />
-                            <a href='#' className="text-gray-700 dark:text-gray-300 font-medium hover:underline decoration-1 underline-offset-4 [text-decoration-skip-ink:none] hover:text-primary transition-all duration-300">{material.author}</a>
+                            <Link href='/mentor' className="text-gray-700 dark:text-gray-300 font-medium hover:underline decoration-1 underline-offset-4 [text-decoration-skip-ink:none] hover:text-primary transition-all duration-300">{material.author}</Link>
                         </div>
 
                         <Button variant="outline" size="sm" className="gap-2 hover:border-primary hover:bg-primary/5">
@@ -76,18 +80,13 @@ export default async function Page({ params }: MaterialPageProps) {
                     {material.content.introduction}
                 </p>)}
 
-                <div className="mb-8 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-lg">
-                    <div className="aspect-video bg-black relative">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="text-center">
-                                <button className="h-20 w-20 bg-primary/80 hover:bg-primary rounded-full flex items-center justify-center mx-auto mb-4 transition-colors group">
-                                    <Play className="h-10 w-10 text-white ml-1 group-hover:scale-110 transition-transform" />
-                                </button>
-                                <p className="text-white/80 text-lg">Видео: Советы по совмещению работы и учебы</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <MediaContent
+                    type={contentType} // 'video', 'article' или 'book'
+                    imageUrl={material.imageUrl}
+                    title={material.title}
+                    contentUrl={contentType !== 'video' ? material.content?.url : undefined}
+                    embedUrl={contentType === 'video' ? material.content?.embedUrl : undefined}
+                />
 
                 <Separator className="mb-8 hidden md:block" />
 
