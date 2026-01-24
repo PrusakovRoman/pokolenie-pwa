@@ -45,3 +45,7 @@ notes.txt
 backup
 
 /app/test
+
+/app/data/subscriptions.json
+.vercel
+.env*.local
