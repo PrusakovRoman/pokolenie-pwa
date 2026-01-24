@@ -89,7 +89,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                 aria-label="Открыть профиль"
                 aria-expanded={isOpen}
             >
-                <Image src={user?.image ? user.image : "/no-photo.jpg"} alt="Фото профиля" className="object-cover" sizes="(width: 100%) (height: 100%)" fill={true} priority />
+                <Image src={user?.image ? user.image : "/profile/no-photo.jpg"} alt="Фото профиля" className="object-cover" sizes="(width: 100%) (height: 100%)" fill={true} priority />
                 <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white dark:border-gray-900"></div>
             </button>
 
@@ -129,7 +129,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                         <div className="flex items-center gap-4 mb-6">
                             <div className="relative">
                                 <div className="h-16 w-16 rounded-full overflow-hidden border-3 border-primary/20">
-                                    <Image src={user?.image ? user.image : "/no-photo.jpg"} alt="Фото профиля" className="object-cover" width={150} height={150} />
+                                    <Image src={user?.image ? user.image : "/profile/no-photo.jpg"} alt="Фото профиля" className="object-cover" width={150} height={150} />
                                 </div>
                                 <div className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full bg-primary flex items-center justify-center">
                                     <User className="h-3 w-3 text-white" />

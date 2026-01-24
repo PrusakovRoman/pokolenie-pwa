@@ -1,73 +1,68 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
-import { X, Download, Smartphone, Monitor, Shield, Zap, Globe } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Download } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export function PWAInstall() {
-    const [isVisible, setIsVisible] = useState(false)
     const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
+    const [showManualButton, setShowManualButton] = useState(false)
     const [isIOS, setIsIOS] = useState(false)
     const [isStandalone, setIsStandalone] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
-    const [showIOSInstructions, setShowIOSInstructions] = useState(false)
 
-    const checkConditions = useCallback(() => {
-        // 1. Уже установлено?
-        const standalone = window.matchMedia('(display-mode: standalone)').matches
+    // Проверка всех условий
+    useEffect(() => {
+        // 1. Проверяем, установлено ли уже приложение
+        const checkStandalone = (): boolean => {
+            // Современный способ
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                return true
+            }
+
+            // Для iOS Safari (типизируем как any для TypeScript)
+            const nav = navigator as any
+            if (nav.standalone === true) {
+                return true
+            }
+
+            return false
+        }
+
+        const standalone = checkStandalone()
         setIsStandalone(standalone)
-        if (standalone) return false
 
-        // 2. Пользователь уже отказался?
-        if (localStorage.getItem('pwa_install_dismissed') === 'true') return false
+        if (standalone) {
+            console.log('Приложение уже установлено')
+            return
+        }
 
-        // 3. iOS? Показываем особую инструкцию
-        const userAgent = navigator.userAgent.toLowerCase()
-        const ios = /iphone|ipad|ipod/.test(userAgent)
+        // 2. Определяем устройство
+        const ua = navigator.userAgent.toLowerCase()
+        const ios = /iphone|ipad|ipod/.test(ua)
+        const mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua)
+
         setIsIOS(ios)
-
-        const mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent)
         setIsMobile(mobile)
 
-        // 4. Пользователь был на сайте хотя бы n времени?
-        const sessionTime = sessionStorage.getItem('session_start')
-        if (sessionTime) {
-            const timeOnSite = Date.now() - parseInt(sessionTime)
-            if (timeOnSite < 5000) return false
-        }
+        // 3. Проверяем, не отказывался ли пользователь
+        const bannerDismissed = localStorage.getItem('pwa_banner_dismissed')
+        const manualBtnHidden = localStorage.getItem('pwa_button_hidden')
 
-        return true
-    }, [])
-
-    useEffect(() => {
-        // Записываем время начала сессии
-        if (!sessionStorage.getItem('session_start')) {
-            sessionStorage.setItem('session_start', Date.now().toString())
-        }
-
-        // Проверяем условия
-        const shouldShow = checkConditions()
-        if (!shouldShow) return
-
-        // Обработчик события установки
+        // 4. Событие установки (для Android/Chrome)
         const handleBeforeInstall = (e: Event) => {
             e.preventDefault()
             setDeferredPrompt(e)
 
-            // Показываем с задержкой
-            const timer = setTimeout(() => {
-                setIsVisible(true)
-            }, 5000) // 5 секунд
-
-            return () => clearTimeout(timer)
+            // Всегда показываем кнопку, если не скрыта
+            if (!manualBtnHidden) {
+                setShowManualButton(true)
+            }
         }
 
-        // Для iOS показываем свою инструкцию
-        if (isIOS) {
-            const timer = setTimeout(() => {
-                setShowIOSInstructions(true)
-            }, 8000) // 8 секунд для iOS
-
-            return () => clearTimeout(timer)
+        // 5. Для iOS показываем кнопку всегда (нет beforeinstallprompt)
+        if (ios && !manualBtnHidden) {
+            setShowManualButton(true)
         }
 
         window.addEventListener('beforeinstallprompt', handleBeforeInstall)
@@ -75,167 +70,57 @@ export function PWAInstall() {
         return () => {
             window.removeEventListener('beforeinstallprompt', handleBeforeInstall)
         }
-    }, [checkConditions, isIOS])
+    }, [])
 
+    // Установка приложения
     const handleInstall = async () => {
-        if (!deferredPrompt && !isIOS) {
-            // Fallback для Android/Desktop
-            if (isMobile) {
-                setShowIOSInstructions(true)
-            }
+        // iOS - инструкция
+        if (isIOS) {
+            alert('На iOS:\n1. Нажмите "Поделиться" (квадрат со стрелкой)\n2. Выберите "На экран «Домой»"\n3. Нажмите "Добавить"')
             return
         }
 
+        // Android/Desktop - стандартная установка
         if (deferredPrompt) {
             deferredPrompt.prompt()
             const { outcome } = await deferredPrompt.userChoice
 
             if (outcome === 'accepted') {
                 console.log('PWA установлено!')
-                setIsVisible(false)
-                localStorage.setItem('pwa_install_dismissed', 'true')
+                setShowManualButton(false)
+            }
+        } else {
+            // Fallback - инструкция
+            if (isMobile) {
+                alert('На Android:\n1. Откройте меню браузера (три точки)\n2. Выберите "Установить приложение"\n3. Подтвердите установку')
+            } else {
+                alert('На компьютере:\n1. Нажмите на иконку 📋 в адресной строке\n2. Выберите "Установить"\n3. Подтвердите установку')
             }
         }
     }
 
-    const handleClose = () => {
-        setIsVisible(false)
-        setShowIOSInstructions(false)
-        localStorage.setItem('pwa_install_dismissed', 'true')
+    // Скрыть кнопку
+    const hideButton = () => {
+        setShowManualButton(false)
+        localStorage.setItem('pwa_button_hidden', 'true')
     }
 
-    // Инструкция для iOS
-    if (showIOSInstructions && !isStandalone) {
-        return (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-                <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
-                    <div className="flex justify-between items-center mb-4">
-                        <h3 className="font-bold text-xl flex items-center gap-2">
-                            <Smartphone className="text-blue-600" />
-                            Установка на iOS
-                        </h3>
-                        <button onClick={handleClose} className="text-gray-500 hover:text-gray-700">
-                            <X size={24} />
-                        </button>
-                    </div>
-
-                    <div className="space-y-4">
-                        <div className="flex items-start gap-3">
-                            <div className="bg-blue-100 p-2 rounded-lg">
-                                <Globe className="text-blue-600" size={20} />
-                            </div>
-                            <div>
-                                <p className="font-semibold">1. Нажмите «Поделиться»</p>
-                                <p className="text-sm text-gray-600">В нижней панели Safari</p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-start gap-3">
-                            <div className="bg-purple-100 p-2 rounded-lg">
-                                <Download className="text-purple-600" size={20} />
-                            </div>
-                            <div>
-                                <p className="font-semibold">2. Выберите «На экран "Домой"»</p>
-                                <p className="text-sm text-gray-600">Прокрутите список действий</p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-start gap-3">
-                            <div className="bg-green-100 p-2 rounded-lg">
-                                <Zap className="text-green-600" size={20} />
-                            </div>
-                            <div>
-                                <p className="font-semibold">3. Готово!</p>
-                                <p className="text-sm text-gray-600">Запускайте с домашнего экрана</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="mt-6 flex gap-3">
-                        <button
-                            onClick={handleClose}
-                            className="flex-1 border border-gray-300 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50"
-                        >
-                            Понятно
-                        </button>
-                        <button
-                            onClick={() => {
-                                setShowIOSInstructions(false)
-                                localStorage.setItem('pwa_install_dismissed', 'true')
-                            }}
-                            className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700"
-                        >
-                            Больше не показывать
-                        </button>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    if (!isVisible || isStandalone) return null
+    // Если приложение установлено - ничего не показываем
+    if (isStandalone) return null
 
     return (
-        <div className="fixed bottom-4 right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl shadow-2xl p-6 z-50 max-w-sm border border-white/20 animate-fade-in-up">
-            <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center gap-3">
-                    <div className="bg-white/20 p-2 rounded-lg">
-                        {isMobile ? <Smartphone size={22} /> : <Monitor size={22} />}
-                    </div>
-                    <div>
-                        <h3 className="font-bold text-lg">Установить приложение</h3>
-                        <div className="flex items-center gap-2 mt-1">
-                            <Shield size={12} className="opacity-80" />
-                            <span className="text-xs opacity-80">Безопасно • Бесплатно</span>
-                        </div>
-                    </div>
-                </div>
-                <button
-                    onClick={handleClose}
-                    className="bg-white/10 hover:bg-white/20 p-1.5 rounded-lg transition"
+        <>
+            {showManualButton && (
+                <Button
+                    onClick={handleInstall}
+                    variant="outline"
+                    className="static md:fixed bottom-0 md: bottom-24 right-0 md:right-4 border border-primary border-3 text-primary hover:text-white hover:bg-primary p-6 rounded-xl shadow-lg z-40 transition flex items-center gap-2 animate-bounce"
+                    title="Установить приложение"
                 >
-                    <X size={18} />
-                </button>
-            </div>
-
-            <p className="text-sm mb-4 opacity-90">
-                {isMobile
-                    ? 'Запускайте с домашнего экрана, работайте оффлайн'
-                    : 'Отдельное окно без вкладок, уведомления, быстрый доступ'}
-            </p>
-
-            <div className="space-y-3 mb-5">
-                <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="text-sm">Работает без интернета</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                    <span className="text-sm">В 2 раза быстрее</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                    <span className="text-sm">Меньше занимает памяти</span>
-                </div>
-            </div>
-
-            <button
-                onClick={handleInstall}
-                className="w-full bg-white text-blue-600 font-bold py-3 px-4 rounded-xl hover:bg-gray-50 active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-lg"
-            >
-                <Download size={20} />
-                Установить сейчас
-                <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
-                    {isMobile ? 'БЕСПЛАТНО' : '~2 МБ'}
-                </span>
-            </button>
-
-            <button
-                onClick={handleClose}
-                className="w-full text-center text-sm opacity-80 hover:opacity-100 mt-3 py-2"
-            >
-                Не сейчас
-            </button>
-        </div>
+                    <Download size={20} className="mb-[1px]" />
+                    <span className="mb-[1px]">Установить "Поколение"</span>
+                </Button>
+            )}
+        </>
     )
 }

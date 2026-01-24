@@ -7,8 +7,8 @@ export class MockDataFactory {
     static async getUsers(): Promise<MockUser[]> {
         if (this.usersCache) return this.usersCache
 
-        this.usersCache = await Promise.all([this.createUser('1', 'user@gmail.com', 'user123', 'Роман Прусаков', '/profile.webp', 'Марсель Габдульманов', '30.11.2025'),
-        this.createUser('2', 'manager@mail.ru', 'manager123', 'Иван Иванов', '/no-photo.jpg', 'Петр Петров', '15.03.2024')])
+        this.usersCache = await Promise.all([this.createUser('1', 'user@gmail.com', 'user123', 'Роман Прусаков', '/profile/profile.webp', 'Марсель Габдульманов', '30.11.2025'),
+        this.createUser('2', 'manager@mail.ru', 'manager123', 'Иван Иванов', '/profile/no-photo.jpg', 'Петр Петров', '15.03.2024')])
 
         return this.usersCache
     }
