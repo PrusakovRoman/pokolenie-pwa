@@ -81,7 +81,7 @@ export default async function Page({ params }: MaterialPageProps) {
                 </p>)}
 
                 <MediaContent
-                    type={contentType} // 'video', 'article' или 'book'
+                    type={contentType}
                     imageUrl={material.imageUrl}
                     title={material.title}
                     contentUrl={contentType !== 'video' ? material.content?.url : undefined}

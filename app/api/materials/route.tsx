@@ -1,8 +1,35 @@
 import { NextRequest } from "next/server";
-import data from '@/app/data/materials.json'
+import fs from 'fs/promises';
+import path from 'path';
+
+import type { Material } from "@/lib/types/materials";
+
+const DATA_PATH = path.join(process.cwd(), 'app/data/materials.json');
+
+async function readData(): Promise<any> {
+    try {
+        const data = await fs.readFile(DATA_PATH, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error reading data:', error);
+        return { materials: [] };
+    }
+}
+
+async function writeData(data: any): Promise<void> {
+    try {
+        await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2), 'utf-8');
+    } catch (error) {
+        console.error('Error writing data:', error);
+    }
+}
+
 
 export async function GET(request: NextRequest) {
     try {
+        const data = await readData();
+        const materials: Material[] = data.materials;
+
         const { searchParams } = new URL(request.url)
 
         const page = Math.max(1, parseInt(searchParams.get('page') || '1'))
@@ -14,7 +41,6 @@ export async function GET(request: NextRequest) {
 
         const searchQuery = searchParams.get('search') || ''
 
-        let materials = data.materials
         let filtered = [...materials]
 
         if (selectedCategories.length > 0 && !selectedCategories.includes('Все')) {
@@ -28,10 +54,10 @@ export async function GET(request: NextRequest) {
             )
         }
 
-        const uniqueCategories = Array.from(new Set(data.materials.map(m => m.category)))
+        const uniqueCategories = Array.from(new Set(materials.map(m => m.category)))
 
         const categoryStats = uniqueCategories.map(category => {
-            const materialsInCategory = data.materials.filter(m => m.category === category)
+            const materialsInCategory = materials.filter(m => m.category === category)
 
             let filteredInCategory = [...materialsInCategory]
 
@@ -43,14 +69,14 @@ export async function GET(request: NextRequest) {
             return {
                 id: category,
                 name: category,
-                count: filteredInCategory.length
+                count: filteredInCategory.length,
             }
         })
 
         const allCategory = {
             id: 'Все',
             name: 'Все',
-            count: searchQuery.trim() !== '' ? data.materials.filter(m => m.title.toLowerCase().includes(searchQuery.toLowerCase())).length : data.materials.length
+            count: searchQuery.trim() !== '' ? materials.filter(m => m.title.toLowerCase().includes(searchQuery.toLowerCase())).length : materials.length
         }
 
         const categoriesStats = [allCategory, ...categoryStats]
@@ -92,5 +118,38 @@ export async function GET(request: NextRequest) {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         })
+    }
+}
+
+export async function POST(request: NextRequest) {
+    try {
+        const body = await request.json();
+
+        // 1. Читаем текущий JSON
+        const filePath = path.join(process.cwd(), 'app/data/materials.json');
+        const fileData = await fs.readFile(filePath, 'utf8');
+        const jsonData = JSON.parse(fileData);
+
+        // 2. Добавляем новый материал
+        const newMaterial = {
+            id: Date.now().toString(),
+            ...body,
+            createdAt: new Date().toISOString()
+        };
+
+        jsonData.materials.unshift(newMaterial);
+
+        // 3. Записываем обратно
+        await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2));
+
+        return Response.json({
+            success: true,
+            material: newMaterial
+        }, {
+            status: 201
+        });
+
+    } catch (error) {
+        return Response.json({ error: 'Failed to add material' }, { status: 500 });
     }
 }

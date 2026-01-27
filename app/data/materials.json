@@ -3,7 +3,7 @@
         {
             "id": "material-001",
             "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
+            "imageUrl": "/emotional-intelligence-1.jpg",
             "author": "Иванова Мария",
             "date": "2024-03-15",
             "category": "Soft-skills",
@@ -20,7 +20,7 @@
         {
             "id": "material-005",
             "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
+            "imageUrl": "/communication-art-1.jpg",
             "author": "Николаев Владимир",
             "date": "2024-02-15",
             "category": "Soft-skills",
@@ -37,7 +37,7 @@
         {
             "id": "material-002",
             "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
+            "imageUrl": "/planning-1.png",
             "author": "Петров Алексей",
             "date": "2024-03-10",
             "category": "Бизнес",
@@ -54,7 +54,7 @@
         {
             "id": "material-003",
             "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
+            "imageUrl": "/family-1.jpg",
             "author": "Смирнова Анна",
             "date": "2024-02-28",
             "category": "Семья",
@@ -71,7 +71,7 @@
         {
             "id": "material-004",
             "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
+            "imageUrl": "/sleepping-1.jpg",
             "author": "Козлов Дмитрий",
             "date": "2024-02-20",
             "category": "Здоровье",
@@ -88,7 +88,7 @@
         {
             "id": "material-006",
             "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
+            "imageUrl": "/sport.jpg",
             "author": "Иван Иванов",
             "date": "2025-02-10",
             "category": "Спорт",
@@ -105,7 +105,24 @@
         {
             "id": "material-001",
             "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
+            "imageUrl": "/emotional-intelligence-1.jpg",
+            "author": "Иванова Мария",
+            "date": "2024-03-15",
+            "category": "Soft-skills",
+            "categoryColor": "bg-pink-500",
+            "isLiked": true,
+            "content": {
+                "type": "article",
+                "url": "https://example.com/article-eq",
+                "introduction": "Эмоциональный интеллект - ключевой навык современности...",
+                "explanation": "Развитие EQ помогает в карьере и личной жизни...",
+                "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
+            }
+        },
+        {
+            "id": "material-001",
+            "title": "Развитие эмоционального интеллекта",
+            "imageUrl": "/emotional-intelligence-1.jpg",
             "author": "Иванова Мария",
             "date": "2024-03-15",
             "category": "Soft-skills",
@@ -122,7 +139,7 @@
         {
             "id": "material-005",
             "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
+            "imageUrl": "/communication-art-1.jpg",
             "author": "Николаев Владимир",
             "date": "2024-02-15",
             "category": "Soft-skills",
@@ -139,7 +156,7 @@
         {
             "id": "material-002",
             "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
+            "imageUrl": "/planning-1.png",
             "author": "Петров Алексей",
             "date": "2024-03-10",
             "category": "Бизнес",
@@ -156,7 +173,7 @@
         {
             "id": "material-003",
             "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
+            "imageUrl": "/family-1.jpg",
             "author": "Смирнова Анна",
             "date": "2024-02-28",
             "category": "Семья",
@@ -173,7 +190,7 @@
         {
             "id": "material-004",
             "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
+            "imageUrl": "/sleepping-1.jpg",
             "author": "Козлов Дмитрий",
             "date": "2024-02-20",
             "category": "Здоровье",
@@ -190,7 +207,7 @@
         {
             "id": "material-006",
             "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
+            "imageUrl": "/sport.jpg",
             "author": "Иван Иванов",
             "date": "2025-02-10",
             "category": "Спорт",
@@ -207,7 +224,7 @@
         {
             "id": "material-001",
             "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
+            "imageUrl": "/emotional-intelligence-1.jpg",
             "author": "Иванова Мария",
             "date": "2024-03-15",
             "category": "Soft-skills",
@@ -219,805 +236,6 @@
                 "introduction": "Эмоциональный интеллект - ключевой навык современности...",
                 "explanation": "Развитие EQ помогает в карьере и личной жизни...",
                 "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
-            }
-        },
-        {
-            "id": "material-005",
-            "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
-            "author": "Николаев Владимир",
-            "date": "2024-02-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/15105113362220740961",
-                "introduction": "Коммуникация - важный социальный навык.",
-                "explanation": "Техники эффективного общения.",
-                "conclusion": "Практика делает общение эффективным."
-            }
-        },
-        {
-            "id": "material-002",
-            "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
-            "author": "Петров Алексей",
-            "date": "2024-03-10",
-            "category": "Бизнес",
-            "categoryColor": "bg-emerald-500",
-            "isLiked": false,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/6504933081883457443",
-                "introduction": "Планирование - основа продуктивности.",
-                "explanation": "Рассматриваем методы тайм-менеджмента.",
-                "conclusion": "Внедрение методов повышает эффективность."
-            }
-        },
-        {
-            "id": "material-003",
-            "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
-            "author": "Смирнова Анна",
-            "date": "2024-02-28",
-            "category": "Семья",
-            "categoryColor": "bg-amber-500",
-            "isLiked": true,
-            "content": {
-                "type": "book",
-                "url": "https://example.com/family-book.pdf",
-                "introduction": "Книга о гармонии в семье.",
-                "explanation": "Техники общения и решения конфликтов.",
-                "conclusion": "Применение принципов улучшает отношения."
-            }
-        },
-        {
-            "id": "material-004",
-            "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
-            "author": "Козлов Дмитрий",
-            "date": "2024-02-20",
-            "category": "Здоровье",
-            "categoryColor": "bg-blue-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Сон влияет на все сферы жизни.",
-                "explanation": "Как улучшить качество сна.",
-                "conclusion": "Здоровый сон - основа здоровья."
-            }
-        },
-        {
-            "id": "material-006",
-            "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
-            "author": "Иван Иванов",
-            "date": "2025-02-10",
-            "category": "Спорт",
-            "categoryColor": "bg-purple-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Спорт влияет на все сферы жизни.",
-                "explanation": "Как именно спорт влияет на нас.",
-                "conclusion": "В здоровм теле - здоровый дух."
-            }
-        },
-        {
-            "id": "material-001",
-            "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
-            "author": "Иванова Мария",
-            "date": "2024-03-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/article-eq",
-                "introduction": "Эмоциональный интеллект - ключевой навык современности...",
-                "explanation": "Развитие EQ помогает в карьере и личной жизни...",
-                "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
-            }
-        },
-        {
-            "id": "material-005",
-            "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
-            "author": "Николаев Владимир",
-            "date": "2024-02-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/15105113362220740961",
-                "introduction": "Коммуникация - важный социальный навык.",
-                "explanation": "Техники эффективного общения.",
-                "conclusion": "Практика делает общение эффективным."
-            }
-        },
-        {
-            "id": "material-002",
-            "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
-            "author": "Петров Алексей",
-            "date": "2024-03-10",
-            "category": "Бизнес",
-            "categoryColor": "bg-emerald-500",
-            "isLiked": false,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/6504933081883457443",
-                "introduction": "Планирование - основа продуктивности.",
-                "explanation": "Рассматриваем методы тайм-менеджмента.",
-                "conclusion": "Внедрение методов повышает эффективность."
-            }
-        },
-        {
-            "id": "material-003",
-            "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
-            "author": "Смирнова Анна",
-            "date": "2024-02-28",
-            "category": "Семья",
-            "categoryColor": "bg-amber-500",
-            "isLiked": true,
-            "content": {
-                "type": "book",
-                "url": "https://example.com/family-book.pdf",
-                "introduction": "Книга о гармонии в семье.",
-                "explanation": "Техники общения и решения конфликтов.",
-                "conclusion": "Применение принципов улучшает отношения."
-            }
-        },
-        {
-            "id": "material-004",
-            "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
-            "author": "Козлов Дмитрий",
-            "date": "2024-02-20",
-            "category": "Здоровье",
-            "categoryColor": "bg-blue-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Сон влияет на все сферы жизни.",
-                "explanation": "Как улучшить качество сна.",
-                "conclusion": "Здоровый сон - основа здоровья."
-            }
-        },
-        {
-            "id": "material-006",
-            "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
-            "author": "Иван Иванов",
-            "date": "2025-02-10",
-            "category": "Спорт",
-            "categoryColor": "bg-purple-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Спорт влияет на все сферы жизни.",
-                "explanation": "Как именно спорт влияет на нас.",
-                "conclusion": "В здоровм теле - здоровый дух."
-            }
-        },
-        {
-            "id": "material-001",
-            "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
-            "author": "Иванова Мария",
-            "date": "2024-03-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/article-eq",
-                "introduction": "Эмоциональный интеллект - ключевой навык современности...",
-                "explanation": "Развитие EQ помогает в карьере и личной жизни...",
-                "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
-            }
-        },
-        {
-            "id": "material-005",
-            "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
-            "author": "Николаев Владимир",
-            "date": "2024-02-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/15105113362220740961",
-                "introduction": "Коммуникация - важный социальный навык.",
-                "explanation": "Техники эффективного общения.",
-                "conclusion": "Практика делает общение эффективным."
-            }
-        },
-        {
-            "id": "material-002",
-            "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
-            "author": "Петров Алексей",
-            "date": "2024-03-10",
-            "category": "Бизнес",
-            "categoryColor": "bg-emerald-500",
-            "isLiked": false,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/6504933081883457443",
-                "introduction": "Планирование - основа продуктивности.",
-                "explanation": "Рассматриваем методы тайм-менеджмента.",
-                "conclusion": "Внедрение методов повышает эффективность."
-            }
-        },
-        {
-            "id": "material-003",
-            "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
-            "author": "Смирнова Анна",
-            "date": "2024-02-28",
-            "category": "Семья",
-            "categoryColor": "bg-amber-500",
-            "isLiked": true,
-            "content": {
-                "type": "book",
-                "url": "https://example.com/family-book.pdf",
-                "introduction": "Книга о гармонии в семье.",
-                "explanation": "Техники общения и решения конфликтов.",
-                "conclusion": "Применение принципов улучшает отношения."
-            }
-        },
-        {
-            "id": "material-004",
-            "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
-            "author": "Козлов Дмитрий",
-            "date": "2024-02-20",
-            "category": "Здоровье",
-            "categoryColor": "bg-blue-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Сон влияет на все сферы жизни.",
-                "explanation": "Как улучшить качество сна.",
-                "conclusion": "Здоровый сон - основа здоровья."
-            }
-        },
-        {
-            "id": "material-006",
-            "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
-            "author": "Иван Иванов",
-            "date": "2025-02-10",
-            "category": "Спорт",
-            "categoryColor": "bg-purple-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Спорт влияет на все сферы жизни.",
-                "explanation": "Как именно спорт влияет на нас.",
-                "conclusion": "В здоровм теле - здоровый дух."
-            }
-        },
-        {
-            "id": "material-001",
-            "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
-            "author": "Иванова Мария",
-            "date": "2024-03-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/article-eq",
-                "introduction": "Эмоциональный интеллект - ключевой навык современности...",
-                "explanation": "Развитие EQ помогает в карьере и личной жизни...",
-                "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
-            }
-        },
-        {
-            "id": "material-005",
-            "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
-            "author": "Николаев Владимир",
-            "date": "2024-02-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/15105113362220740961",
-                "introduction": "Коммуникация - важный социальный навык.",
-                "explanation": "Техники эффективного общения.",
-                "conclusion": "Практика делает общение эффективным."
-            }
-        },
-        {
-            "id": "material-002",
-            "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
-            "author": "Петров Алексей",
-            "date": "2024-03-10",
-            "category": "Бизнес",
-            "categoryColor": "bg-emerald-500",
-            "isLiked": false,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/6504933081883457443",
-                "introduction": "Планирование - основа продуктивности.",
-                "explanation": "Рассматриваем методы тайм-менеджмента.",
-                "conclusion": "Внедрение методов повышает эффективность."
-            }
-        },
-        {
-            "id": "material-003",
-            "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
-            "author": "Смирнова Анна",
-            "date": "2024-02-28",
-            "category": "Семья",
-            "categoryColor": "bg-amber-500",
-            "isLiked": true,
-            "content": {
-                "type": "book",
-                "url": "https://example.com/family-book.pdf",
-                "introduction": "Книга о гармонии в семье.",
-                "explanation": "Техники общения и решения конфликтов.",
-                "conclusion": "Применение принципов улучшает отношения."
-            }
-        },
-        {
-            "id": "material-004",
-            "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
-            "author": "Козлов Дмитрий",
-            "date": "2024-02-20",
-            "category": "Здоровье",
-            "categoryColor": "bg-blue-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Сон влияет на все сферы жизни.",
-                "explanation": "Как улучшить качество сна.",
-                "conclusion": "Здоровый сон - основа здоровья."
-            }
-        },
-        {
-            "id": "material-006",
-            "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
-            "author": "Иван Иванов",
-            "date": "2025-02-10",
-            "category": "Спорт",
-            "categoryColor": "bg-purple-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Спорт влияет на все сферы жизни.",
-                "explanation": "Как именно спорт влияет на нас.",
-                "conclusion": "В здоровм теле - здоровый дух."
-            }
-        },
-        {
-            "id": "material-001",
-            "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
-            "author": "Иванова Мария",
-            "date": "2024-03-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/article-eq",
-                "introduction": "Эмоциональный интеллект - ключевой навык современности...",
-                "explanation": "Развитие EQ помогает в карьере и личной жизни...",
-                "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
-            }
-        },
-        {
-            "id": "material-005",
-            "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
-            "author": "Николаев Владимир",
-            "date": "2024-02-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/15105113362220740961",
-                "introduction": "Коммуникация - важный социальный навык.",
-                "explanation": "Техники эффективного общения.",
-                "conclusion": "Практика делает общение эффективным."
-            }
-        },
-        {
-            "id": "material-002",
-            "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
-            "author": "Петров Алексей",
-            "date": "2024-03-10",
-            "category": "Бизнес",
-            "categoryColor": "bg-emerald-500",
-            "isLiked": false,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/6504933081883457443",
-                "introduction": "Планирование - основа продуктивности.",
-                "explanation": "Рассматриваем методы тайм-менеджмента.",
-                "conclusion": "Внедрение методов повышает эффективность."
-            }
-        },
-        {
-            "id": "material-003",
-            "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
-            "author": "Смирнова Анна",
-            "date": "2024-02-28",
-            "category": "Семья",
-            "categoryColor": "bg-amber-500",
-            "isLiked": true,
-            "content": {
-                "type": "book",
-                "url": "https://example.com/family-book.pdf",
-                "introduction": "Книга о гармонии в семье.",
-                "explanation": "Техники общения и решения конфликтов.",
-                "conclusion": "Применение принципов улучшает отношения."
-            }
-        },
-        {
-            "id": "material-004",
-            "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
-            "author": "Козлов Дмитрий",
-            "date": "2024-02-20",
-            "category": "Здоровье",
-            "categoryColor": "bg-blue-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Сон влияет на все сферы жизни.",
-                "explanation": "Как улучшить качество сна.",
-                "conclusion": "Здоровый сон - основа здоровья."
-            }
-        },
-        {
-            "id": "material-006",
-            "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
-            "author": "Иван Иванов",
-            "date": "2025-02-10",
-            "category": "Спорт",
-            "categoryColor": "bg-purple-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Спорт влияет на все сферы жизни.",
-                "explanation": "Как именно спорт влияет на нас.",
-                "conclusion": "В здоровм теле - здоровый дух."
-            }
-        },
-        {
-            "id": "material-001",
-            "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
-            "author": "Иванова Мария",
-            "date": "2024-03-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/article-eq",
-                "introduction": "Эмоциональный интеллект - ключевой навык современности...",
-                "explanation": "Развитие EQ помогает в карьере и личной жизни...",
-                "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
-            }
-        },
-        {
-            "id": "material-005",
-            "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
-            "author": "Николаев Владимир",
-            "date": "2024-02-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/15105113362220740961",
-                "introduction": "Коммуникация - важный социальный навык.",
-                "explanation": "Техники эффективного общения.",
-                "conclusion": "Практика делает общение эффективным."
-            }
-        },
-        {
-            "id": "material-002",
-            "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
-            "author": "Петров Алексей",
-            "date": "2024-03-10",
-            "category": "Бизнес",
-            "categoryColor": "bg-emerald-500",
-            "isLiked": false,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/6504933081883457443",
-                "introduction": "Планирование - основа продуктивности.",
-                "explanation": "Рассматриваем методы тайм-менеджмента.",
-                "conclusion": "Внедрение методов повышает эффективность."
-            }
-        },
-        {
-            "id": "material-003",
-            "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
-            "author": "Смирнова Анна",
-            "date": "2024-02-28",
-            "category": "Семья",
-            "categoryColor": "bg-amber-500",
-            "isLiked": true,
-            "content": {
-                "type": "book",
-                "url": "https://example.com/family-book.pdf",
-                "introduction": "Книга о гармонии в семье.",
-                "explanation": "Техники общения и решения конфликтов.",
-                "conclusion": "Применение принципов улучшает отношения."
-            }
-        },
-        {
-            "id": "material-004",
-            "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
-            "author": "Козлов Дмитрий",
-            "date": "2024-02-20",
-            "category": "Здоровье",
-            "categoryColor": "bg-blue-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Сон влияет на все сферы жизни.",
-                "explanation": "Как улучшить качество сна.",
-                "conclusion": "Здоровый сон - основа здоровья."
-            }
-        },
-        {
-            "id": "material-006",
-            "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
-            "author": "Иван Иванов",
-            "date": "2025-02-10",
-            "category": "Спорт",
-            "categoryColor": "bg-purple-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Спорт влияет на все сферы жизни.",
-                "explanation": "Как именно спорт влияет на нас.",
-                "conclusion": "В здоровм теле - здоровый дух."
-            }
-        },
-        {
-            "id": "material-001",
-            "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
-            "author": "Иванова Мария",
-            "date": "2024-03-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/article-eq",
-                "introduction": "Эмоциональный интеллект - ключевой навык современности...",
-                "explanation": "Развитие EQ помогает в карьере и личной жизни...",
-                "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
-            }
-        },
-        {
-            "id": "material-005",
-            "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
-            "author": "Николаев Владимир",
-            "date": "2024-02-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/15105113362220740961",
-                "introduction": "Коммуникация - важный социальный навык.",
-                "explanation": "Техники эффективного общения.",
-                "conclusion": "Практика делает общение эффективным."
-            }
-        },
-        {
-            "id": "material-002",
-            "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
-            "author": "Петров Алексей",
-            "date": "2024-03-10",
-            "category": "Бизнес",
-            "categoryColor": "bg-emerald-500",
-            "isLiked": false,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/6504933081883457443",
-                "introduction": "Планирование - основа продуктивности.",
-                "explanation": "Рассматриваем методы тайм-менеджмента.",
-                "conclusion": "Внедрение методов повышает эффективность."
-            }
-        },
-        {
-            "id": "material-003",
-            "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
-            "author": "Смирнова Анна",
-            "date": "2024-02-28",
-            "category": "Семья",
-            "categoryColor": "bg-amber-500",
-            "isLiked": true,
-            "content": {
-                "type": "book",
-                "url": "https://example.com/family-book.pdf",
-                "introduction": "Книга о гармонии в семье.",
-                "explanation": "Техники общения и решения конфликтов.",
-                "conclusion": "Применение принципов улучшает отношения."
-            }
-        },
-        {
-            "id": "material-004",
-            "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
-            "author": "Козлов Дмитрий",
-            "date": "2024-02-20",
-            "category": "Здоровье",
-            "categoryColor": "bg-blue-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Сон влияет на все сферы жизни.",
-                "explanation": "Как улучшить качество сна.",
-                "conclusion": "Здоровый сон - основа здоровья."
-            }
-        },
-        {
-            "id": "material-006",
-            "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
-            "author": "Иван Иванов",
-            "date": "2025-02-10",
-            "category": "Спорт",
-            "categoryColor": "bg-purple-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Спорт влияет на все сферы жизни.",
-                "explanation": "Как именно спорт влияет на нас.",
-                "conclusion": "В здоровм теле - здоровый дух."
-            }
-        },
-        {
-            "id": "material-001",
-            "title": "Развитие эмоционального интеллекта",
-            "imageUrl": "/materials/emotional-intelligence-1.jpg",
-            "author": "Иванова Мария",
-            "date": "2024-03-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/article-eq",
-                "introduction": "Эмоциональный интеллект - ключевой навык современности...",
-                "explanation": "Развитие EQ помогает в карьере и личной жизни...",
-                "conclusion": "Регулярная практика улучшает эмоциональный интеллект."
-            }
-        },
-        {
-            "id": "material-005",
-            "title": "Мастерство коммуникации",
-            "imageUrl": "/materials/communication-art-1.jpg",
-            "author": "Николаев Владимир",
-            "date": "2024-02-15",
-            "category": "Soft-skills",
-            "categoryColor": "bg-pink-500",
-            "isLiked": true,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/15105113362220740961",
-                "introduction": "Коммуникация - важный социальный навык.",
-                "explanation": "Техники эффективного общения.",
-                "conclusion": "Практика делает общение эффективным."
-            }
-        },
-        {
-            "id": "material-002",
-            "title": "Эффективное планирование задач",
-            "imageUrl": "/materials/planning-1.png",
-            "author": "Петров Алексей",
-            "date": "2024-03-10",
-            "category": "Бизнес",
-            "categoryColor": "bg-emerald-500",
-            "isLiked": false,
-            "content": {
-                "type": "video",
-                "embedUrl": "https://yandex.ru/video/preview/6504933081883457443",
-                "introduction": "Планирование - основа продуктивности.",
-                "explanation": "Рассматриваем методы тайм-менеджмента.",
-                "conclusion": "Внедрение методов повышает эффективность."
-            }
-        },
-        {
-            "id": "material-003",
-            "title": "Гармония в семейных отношениях",
-            "imageUrl": "/materials/family-1.jpg",
-            "author": "Смирнова Анна",
-            "date": "2024-02-28",
-            "category": "Семья",
-            "categoryColor": "bg-amber-500",
-            "isLiked": true,
-            "content": {
-                "type": "book",
-                "url": "https://example.com/family-book.pdf",
-                "introduction": "Книга о гармонии в семье.",
-                "explanation": "Техники общения и решения конфликтов.",
-                "conclusion": "Применение принципов улучшает отношения."
-            }
-        },
-        {
-            "id": "material-004",
-            "title": "Качество сна и продуктивность",
-            "imageUrl": "/materials/sleepping-1.jpg",
-            "author": "Козлов Дмитрий",
-            "date": "2024-02-20",
-            "category": "Здоровье",
-            "categoryColor": "bg-blue-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Сон влияет на все сферы жизни.",
-                "explanation": "Как улучшить качество сна.",
-                "conclusion": "Здоровый сон - основа здоровья."
-            }
-        },
-        {
-            "id": "material-006",
-            "title": "Спорт в вашей жизни",
-            "imageUrl": "/materials/sport.jpg",
-            "author": "Иван Иванов",
-            "date": "2025-02-10",
-            "category": "Спорт",
-            "categoryColor": "bg-purple-500",
-            "isLiked": false,
-            "content": {
-                "type": "article",
-                "url": "https://example.com/sleep-article",
-                "introduction": "Спорт влияет на все сферы жизни.",
-                "explanation": "Как именно спорт влияет на нас.",
-                "conclusion": "В здоровм теле - здоровый дух."
             }
         }
     ]

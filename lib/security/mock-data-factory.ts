@@ -7,8 +7,8 @@ export class MockDataFactory {
     static async getUsers(): Promise<MockUser[]> {
         if (this.usersCache) return this.usersCache
 
-        this.usersCache = await Promise.all([this.createUser('1', 'user@gmail.com', 'user123', 'Роман Прусаков', '/profile/profile.webp', 'Марсель Габдульманов', '30.11.2025'),
-        this.createUser('2', 'manager@mail.ru', 'manager123', 'Иван Иванов', '/profile/no-photo.jpg', 'Петр Петров', '15.03.2024')])
+        this.usersCache = await Promise.all([this.createUser('1', 'user@gmail.com', 'user123', 'Роман Прусаков', 'Участник', '/profile/profile.webp', 'Марсель Габдульманов', '30.11.2025'),
+        this.createUser('2', 'admin@mail.ru', 'admin123', 'Иван Иванов', 'Администратор', '/profile/no-photo.jpg', '', '')])
 
         return this.usersCache
     }
@@ -23,6 +23,7 @@ export class MockDataFactory {
         email: string,
         plainPassword: string,
         name: string,
+        role: string,
         image: string,
         mentor: string,
         createdAt: string
@@ -32,6 +33,7 @@ export class MockDataFactory {
             email,
             password: await hashPassword(plainPassword),
             name,
+            role,
             image,
             mentor,
             createdAt

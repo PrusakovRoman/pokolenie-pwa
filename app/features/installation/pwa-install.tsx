@@ -46,22 +46,17 @@ export function PWAInstall() {
         setIsMobile(mobile)
 
         // 3. Проверяем, не отказывался ли пользователь
-        const bannerDismissed = localStorage.getItem('pwa_banner_dismissed')
-        const manualBtnHidden = localStorage.getItem('pwa_button_hidden')
+        // const manualBtnHidden = localStorage.getItem('pwa_button_hidden')
 
         // 4. Событие установки (для Android/Chrome)
         const handleBeforeInstall = (e: Event) => {
             e.preventDefault()
             setDeferredPrompt(e)
-
-            // Всегда показываем кнопку, если не скрыта
-            if (!manualBtnHidden) {
-                setShowManualButton(true)
-            }
+            setShowManualButton(true)
         }
 
         // 5. Для iOS показываем кнопку всегда (нет beforeinstallprompt)
-        if (ios && !manualBtnHidden) {
+        if (ios) {
             setShowManualButton(true)
         }
 
@@ -99,12 +94,6 @@ export function PWAInstall() {
         }
     }
 
-    // Скрыть кнопку
-    const hideButton = () => {
-        setShowManualButton(false)
-        localStorage.setItem('pwa_button_hidden', 'true')
-    }
-
     // Если приложение установлено - ничего не показываем
     if (isStandalone) return null
 
@@ -117,8 +106,8 @@ export function PWAInstall() {
                     className="static md:fixed bottom-0 md: bottom-24 right-0 md:right-4 border border-primary border-3 text-primary hover:text-white hover:bg-primary p-6 rounded-xl shadow-lg z-40 transition flex items-center gap-2 animate-bounce"
                     title="Установить приложение"
                 >
-                    <Download size={20} className="mb-[1px]" />
-                    <span className="mb-[1px]">Установить "Поколение"</span>
+                    <Download size={20} />
+                    <span>Установить "Поколение"</span>
                 </Button>
             )}
         </>

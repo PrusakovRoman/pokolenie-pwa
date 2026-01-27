@@ -41,6 +41,7 @@ export const authConfig: NextAuthConfig = {
                         id: user.id,
                         email: user.email,
                         name: user.name,
+                        role: user.role,
                         image: user.image,
                         mentor: user.mentor,
                         createdAt: user.createdAt
@@ -60,6 +61,7 @@ export const authConfig: NextAuthConfig = {
                 token.id = user.id;
                 token.name = user.name;
                 token.email = user.email;
+                token.role = user.role;
                 token.image = user.image;
                 token.mentor = user.mentor;
                 token.createdAt = user.createdAt;
@@ -77,6 +79,7 @@ export const authConfig: NextAuthConfig = {
                 session.user.id = token.id as string;
                 session.user.name = token.name as string;
                 session.user.email = token.email as string;
+                session.user.role = token.role as string
                 session.user.image = token.image as string;
                 session.user.mentor = token.mentor as string;
                 session.user.createdAt = token.createdAt as string;

@@ -2,11 +2,6 @@ import "@/app/ui/globals.css";
 
 import type { Metadata } from "next";
 
-import { X, Download } from "lucide-react"
-
-import { PWAInstall } from "@/app/features/installation/pwa-install";
-import { Button } from "@/components/ui/button";
-
 export const metadata: Metadata = {
   title: "Поколение",
   description: "Закрытая платформа для участников проекта",
@@ -37,7 +32,6 @@ export default async function RootLayout({
       <body>
         <div className="min-h-screen flex flex-col justify-between bg-linear-160 from-gray-200 to-gray-30">
           {children}
-          {/* <PWAInstall /> */}
         </div>
       </body>
     </html>

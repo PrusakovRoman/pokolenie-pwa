@@ -8,7 +8,7 @@ export default function MentorPage() {
         <>
             <Header />
             <main className="w-full text-center">
-                <p className="flex gap-2 items-centertext-lg md:text-xl justify-center">На этой странице будет информация о наставнике... <Heart className="text-primary fill-primary" /></p>
+                <p className="text-lg md:text-xl">На этой странице будет информация о наставнике... <Heart className="text-primary fill-primary inline ml-2 mb-1" /></p>
             </main>
             <Footer />
         </>

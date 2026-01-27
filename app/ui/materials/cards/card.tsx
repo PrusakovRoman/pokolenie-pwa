@@ -51,5 +51,7 @@ export function MaterialCard({ material }: MaterialCardProps) {
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </article>
         </Link >
+
+
     )
 }

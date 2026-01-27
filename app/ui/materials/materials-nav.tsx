@@ -1,9 +1,12 @@
+import Link from "next/link"
+
 import Search from "@/app/ui/materials/search/search"
 import DesktopFilters from "@/app/ui/materials/filters/desktop/filters"
 import MobileFilters from "@/app/ui/materials/filters/mobile/filters"
 
 import { CategoryStat, Metadata } from "@/lib/types/materials"
 import { materialsWord } from "@/app/lib/utils"
+import { Button } from "@/components/ui/button"
 
 interface MaterialsNavProps {
     metadata: Metadata | null
@@ -26,11 +29,18 @@ export function MaterialsNav({ metadata, selectedCategories, categoryStats, sear
 
             <MobileFilters selectedCategories={selectedCategories} categoryStats={categoryStats} toggleCategory={toggleCategory} resetFilters={resetFilters} />
 
-            <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <div>
+            <div className="flex items-center justify-between text-sm">
+                <div className=" text-muted-foreground">
                     Найдено:{' '}<span className="font-semibold text-foreground">{count}</span>{' '}{materialsWord(count)}
                 </div>
+                <Link href='/createMaterial'>
+                    <Button variant='outline'
+                        className="border border-primary hover:bg-primary/5 hover:text-primary"
+                    >
+                        Добавить материал
+                    </Button>
+                </Link>
             </div>
-        </div>
+        </div >
     )
 }

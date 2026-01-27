@@ -10,6 +10,7 @@ interface UserMenuProps {
     user: {
         name?: string | null
         email?: string | null
+        role?: string | null
         image?: string | null
         mentor?: string
         createdAt?: string
@@ -80,7 +81,6 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
     //     document.addEventListener('keydown', handleEscape)
     //     return () => document.removeEventListener('keydown', handleEscape)
     // }, [isOpen])
-
     return (
         <div className="relative" ref={dropdownRef}>
             <button
@@ -138,7 +138,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
 
                             <div>
                                 <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{user.name}</h4>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">Участник</p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">{user.role}</p>
                             </div>
                         </div>
 
@@ -154,7 +154,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                             </div>
                         </div>
 
-                        <div className="mb-6">
+                        {user.role === 'Участник' && (<div className="mb-6">
                             <div className="flex items-center gap-2 mb-3">
                                 <Award className="h-4 w-4 text-primary" />
                                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -169,12 +169,13 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
 
                                     </div>
                                     <div>
-                                        <p className="font-medium text-gray-900 dark:text-white group-hover:text-primary group-hover:underline decoration-1 underline-offset-3 [text-decoration-skip-ink:none] transition-all duration-300 ">{user.mentor}</p>
+                                        <p className="font-medium text-gray-900 dark:text-white group-hover:text-primary group-hover:underline decoration-1 underline-offset-3 [text-decoration-skip-ink:none] transition-all duration-300 ">{user?.mentor}</p>
                                     </div>
                                 </div>
                             </Link>
 
-                        </div>
+                        </div>)}
+
 
                         <Separator className="mb-6" />
 
@@ -188,12 +189,11 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                             {isPending ? "Выходим..." : "Выйти из профиля"}
                         </Button>
                     </div>
-
-                    <div className="px-5 py-3 border-t border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50">
+                    {user.role === 'Участник' && (<div className="px-5 py-3 border-t border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50">
                         <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
                             Вступил в проект: {user.createdAt}
                         </p>
-                    </div>
+                    </div>)}
                 </div>
             </div>
         </div >

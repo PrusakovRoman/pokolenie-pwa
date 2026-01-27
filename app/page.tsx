@@ -1,7 +1,5 @@
 'use server'
 
-import { Download } from "lucide-react"
-
 import { auth } from "@/lib/auth"
 import Link from "next/link"
 
@@ -19,6 +17,7 @@ export default async function Home() {
   return (
     <>
       <Header />
+
       <main>
         <div className="container mx-auto p-6 md:py-16">
           <div className="flex flex-col items-center gap-10">
