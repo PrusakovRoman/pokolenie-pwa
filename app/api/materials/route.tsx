@@ -1,29 +1,27 @@
 import { NextRequest } from "next/server";
-import fs from 'fs/promises';
-import path from 'path';
+import { Redis } from '@upstash/redis';
 
 import type { Material } from "@/lib/types/materials";
 
-const DATA_PATH = path.join(process.cwd(), 'app/data/materials.json');
+const redis = Redis.fromEnv();
 
 async function readData(): Promise<any> {
     try {
-        const data = await fs.readFile(DATA_PATH, 'utf-8');
-        return JSON.parse(data);
+        const materials = await redis.get('materials')
+        return { materials: materials || [] };
     } catch (error) {
-        console.error('Error reading data:', error);
+        console.error('Error reading from Redis:', error);
         return { materials: [] };
     }
 }
 
 async function writeData(data: any): Promise<void> {
     try {
-        await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2), 'utf-8');
+        await redis.set('materials', data.materials)
     } catch (error) {
-        console.error('Error writing data:', error);
+        console.error('Error writing to Redis:', error);
     }
 }
-
 
 export async function GET(request: NextRequest) {
     try {
@@ -125,22 +123,20 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
 
-        // 1. Читаем текущий JSON
-        const filePath = path.join(process.cwd(), 'app/data/materials.json');
-        const fileData = await fs.readFile(filePath, 'utf8');
-        const jsonData = JSON.parse(fileData);
+        const data = await readData()
+        const materials: Material[] = data.materials
 
         // 2. Добавляем новый материал
-        const newMaterial = {
+        const newMaterial: Material = {
             id: Date.now().toString(),
             ...body,
             createdAt: new Date().toISOString()
         };
 
-        jsonData.materials.unshift(newMaterial);
+        materials.unshift(newMaterial);
 
         // 3. Записываем обратно
-        await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2));
+        await writeData({ materials })
 
         return Response.json({
             success: true,
@@ -150,7 +146,13 @@ export async function POST(request: NextRequest) {
         });
 
     } catch (error) {
-        return Response.json({ error: 'Failed to add material' }, { status: 500 });
+        console.error('POST error:', error);
+        return Response.json({
+            error: 'Failed to add material',
+            details: error instanceof Error ? error.message : 'Unknown error'
+        }, {
+            status: 500
+        });
     }
 }
 
@@ -167,11 +169,10 @@ export async function DELETE(request: NextRequest) {
             });
         }
 
-        const filePath = path.join(process.cwd(), 'app/data/materials.json');
-        const fileData = await fs.readFile(filePath, 'utf8');
-        const jsonData = JSON.parse(fileData);
+        const data = await readData()
+        const materials: Material[] = data.materials
 
-        const materialIndex = jsonData.materials.findIndex((m: Material) => m.id === id);
+        const materialIndex = materials.findIndex((m: Material) => m.id === id);
 
         if (materialIndex === -1) {
             return Response.json({
@@ -181,10 +182,10 @@ export async function DELETE(request: NextRequest) {
             });
         }
 
-        const deletedMaterial = jsonData.materials[materialIndex];
-        jsonData.materials.splice(materialIndex, 1);
+        const deletedMaterial = materials[materialIndex];
+        materials.splice(materialIndex, 1);
 
-        await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2));
+        await writeData({ materials })
 
         return Response.json({
             success: true,
@@ -196,14 +197,14 @@ export async function DELETE(request: NextRequest) {
     } catch (error) {
         console.error('Delete error:', error);
         return Response.json({
-            error: 'Ошибка при удалении материала'
+            error: 'Ошибка при удалении материала',
+            details: error instanceof Error ? error.message : 'Unknown error'
         }, {
             status: 500
         });
     }
 }
 
-// app/api/materials/route.ts - добавьте PUT метод
 export async function PUT(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
@@ -218,11 +219,10 @@ export async function PUT(request: NextRequest) {
             });
         }
 
-        const filePath = path.join(process.cwd(), 'app/data/materials.json');
-        const fileData = await fs.readFile(filePath, 'utf8');
-        const jsonData = JSON.parse(fileData);
+        const data = await readData()
+        const materials: Material[] = data.materials
 
-        const materialIndex = jsonData.materials.findIndex((m: Material) => m.id === id);
+        const materialIndex = materials.findIndex((m: Material) => m.id === id);
 
         if (materialIndex === -1) {
             return Response.json({
@@ -233,17 +233,17 @@ export async function PUT(request: NextRequest) {
         }
 
         // Обновляем материал
-        jsonData.materials[materialIndex] = {
-            ...jsonData.materials[materialIndex],
+        materials[materialIndex] = {
+            ...materials[materialIndex],
             ...body,
             updatedAt: new Date().toISOString()
         };
 
-        await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2));
+        await writeData({ materials })
 
         return Response.json({
             success: true,
-            material: jsonData.materials[materialIndex]
+            material: materials[materialIndex]
         }, {
             status: 200
         });
@@ -251,7 +251,8 @@ export async function PUT(request: NextRequest) {
     } catch (error) {
         console.error('Update error:', error);
         return Response.json({
-            error: 'Ошибка при обновлении материала'
+            error: 'Ошибка при обновлении материала',
+            details: error instanceof Error ? error.message : 'Unknown error'
         }, {
             status: 500
         });

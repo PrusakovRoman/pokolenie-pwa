@@ -17,7 +17,6 @@ export default function EditMaterialPage() {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [materialData, setMaterialData] = useState<any>(null);
 
-    // Загружаем данные материала
     useEffect(() => {
         const fetchMaterial = async () => {
             try {
@@ -44,9 +43,8 @@ export default function EditMaterialPage() {
     const handleSubmit = async (formData: any) => {
         setIsSubmitting(true);
         try {
-            // TODO: Добавить PUT метод в API для обновления
             const response = await fetch(`/api/materials?id=${materialId}`, {
-                method: 'PUT', // Или PATCH
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },

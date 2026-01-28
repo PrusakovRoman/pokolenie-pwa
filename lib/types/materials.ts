@@ -6,16 +6,11 @@ export interface Material {
     date: string
     category: string
     categoryColor: string
-    isLiked: boolean
-    content: {
-        // type: 'video' | 'article' | 'book'
-        type: string
-        url?: string
-        embedUrl?: string
-        introduction?: string
-        explanation: string
-        conclusion: string
-    }
+    type: string
+    url: string
+    introduction: string
+    explanation: string
+    conclusion: string
 }
 
 export interface Metadata {

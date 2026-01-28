@@ -1,12 +1,9 @@
 'use client'
-import { Calendar, User, Trash, Pencil, AlertTriangle } from "lucide-react"
+import { Calendar, User, Pencil } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
 import { Material } from "@/lib/types/materials"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import ConfirmDialog from "@/app/ui/materials/admin/confirm-dialog"
 
 interface MaterialCardProps {
     material: Material

@@ -1,6 +1,7 @@
+import { Redis } from '@upstash/redis';
 import { NextRequest, NextResponse } from "next/server"
 
-import data from '@/app/data/materials.json'
+const redis = Redis.fromEnv();
 
 import { Material } from "@/lib/types/materials"
 
@@ -11,7 +12,17 @@ export async function GET(
     try {
         const { id } = await params
 
-        const material = data.materials.find((m: Material) => m.id === id)
+        if (!id) {
+            return NextResponse.json(
+                { error: 'ID материала не указан' },
+                { status: 400 }
+            )
+        }
+
+        const materials = await redis.get<Material[]>('materials')
+        const materialsArray = materials || []
+
+        const material = materialsArray.find((m: Material) => m.id === id)
 
         if (!material) {
             return NextResponse.json(
@@ -30,7 +41,10 @@ export async function GET(
     } catch (error) {
         console.error('API error: ', error)
         return NextResponse.json(
-            { error: 'Внутренняя ошибка сервера' },
+            {
+                error: 'Внутренняя ошибка сервера',
+                details: error instanceof Error ? error.message : 'Unknown error'
+            },
             { status: 500 }
         )
     }
