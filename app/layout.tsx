@@ -1,12 +1,15 @@
 import "@/app/ui/globals.css";
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+
+export const viewport: Viewport = {
+  themeColor: '#000000',
+}
 
 export const metadata: Metadata = {
   title: "Поколение",
   description: "Закрытая платформа для участников проекта",
   manifest: "/manifest.json",
-  themeColor: "#000000",
   appleWebApp: {
     capable: true,
     title: "Поколение",

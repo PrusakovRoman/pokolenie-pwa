@@ -1,16 +1,16 @@
 'use client'
-import { Calendar, User, Pencil } from "lucide-react"
+import { Calendar, User } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import Image from "next/image"
 import { Material } from "@/lib/types/materials"
+import ModifyMaterialButton from "@/app/ui/materials/admin/modify-material-button"
 
 interface MaterialCardProps {
     material: Material
-    onDelete?: (id: string) => void
 }
 
-export function MaterialCard({ material, onDelete }: MaterialCardProps) {
+export function MaterialCard({ material }: MaterialCardProps) {
     return (
         <Link href={`/material/${material.id}`}>
             <article className=
@@ -28,21 +28,9 @@ export function MaterialCard({ material, onDelete }: MaterialCardProps) {
                 </div>
 
                 <div className="relative h-48 overflow-hidden flex-shrink-0">
-                    <Image src={material.imageUrl} alt={material.title} sizes="(width: 100%) (height: 100%)" className="object-cover transition-transform duration-500 group-hover:scale-110" fill={true} priority />
+                    <Image src={material.imageUrl} alt={material.title} sizes="(width: 100%) (height: 100%)" className="object-cover transition-transform duration-500 group-hover:scale-110" fill={true} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
-                    <div className="flex items-center justify-end gap-2 absolute bottom-4 right-4">
-                        <div className="backdrop-blur-md bg-white/40 dark:bg-black/20 p-2 rounded-xl shadow-lg border border-white/30 dark:border-black/30">
-                            <div className="flex items-center">
-                                <Link
-                                    href={`/modifyMaterial/edit/${material.id}`}
-                                    className="p-2 hover:bg-white/20 rounded-lg transition-colors"
-                                    aria-label="Редактировать"
-                                >
-                                    <Pencil className="w-5 h-5 text-green-700/80 hover:text-green-700  drop-shadow-[0_1px_1px_rgba(0,0,0,0.3)]" />
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
+                    <ModifyMaterialButton materialId={material.id} />
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow">

@@ -167,7 +167,7 @@ export default function MaterialForm({
     return (
         <form onSubmit={handleSubmit} className="relative">
             {mode === 'edit' && onDelete && (
-                <div className="flex items-center justify-end">
+                <div className="flex items-center justify-end my-4">
                     <button
                         type="button"
                         onClick={onDelete}

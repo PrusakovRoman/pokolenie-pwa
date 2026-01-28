@@ -81,6 +81,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
     //     document.addEventListener('keydown', handleEscape)
     //     return () => document.removeEventListener('keydown', handleEscape)
     // }, [isOpen])
+
     return (
         <div className="relative" ref={dropdownRef}>
             <button
@@ -89,7 +90,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                 aria-label="Открыть профиль"
                 aria-expanded={isOpen}
             >
-                <Image src={user?.image ? user.image : "/profile/no-photo.jpg"} alt="Фото профиля" className="object-cover" sizes="(width: 100%) (height: 100%)" fill={true} priority />
+                <Image src={user?.image ? user.image : "/profile/no-photo.jpg"} alt="Фото профиля" className="object-cover" sizes="(width: 100%) (height: 100%)" fill={true} />
                 <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white dark:border-gray-900"></div>
             </button>
 
@@ -110,6 +111,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                     display: isOpen ? 'block' : 'none',
                 }}
                 aria-hidden={!isOpen}
+            // inert
             >
                 <div className="p-1">
                     <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800">

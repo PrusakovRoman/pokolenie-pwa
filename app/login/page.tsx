@@ -10,12 +10,6 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import LoginForm from "@/app/ui/login-form"
 
 export default async function LoginPage() {
-    // const session = await auth()
-
-    // if (session?.user) {
-    //     redirect('/')
-    // }
-
     return (
         <main className="min-h-screen flex items-center justify-center p-4 bg-linear-100 from-gray-200 to-gray-30">
             <Card className="w-full max-w-md">

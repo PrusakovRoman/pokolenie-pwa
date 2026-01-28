@@ -49,7 +49,7 @@ export default function LoginForm() {
                             variant="link"
                             className="h-auto p-0 text-xs"
                             type="button"
-                            onClick={() => alert('Логика восстановления пароль скоро будет реализована! Для восстановления пароля напишите на почту lalala@ro.ru')}
+                            onClick={() => alert('На вашу почту была отправлена ссылка для восстановления пароля (заглушка)')}
                         >
                             Забыли пароль?
                         </Button>
