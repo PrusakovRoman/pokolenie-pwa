@@ -1,8 +1,31 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { useState, FormEvent } from 'react';
-import LinkToMaterials from './link-to-materials';
+import { useState, FormEvent, useEffect } from 'react';
+import { Loader2, AlertTriangle } from 'lucide-react';
+
+interface MaterialFormData {
+    title: string;
+    imageUrl: string;
+    author: string;
+    date: string;
+    category: string;
+    categoryColor: string;
+    type: 'article' | 'video' | 'book';
+    url: string;
+    introduction: string;
+    explanation: string;
+    conclusion: string;
+}
+
+interface MaterialFormProps {
+    mode: 'create' | 'edit';
+    initialData?: Partial<MaterialFormData> & { id?: string };
+    onDelete?: () => void;
+    onSubmit: (data: MaterialFormData) => Promise<void>;
+    isSubmitting?: boolean;
+    deleteLoading?: boolean;
+}
 
 const CATEGORIES = [
     { name: 'Soft-skills', color: 'bg-pink-500' },
@@ -24,24 +47,42 @@ const MATERIAL_TYPES = [
     { value: 'book', label: 'Книга' },
 ];
 
-export default function CreateMaterialForm() {
-    const [isSubmitting, setIsSubmitting] = useState(false);
+export default function MaterialForm({
+    mode,
+    initialData = {},
+    onDelete,
+    onSubmit,
+    isSubmitting = false,
+    deleteLoading = false
+}: MaterialFormProps) {
     const [error, setError] = useState<string | null>(null);
-    const [isSubmitted, setIsSubmitted] = useState(false)
+    const [isChanged, setIsChanged] = useState(false);
+    const [originalData, setOriginalData] = useState<Partial<MaterialFormData>>({});
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<MaterialFormData>({
         title: '',
         imageUrl: '',
         author: '',
         date: new Date().toISOString().split('T')[0],
         category: '',
         categoryColor: '#FF6B6B',
-        type: 'article' as 'article' | 'video' | 'book',
+        type: 'article',
         url: '',
         introduction: '',
         explanation: '',
         conclusion: '',
+        ...initialData
     });
+
+    // Сравниваем изменения
+    useEffect(() => {
+        const hasChanged = Object.keys(formData).some(key => {
+            const formValue = formData[key as keyof MaterialFormData];
+            const initialValue = initialData[key as keyof MaterialFormData];
+            return formValue !== initialValue;
+        });
+        setIsChanged(hasChanged);
+    }, [formData, initialData]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -59,6 +100,13 @@ export default function CreateMaterialForm() {
         }));
     };
 
+    const handleTypeSelect = (typeValue: 'article' | 'video' | 'book') => {
+        setFormData(prev => ({
+            ...prev,
+            type: typeValue
+        }));
+    };
+
     const resetFields = () => {
         setFormData({
             title: '',
@@ -73,48 +121,23 @@ export default function CreateMaterialForm() {
             explanation: '',
             conclusion: '',
         });
-    }
-
+    };
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        setIsSubmitting(true);
         setError(null);
 
+        // Проверка категории для создания
+        if (mode === 'create' && !formData.category.trim()) {
+            setError('Пожалуйста, выберите категорию');
+            return;
+        }
+
         try {
-            if (!formData.category.trim()) {
-                alert('Пожалуйста, выберите категорию');
-                return
-            }
-
-            const response = await fetch('/api/materials', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Ошибка при сохранении материала');
-            }
-
-            const result = await response.json();
-
-            if (result.success) {
-                alert('Материал успешно создан!');
-                resetFields()
-                setIsSubmitted(true)
-            } else {
-                throw new Error('Неизвестная ошибка');
-            }
+            await onSubmit(formData);
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Произошла ошибка при создании материала');
-            console.error('Error creating material:', err);
-        } finally {
-            setIsSubmitting(false);
-            setIsSubmitted(false)
+            setError(err instanceof Error ? err.message : 'Произошла ошибка');
+            console.error('Form error:', err);
         }
     };
 
@@ -138,19 +161,39 @@ export default function CreateMaterialForm() {
             'bg-violet-500': '#8B5CF6',
             'bg-fuchsia-500': '#D946EF',
         };
-
         return colorMap[twColor] || '#3B82F6';
     };
-    return (
-        <form onSubmit={handleSubmit}>
 
-            {error && (<div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-                <p className="text-red-700 font-medium">Ошибка: {error}</p>
-            </div>)}
+    return (
+        <form onSubmit={handleSubmit} className="relative">
+            {mode === 'edit' && onDelete && (
+                <div className="flex items-center justify-end">
+                    <button
+                        type="button"
+                        onClick={onDelete}
+                        disabled={deleteLoading}
+                        className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-xl transition-colors disabled:opacity-50"
+                    >
+                        {deleteLoading ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                            <AlertTriangle className="w-4 h-4" />
+                        )}
+                        Удалить материал
+                    </button>
+                </div>
+            )}
+
+            {error && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+                    <p className="text-red-700 font-medium">Ошибка: {error}</p>
+                </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Название материала
+                        Название материала *
                     </label>
                     <input
                         type="text"
@@ -165,7 +208,7 @@ export default function CreateMaterialForm() {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Автор
+                        Автор *
                     </label>
                     <input
                         type="text"
@@ -193,7 +236,7 @@ export default function CreateMaterialForm() {
 
                 <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Ссылка на превью
+                        Ссылка на превью *
                     </label>
                     <input
                         type="text"
@@ -208,7 +251,7 @@ export default function CreateMaterialForm() {
 
                 <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Ссылка на материал
+                        Ссылка на материал *
                     </label>
                     <input
                         type="url"
@@ -223,18 +266,20 @@ export default function CreateMaterialForm() {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Тип материала
+                        Тип материала *
                     </label>
                     <div className="grid grid-cols-3 gap-2">
                         {MATERIAL_TYPES.map((type) => (
                             <button
                                 key={type.value}
                                 type="button"
-                                onClick={() => setFormData(prev => ({ ...prev, type: type.value as any }))}
-                                className={`py-3 px-4 rounded-xl text-sm font-medium transition-all ${formData.type === type.value
-                                    ? 'bg-primary text-white shadow-sm'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                    }`}
+                                onClick={() => handleTypeSelect(type.value as any)}
+                                className={cn(
+                                    "py-3 px-4 rounded-xl text-sm font-medium transition-all",
+                                    formData.type === type.value
+                                        ? 'bg-primary text-white shadow-sm'
+                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                )}
                             >
                                 {type.label}
                             </button>
@@ -244,7 +289,7 @@ export default function CreateMaterialForm() {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Категория
+                        Категория {mode === 'create' && '*'}
                     </label>
                     <div className="flex flex-wrap gap-2">
                         {CATEGORIES.map((category) => (
@@ -285,7 +330,7 @@ export default function CreateMaterialForm() {
             <div className="space-y-6 mb-8">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Введение
+                        Введение *
                     </label>
                     <textarea
                         name="introduction"
@@ -300,7 +345,7 @@ export default function CreateMaterialForm() {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Основное содержание
+                        Основное содержание *
                     </label>
                     <textarea
                         name="explanation"
@@ -315,7 +360,7 @@ export default function CreateMaterialForm() {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Заключение
+                        Заключение *
                     </label>
                     <textarea
                         name="conclusion"
@@ -330,28 +375,35 @@ export default function CreateMaterialForm() {
             </div>
 
             <div className="flex flex-col-reverse sm:flex-row gap-4 pt-6 border-t border-gray-100">
-                <button
-                    className="w-full sm:w-auto px-6 py-3 text-center border border-gray-300 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-colors"
-                    onClick={() => resetFields()}
-                >
-                    Очистить все
-                </button>
+                {mode === 'create' && (
+                    <button
+                        type="button"
+                        className="w-full sm:w-auto px-6 py-3 text-center border border-gray-300 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-colors"
+                        onClick={resetFields}
+                    >
+                        Очистить все
+                    </button>
+                )}
                 <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="w-full sm:w-auto px-8 py-3 bg-primary text-white font-medium rounded-xl hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+                    disabled={isSubmitting || (mode === 'edit' && !isChanged)}
+                    className={cn(
+                        "w-full sm:w-auto px-8 py-3 font-medium rounded-xl transition-colors flex items-center justify-center gap-2",
+                        mode === 'edit' && !isChanged
+                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                            : "bg-primary text-white hover:opacity-90"
+                    )}
                 >
                     {isSubmitting ? (
                         <>
-                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            Сохранение...
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                            {mode === 'create' ? 'Создание...' : 'Сохранение...'}
                         </>
                     ) : (
-                        'Создать материал'
+                        mode === 'create' ? 'Создать материал' : 'Сохранить изменения'
                     )}
                 </button>
-                {isSubmitted && (<LinkToMaterials />)}
             </div>
         </form>
-    )
+    );
 }

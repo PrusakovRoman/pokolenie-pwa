@@ -33,7 +33,7 @@ export function MaterialsNav({ metadata, selectedCategories, categoryStats, sear
                 <div className=" text-muted-foreground">
                     Найдено:{' '}<span className="font-semibold text-foreground">{count}</span>{' '}{materialsWord(count)}
                 </div>
-                <Link href='/createMaterial'>
+                <Link href='/modifyMaterial/create'>
                     <Button variant='outline'
                         className="border border-primary hover:bg-primary/5 hover:text-primary"
                     >

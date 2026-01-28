@@ -24,7 +24,8 @@ export default function Materials() {
         goToPage,
         resetFilters,
         removeFilter,
-        fetchMaterials
+        fetchMaterials,
+        deleteMaterial
     } = useMaterials()
     return (
         <div className="min-h-screen bg-background p-4 md:p-6">
@@ -33,7 +34,7 @@ export default function Materials() {
 
                 <MaterialsNav metadata={metadata} selectedCategories={selectedCategories} categoryStats={categoryStats} searchQuery={searchQuery} toggleCategory={toggleCategory} setSearchQuery={setSearchQuery} resetFilters={resetFilters} removeFilter={removeFilter} />
 
-                <MaterialsGrid materials={materials} isLoading={isLoading} />
+                <MaterialsGrid materials={materials} isLoading={isLoading} onDelete={deleteMaterial} />
 
                 {metadata && metadata.totalPages > 1 && (
                     <MaterialsPagination

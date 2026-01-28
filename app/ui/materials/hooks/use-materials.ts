@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useCallback } from "react"
-
 import { CategoryStat, Material, Metadata } from "@/lib/types/materials"
 
 export function useMaterials() {
@@ -27,7 +26,12 @@ export function useMaterials() {
         }
 
         try {
-            const res = await fetch(`/api/materials?${params}`)
+            const res = await fetch(`/api/materials?${params}`, {
+                cache: 'no-store' // Добавляем для свежих данных
+            })
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`)
+            }
             const data = await res.json()
             setMaterials(data.data)
             setMetadata(data.meta)
@@ -44,12 +48,62 @@ export function useMaterials() {
         fetchMaterials()
     }, [fetchMaterials])
 
+    // Функция удаления материала
+    const deleteMaterial = useCallback(async (id: string) => {
+        try {
+            // 1. Оптимистичное обновление (удаляем сразу из UI)
+            setMaterials(prev => prev.filter(m => m.id !== id))
+
+            // 2. Обновляем метаданные (уменьшаем total)
+            setMetadata(prev => prev ? {
+                ...prev,
+                total: prev.total - 1,
+                totalPages: Math.ceil((prev.total - 1) / prev.limit)
+            } : null)
+
+            // 3. Отправляем запрос на удаление
+            const response = await fetch(`/api/materials?id=${id}`, {
+                method: 'DELETE',
+            })
+
+            if (!response.ok) {
+                const errorData = await response.json()
+                throw new Error(errorData.error || 'Ошибка при удалении')
+            }
+
+            // 4. Пересчитываем статистику категорий
+            const deletedMaterial = materials.find(m => m.id === id)
+            if (deletedMaterial) {
+                setCategoryStats(prev => prev.map(stat =>
+                    stat.id === deletedMaterial.category
+                        ? { ...stat, count: Math.max(0, stat.count - 1) }
+                        : stat
+                ))
+            }
+
+            // 5. Если на текущей странице стало мало материалов,
+            // возможно нужно вернуться на предыдущую страницу
+            if (metadata && materials.length === 1 && page > 1) {
+                setPage(page - 1)
+            }
+
+            return { success: true }
+        } catch (error) {
+            console.error('Delete error:', error)
+
+            fetchMaterials()
+
+            throw error
+        }
+    }, [materials, metadata, page, fetchMaterials])
 
     const toggleCategory = (category: string) => {
         if (category === 'Все') {
             setSelectedCategories(['Все'])
         } else {
-            const newCategories = selectedCategories.includes(category) ? selectedCategories.filter(c => c !== category) : [...selectedCategories.filter(c => c !== 'Все'), category]
+            const newCategories = selectedCategories.includes(category)
+                ? selectedCategories.filter(c => c !== category)
+                : [...selectedCategories.filter(c => c !== 'Все'), category]
             setSelectedCategories(newCategories.length ? newCategories : ['Все'])
         }
         setPage(1)
@@ -81,7 +135,6 @@ export function useMaterials() {
     return {
         materials,
         metadata,
-
         selectedCategories,
         categoryStats,
         searchQuery,
@@ -93,6 +146,7 @@ export function useMaterials() {
         goToPage,
         resetFilters,
         removeFilter,
-        fetchMaterials
+        fetchMaterials,
+        deleteMaterial
     }
 }

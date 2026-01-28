@@ -3,6 +3,9 @@
 import { signIn, signOut } from "@/lib/auth"
 import { AuthError } from "next-auth"
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
+import fs from 'fs/promises';
+import path from 'path';
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
     try {
@@ -63,3 +66,61 @@ export async function logout() {
     redirect('/')
 }
 
+
+const DATA_PATH = path.join(process.cwd(), 'app/data/materials.json');
+
+async function readData(): Promise<any> {
+    try {
+        const data = await fs.readFile(DATA_PATH, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error reading data:', error);
+        return { materials: [] };
+    }
+}
+
+async function writeData(data: any): Promise<void> {
+    try {
+        await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2), 'utf-8');
+    } catch (error) {
+        console.error('Error writing data:', error);
+    }
+}
+
+export async function deleteMaterial(id: string) {
+    try {
+        const data = await readData();
+        const jsonData = data;
+
+        const materialIndex = jsonData.materials.findIndex((m: any) => m.id === id);
+
+        if (materialIndex === -1) {
+            return {
+                success: false,
+                error: 'Материал не найден'
+            };
+        }
+
+        const deletedMaterial = jsonData.materials[materialIndex];
+        jsonData.materials.splice(materialIndex, 1);
+
+        await writeData(jsonData);
+
+        // 5. Ревалидируем все пути, где используются материалы
+        revalidatePath('/dashboard/materials'); // Страница материалов
+        revalidatePath('/material/[id]', 'page'); // Страницы отдельных материалов
+        revalidatePath('/api/materials'); // API endpoint
+
+        return {
+            success: true,
+            deleted: deletedMaterial
+        };
+
+    } catch (error) {
+        console.error('Delete action error:', error);
+        return {
+            success: false,
+            error: 'Ошибка при удалении материала'
+        };
+    }
+}

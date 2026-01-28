@@ -12,6 +12,7 @@ import { ChevronLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Heart } from "lucide-react"
+import LinkToMaterials from "@/app/ui/link-to-materials"
 
 interface MaterialPageProps {
     params: Promise<{ id: string }>
@@ -26,8 +27,8 @@ export default async function Page({ params }: MaterialPageProps) {
 
     if (!material) return <MaterialNotFound />
 
-    const contentType = material.content?.type || 'article'
-    const contentUrl = material.content?.url || material.content?.embedUrl
+    const contentType = material.type || 'article'
+    const contentUrl = material.url || material.embedUrl
 
     return (
         <>
@@ -39,10 +40,11 @@ export default async function Page({ params }: MaterialPageProps) {
                         className="gap-2 text-gray-600 hover:text-gray-900 hover:bg-primary/5 dark:text-gray-400 dark:hover:text-gray-200"
                         asChild
                     >
-                        <Link href="/dashboard/materials">
+                        {/* <Link href="/dashboard/materials">
                             <ChevronLeft className="h-4 w-4 text-primary" />
                             Назад к материалам
-                        </Link>
+                        </Link> */}
+                        <LinkToMaterials />
                     </Button>
                 </div>
 
@@ -76,23 +78,23 @@ export default async function Page({ params }: MaterialPageProps) {
                     </div>
                 </div>
 
-                {material.content.introduction && (<p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-8">
-                    {material.content.introduction}
+                {material.introduction && (<p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-8">
+                    {material.introduction}
                 </p>)}
 
                 <MediaContent
                     type={contentType}
                     imageUrl={material.imageUrl}
                     title={material.title}
-                    contentUrl={contentType !== 'video' ? material.content?.url : undefined}
-                    embedUrl={contentType === 'video' ? material.content?.embedUrl : undefined}
+                    contentUrl={contentType !== 'video' ? material?.url : undefined}
+                    embedUrl={contentType === 'video' ? material?.embedUrl : undefined}
                 />
 
                 <Separator className="mb-8 hidden md:block" />
 
                 <div className="prose prose-lg dark:prose-invert max-w-none mb-8">
-                    {material.content.explanation ? (<p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
-                        {material.content.explanation}
+                    {material.explanation ? (<p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
+                        {material.explanation}
                     </p>) : (<p>Контент скоро появится!</p>)}
                 </div>
 
@@ -102,7 +104,7 @@ export default async function Page({ params }: MaterialPageProps) {
                         💡 Вывод
                     </h2>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                        {material.content.conclusion}
+                        {material.conclusion}
                     </p>
                 </div>
 

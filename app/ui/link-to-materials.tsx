@@ -7,7 +7,7 @@ export default function LinkToMaterials() {
             href="/dashboard/materials"
             className="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors"
         >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-5 h-5 text-primary" />
             <span className="font-medium">К материалам</span>
         </Link>
     )

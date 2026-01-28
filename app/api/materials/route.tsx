@@ -153,3 +153,107 @@ export async function POST(request: NextRequest) {
         return Response.json({ error: 'Failed to add material' }, { status: 500 });
     }
 }
+
+export async function DELETE(request: NextRequest) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const id = searchParams.get('id');
+
+        if (!id) {
+            return Response.json({
+                error: 'ID материала не указан'
+            }, {
+                status: 400
+            });
+        }
+
+        const filePath = path.join(process.cwd(), 'app/data/materials.json');
+        const fileData = await fs.readFile(filePath, 'utf8');
+        const jsonData = JSON.parse(fileData);
+
+        const materialIndex = jsonData.materials.findIndex((m: Material) => m.id === id);
+
+        if (materialIndex === -1) {
+            return Response.json({
+                error: 'Материал не найден'
+            }, {
+                status: 404
+            });
+        }
+
+        const deletedMaterial = jsonData.materials[materialIndex];
+        jsonData.materials.splice(materialIndex, 1);
+
+        await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2));
+
+        return Response.json({
+            success: true,
+            deleted: deletedMaterial
+        }, {
+            status: 200
+        });
+
+    } catch (error) {
+        console.error('Delete error:', error);
+        return Response.json({
+            error: 'Ошибка при удалении материала'
+        }, {
+            status: 500
+        });
+    }
+}
+
+// app/api/materials/route.ts - добавьте PUT метод
+export async function PUT(request: NextRequest) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const id = searchParams.get('id');
+        const body = await request.json();
+
+        if (!id) {
+            return Response.json({
+                error: 'ID материала не указан'
+            }, {
+                status: 400
+            });
+        }
+
+        const filePath = path.join(process.cwd(), 'app/data/materials.json');
+        const fileData = await fs.readFile(filePath, 'utf8');
+        const jsonData = JSON.parse(fileData);
+
+        const materialIndex = jsonData.materials.findIndex((m: Material) => m.id === id);
+
+        if (materialIndex === -1) {
+            return Response.json({
+                error: 'Материал не найден'
+            }, {
+                status: 404
+            });
+        }
+
+        // Обновляем материал
+        jsonData.materials[materialIndex] = {
+            ...jsonData.materials[materialIndex],
+            ...body,
+            updatedAt: new Date().toISOString()
+        };
+
+        await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2));
+
+        return Response.json({
+            success: true,
+            material: jsonData.materials[materialIndex]
+        }, {
+            status: 200
+        });
+
+    } catch (error) {
+        console.error('Update error:', error);
+        return Response.json({
+            error: 'Ошибка при обновлении материала'
+        }, {
+            status: 500
+        });
+    }
+}
