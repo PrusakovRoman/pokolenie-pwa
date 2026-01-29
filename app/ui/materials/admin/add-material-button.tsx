@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useAdminCheck } from "@/app/ui/materials/hooks/use-admin-check"

@@ -1,3 +1,5 @@
+'use client'
+
 import { Pencil } from "lucide-react"
 import { useAdminCheck } from "@/app/ui/materials/hooks/use-admin-check"
 import Link from "next/link"

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import MaterialForm from '@/app/ui/materials/admin/material-form';
-import LinkToMaterials from '@/app/ui/link-to-materials';
 
 export default function CreateMaterialPage() {
     const router = useRouter()

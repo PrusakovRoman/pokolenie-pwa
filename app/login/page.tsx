@@ -1,9 +1,6 @@
 import Link from "next/link"
 import { Suspense } from "react"
 
-// import { auth } from "@/lib/auth"
-// import { redirect } from "next/navigation"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 

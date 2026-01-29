@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { BellOff, BellRing, Loader2 } from "lucide-react";
+import DebugHydration from "@/app/test/debugHydration";
 
 interface NotificationToggleProps {
     userEmail: string
@@ -142,6 +143,7 @@ export default function NotificationToggle({ userEmail }: NotificationToggleProp
 
     return (
         <div className="relative">
+            <DebugHydration name='toggle' />
             <button
                 onClick={handleToggle}
                 onMouseEnter={() => setShowTooltip(true)}
