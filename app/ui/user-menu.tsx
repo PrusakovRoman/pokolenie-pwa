@@ -1,10 +1,12 @@
+import Image from "next/image"
+import Link from "next/link"
+
 import { useState, useRef, useEffect, useTransition } from "react"
 import { User, Mail, LogOut, X, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import Link from "next/link"
 import { logout } from "@/app/lib/actions"
-import Image from "next/image"
+import NotificationToggleWrapper from "@/app/ui/notifications/toggle-wrapper"
 
 interface UserMenuProps {
     user: {
@@ -47,10 +49,9 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
 
     useEffect(() => {
         if (isOpen) {
-            // Проверяем ширину экрана
-            if (window.innerWidth < 768) { // md breakpoint
+            if (window.innerWidth < 768) {
                 document.body.style.overflow = 'hidden'
-                document.body.style.touchAction = 'none' // Для мобильных устройств
+                document.body.style.touchAction = 'none'
             }
         } else {
             document.body.style.overflow = 'unset'
@@ -71,17 +72,6 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
         })
     }
 
-    // useEffect(() => {
-    //     const handleEscape = (e: KeyboardEvent) => {
-    //         if (e.key === 'Escape' && isOpen) {
-    //             setIsOpen(false)
-    //         }
-    //     }
-
-    //     document.addEventListener('keydown', handleEscape)
-    //     return () => document.removeEventListener('keydown', handleEscape)
-    // }, [isOpen])
-
     return (
         <div className="relative" ref={dropdownRef}>
             <button
@@ -99,8 +89,8 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
      md:absolute md:right-0 md:mt-2 md:inset-auto md:top-auto md:left-auto md:bottom-auto
      w-full md:w-96
           bg-white dark:bg-gray-900 
-          rounded-none md:rounded-xl border border-gray-200 dark:border-gray-800 
-          shadow-xl overflow-hidden z-50
+          rounded-none md:rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 
+          shadow-xl z-50
           transition-all duration-200 ease-out
           ${isOpen
                         ? "opacity-100 translate-y-0 visible"
@@ -128,20 +118,23 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                     </div>
 
                     <div className="p-5">
-                        <div className="flex items-center gap-4 mb-6">
-                            <div className="relative">
-                                <div className="h-16 w-16 rounded-full overflow-hidden border-3 border-primary/20">
-                                    <Image src={user?.image ? user.image : "/profile/no-photo.jpg"} alt="Фото профиля" className="object-cover" width={150} height={150} />
+                        <div className="flex items-center justify-between gap-4 mb-6">
+                            <div className="flex gap-4 items-center">
+                                <div className="relative">
+                                    <div className="h-16 w-16 rounded-full overflow-hidden border-3 border-primary/20">
+                                        <Image src={user?.image ? user.image : "/profile/no-photo.jpg"} alt="Фото профиля" className="object-cover" width={150} height={150} />
+                                    </div>
+                                    <div className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full bg-primary flex items-center justify-center">
+                                        <User className="h-3 w-3 text-white" />
+                                    </div>
                                 </div>
-                                <div className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full bg-primary flex items-center justify-center">
-                                    <User className="h-3 w-3 text-white" />
-                                </div>
-                            </div>
 
-                            <div>
-                                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{user.name}</h4>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">{user.role}</p>
+                                <div>
+                                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{user.name}</h4>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">{user.role}</p>
+                                </div>
                             </div>
+                            <NotificationToggleWrapper />
                         </div>
 
                         <div className="mb-6 p-3 rounded-lg bg-gray-50 dark:bg-gray-800">
@@ -177,7 +170,6 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                             </Link>
 
                         </div>)}
-
 
                         <Separator className="mb-6" />
 

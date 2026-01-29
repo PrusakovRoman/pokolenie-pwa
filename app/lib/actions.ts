@@ -63,7 +63,25 @@ export async function logout() {
     redirect('/')
 }
 
+export async function getCurrentUser() {
+    const session = await auth();
+    return session?.user;
+}
+
 export async function checkIsAdmin(): Promise<boolean> {
-    const session = await auth()
-    return session?.user.role === 'Администратор'
+    const user = await getCurrentUser();
+    return user?.role === 'Администратор'
+}
+
+export async function getUserEmail(): Promise<string | null> {
+    const user = await getCurrentUser();
+    return user?.email ?? null;
+}
+
+export async function requireAuth() {
+    const user = await getCurrentUser();
+    if (!user) {
+        throw new Error('Unauthorized');
+    }
+    return user;
 }
