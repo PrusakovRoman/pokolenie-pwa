@@ -1,3 +1,5 @@
+'use client'
+
 import FiltersNav from "@/app/ui/materials/filters/desktop/filters-nav"
 import FiltersGrid from "@/app/ui/materials/filters/desktop/filters-grid"
 import SelectedFilters from "@/app/ui/materials/filters/desktop/selected-filters"

@@ -136,7 +136,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{user.role}</p>
                                 </div>
                             </div>
-                            <NotificationToggleWrapper />
+                            {/* <NotificationToggleWrapper /> */}
                         </div>
 
                         <div className="mb-6 p-3 rounded-lg bg-gray-50 dark:bg-gray-800">

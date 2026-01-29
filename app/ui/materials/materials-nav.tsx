@@ -1,3 +1,5 @@
+'use client'
+
 import Search from "@/app/ui/materials/search/search"
 import DesktopFilters from "@/app/ui/materials/filters/desktop/filters"
 import MobileFilters from "@/app/ui/materials/filters/mobile/filters"
