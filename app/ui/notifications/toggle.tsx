@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { BellOff, BellRing, Loader2 } from "lucide-react";
 
+const VAPID_PUBLIC_KEY = 'BEjDtCgOpneLOb9_RpWDxWNvTxw3_OxMBM2_cCwfZvSomNHMjs2ZhTfwUMYLozf9wZcDus2DMEc96k5y7MHOlgQ';
+const vapidKey = VAPID_PUBLIC_KEY;
+
 export default function NotificationToggle() {
     const [userEmail, setUserEmail] = useState<string | null>(null);
     const [enabled, setEnabled] = useState(false);
@@ -71,7 +74,7 @@ export default function NotificationToggle() {
                 }
 
                 const registration = await navigator.serviceWorker.ready;
-                const vapidKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+                // const vapidKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
 
                 if (!vapidKey) {
                     throw new Error('VAPID ключ не настроен');
