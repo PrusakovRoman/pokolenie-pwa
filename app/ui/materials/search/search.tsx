@@ -40,6 +40,7 @@ export default function SearchField({ searchQuery, setSearchQuery }: searchField
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground group-hover:text-primary group-focus-within:text-primary transition-colors duration-200" />
             <Input
                 value={inputValue}
+                name="search"
                 onChange={handleChange}
                 placeholder="Найти материал..."
                 className="pl-12 pr-12 h-14 text-lg rounded-xl border-2 transition-all duration-200 focus-visible:border-primary focus-visible:ring-0 focus-visible:ring-offset-0"

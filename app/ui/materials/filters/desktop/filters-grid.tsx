@@ -2,14 +2,17 @@
 
 import { CategoryStat } from "@/lib/types/materials"
 import FilterButton from "@/app/ui/materials/filters/filter-button"
+import { FiltersGridSkeleton } from "@/app/ui/skeletons"
 
 interface FiltersGridProps {
     selectedCategories: string[]
     categoryStats: CategoryStat[]
     toggleCategory: (category: string) => void
+    isLoading: boolean
 }
 
-export default function FiltersGrid({ selectedCategories, categoryStats, toggleCategory }: FiltersGridProps) {
+export default function FiltersGrid({ selectedCategories, categoryStats, toggleCategory, isLoading }: FiltersGridProps) {
+    if (isLoading) return <FiltersGridSkeleton />
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {categoryStats.map((stats: CategoryStat) => {

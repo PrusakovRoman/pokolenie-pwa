@@ -28,7 +28,7 @@ export function MaterialCard({ material }: MaterialCardProps) {
                 </div>
 
                 <div className="relative h-48 overflow-hidden flex-shrink-0">
-                    <Image src={material.imageUrl} alt={material.title} sizes="(width: 100%) (height: 100%)" className="object-cover transition-transform duration-500 group-hover:scale-110" fill={true} />
+                    <Image src={material.imageUrl} alt={material.title} sizes="(width: 100%) (height: 100%)" loading="eager" className="object-cover transition-transform duration-500 group-hover:scale-110" fill={true} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                     <ModifyMaterialButton materialId={material.id} />
                 </div>

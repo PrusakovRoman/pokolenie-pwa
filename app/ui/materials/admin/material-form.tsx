@@ -57,7 +57,6 @@ export default function MaterialForm({
 }: MaterialFormProps) {
     const [error, setError] = useState<string | null>(null);
     const [isChanged, setIsChanged] = useState(false);
-    const [originalData, setOriginalData] = useState<Partial<MaterialFormData>>({});
 
     const [formData, setFormData] = useState<MaterialFormData>({
         title: '',
@@ -74,7 +73,6 @@ export default function MaterialForm({
         ...initialData
     });
 
-    // Сравниваем изменения
     useEffect(() => {
         const hasChanged = Object.keys(formData).some(key => {
             const formValue = formData[key as keyof MaterialFormData];
@@ -127,7 +125,6 @@ export default function MaterialForm({
         e.preventDefault();
         setError(null);
 
-        // Проверка категории для создания
         if (mode === 'create' && !formData.category.trim()) {
             setError('Пожалуйста, выберите категорию');
             return;

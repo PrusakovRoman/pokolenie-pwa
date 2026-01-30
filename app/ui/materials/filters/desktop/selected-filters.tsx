@@ -9,12 +9,12 @@ interface SelectedFiltersProps {
 }
 
 export default function SelectedFilters({ selectedCategories, resetFilters, removeFilter }: SelectedFiltersProps) {
-    const isAllSelected = selectedCategories.includes('all')
+    const isDisabled = selectedCategories.includes('Все')
     return (
         <div className="mt-4 pt-4 border-t">
             <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium">Выбранные фильтры:</span>
-                <Button variant="ghost" size="sm" className="h-7 text-xs hover:bg-primary/5" onClick={resetFilters}>
+                <Button variant="ghost" size="sm" className="h-7 text-xs hover:bg-primary/5" disabled={isDisabled} onClick={resetFilters}>
                     Очистить все
                 </Button>
             </div>

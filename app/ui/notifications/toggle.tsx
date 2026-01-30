@@ -1,195 +1,42 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { BellOff, BellRing, Loader2 } from "lucide-react";
-
-const VAPID_PUBLIC_KEY = 'BEjDtCgOpneLOb9_RpWDxWNvTxw3_OxMBM2_cCwfZvSomNHMjs2ZhTfwUMYLozf9wZcDus2DMEc96k5y7MHOlgQ';
-const vapidKey = VAPID_PUBLIC_KEY;
+import { BellOff, BellRing } from "lucide-react";
 
 export default function NotificationToggle() {
-    const [userEmail, setUserEmail] = useState<string | null>(null);
     const [enabled, setEnabled] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [pulse, setPulse] = useState(false);
+    const [alertShown, setAlertShown] = useState(false);
 
-    useEffect(() => {
-        const fetchEmail = async () => {
-            try {
-                const response = await fetch('/api/auth/email', {
-                    credentials: 'include'
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.exists && data.email) {
-                        setUserEmail(data.email);
-                    }
-                }
-            } catch (error) {
-                console.error('Failed to fetch email:', error);
-            }
-        };
-
-        fetchEmail();
-    }, []);
-
-    useEffect(() => {
-        if (userEmail && 'serviceWorker' in navigator) {
-            checkStatus();
+    const handleToggle = () => {
+        if (!alertShown) {
+            alert('Функция уведомлений появится в следующем обновлении!');
+            setAlertShown(true);
         }
-    }, [userEmail]);
 
-    const checkStatus = async () => {
-        if (!userEmail) return;
-
-        try {
-            const response = await fetch('/api/notifications/status', {
-                credentials: 'include'
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setEnabled(data.enabled);
-            } else if (response.status === 401) {
-                setEnabled(false);
-            }
-        } catch (error) {
-            console.error('Error checking notification status:', error);
-        }
+        setEnabled(!enabled);
     };
-
-    const handleToggle = async () => {
-        if (!userEmail) return;
-
-        setIsLoading(true);
-
-        try {
-            if (!enabled) {
-                const permission = await Notification.requestPermission();
-                if (permission !== 'granted') {
-                    alert('Разрешение на уведомления отклонено');
-                    setIsLoading(false);
-                    return;
-                }
-
-                const registration = await navigator.serviceWorker.ready;
-                // const vapidKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
-
-                if (!vapidKey) {
-                    throw new Error('VAPID ключ не настроен');
-                }
-
-                const subscription = await registration.pushManager.subscribe({
-                    userVisibleOnly: true,
-                    applicationServerKey: urlBase64ToUint8Array(vapidKey)
-                });
-
-                const res = await fetch('/api/notifications/subscribe', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ subscription }),
-                    credentials: 'include'
-                });
-
-                if (!res.ok) {
-                    const error = await res.json();
-                    throw new Error(error.details || 'Failed to save subscription');
-                }
-
-                setEnabled(true);
-                setPulse(true);
-                setTimeout(() => setPulse(false), 1000);
-
-            } else {
-                const registration = await navigator.serviceWorker.ready;
-                const subscription = await registration.pushManager.getSubscription();
-
-                if (subscription) {
-                    const unsubscribed = await subscription.unsubscribe();
-                    if (!unsubscribed) {
-                        console.warn('Failed to unsubscribe from browser');
-                    }
-
-                    const res = await fetch('/api/notifications/unsubscribe', {
-                        method: 'DELETE',
-                        credentials: 'include'
-                    });
-
-                    if (!res.ok) {
-                        console.log('не ок')
-
-                        const error = await res.json();
-                        throw new Error(error.details || 'Failed to delete subscription');
-                    }
-                }
-
-                setEnabled(false);
-            }
-
-        } catch (error) {
-            console.error('Error toggling notifications:', error);
-            alert('Ошибка при изменении настроек: ' +
-                (error instanceof Error ? error.message : 'Неизвестная ошибка'));
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const urlBase64ToUint8Array = (base64String: string) => {
-        const padding = '='.repeat((4 - base64String.length % 4) % 4);
-        const base64 = (base64String + padding)
-            .replace(/-/g, '+')
-            .replace(/_/g, '/');
-
-        const rawData = window.atob(base64);
-        const outputArray = new Uint8Array(rawData.length);
-
-        for (let i = 0; i < rawData.length; ++i) {
-            outputArray[i] = rawData.charCodeAt(i);
-        }
-        return outputArray;
-    };
-
-    if (!userEmail) {
-        return (
-            <button
-                disabled
-                className="p-2.5 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
-            >
-                <Loader2 className="h-5 w-5 animate-spin" />
-            </button>
-        );
-    }
 
     return (
         <div className="relative">
             <button
                 onClick={handleToggle}
-                disabled={isLoading}
                 className={cn(
                     "relative p-2.5 rounded-full transition-all duration-300",
                     "hover:scale-105 active:scale-95",
                     "focus:outline-none focus:ring-2 focus:ring-primary/30",
                     enabled
                         ? "bg-gradient-to-br from-green-500 to-green-600 text-white shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50"
-                        : "bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-600",
-                    "disabled:opacity-50 disabled:cursor-not-allowed"
+                        : "bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-600"
                 )}
             >
-                {pulse && (
-                    <div className="absolute inset-0 rounded-full bg-orange-500 animate-ping opacity-30" />
-                )}
-
-                {isLoading ? (
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                ) : enabled ? (
+                {enabled ? (
                     <BellRing className="h-5 w-5" />
                 ) : (
                     <BellOff className="h-5 w-5" />
                 )}
 
-                {enabled && !isLoading && (
+                {enabled && (
                     <div className="absolute -top-0.5 -right-0.5">
                         <div className="relative flex h-3 w-3">
                             <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75" />

@@ -11,16 +11,12 @@ export function PWAInstall() {
     const [isStandalone, setIsStandalone] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
 
-    // Проверка всех условий
     useEffect(() => {
-        // 1. Проверяем, установлено ли уже приложение
         const checkStandalone = (): boolean => {
-            // Современный способ
             if (window.matchMedia('(display-mode: standalone)').matches) {
                 return true
             }
 
-            // Для iOS Safari (типизируем как any для TypeScript)
             const nav = navigator as any
             if (nav.standalone === true) {
                 return true
@@ -37,7 +33,6 @@ export function PWAInstall() {
             return
         }
 
-        // 2. Определяем устройство
         const ua = navigator.userAgent.toLowerCase()
         const ios = /iphone|ipad|ipod/.test(ua)
         const mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua)
@@ -45,17 +40,12 @@ export function PWAInstall() {
         setIsIOS(ios)
         setIsMobile(mobile)
 
-        // 3. Проверяем, не отказывался ли пользователь
-        // const manualBtnHidden = localStorage.getItem('pwa_button_hidden')
-
-        // 4. Событие установки (для Android/Chrome)
         const handleBeforeInstall = (e: Event) => {
             e.preventDefault()
             setDeferredPrompt(e)
             setShowManualButton(true)
         }
 
-        // 5. Для iOS показываем кнопку всегда (нет beforeinstallprompt)
         if (ios) {
             setShowManualButton(true)
         }
@@ -67,15 +57,12 @@ export function PWAInstall() {
         }
     }, [])
 
-    // Установка приложения
     const handleInstall = async () => {
-        // iOS - инструкция
         if (isIOS) {
             alert('На iOS:\n1. Нажмите "Поделиться" (квадрат со стрелкой)\n2. Выберите "На экран «Домой»"\n3. Нажмите "Добавить"')
             return
         }
 
-        // Android/Desktop - стандартная установка
         if (deferredPrompt) {
             deferredPrompt.prompt()
             const { outcome } = await deferredPrompt.userChoice
@@ -85,7 +72,6 @@ export function PWAInstall() {
                 setShowManualButton(false)
             }
         } else {
-            // Fallback - инструкция
             if (isMobile) {
                 alert('На Android:\n1. Откройте меню браузера (три точки)\n2. Выберите "Установить приложение"\n3. Подтвердите установку')
             } else {
@@ -94,7 +80,6 @@ export function PWAInstall() {
         }
     }
 
-    // Если приложение установлено - ничего не показываем
     if (isStandalone) return null
 
     return (

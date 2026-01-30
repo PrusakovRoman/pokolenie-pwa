@@ -24,7 +24,6 @@ interface UserMenuProps {
 export function UserProfileDropdown({ user }: UserMenuProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [isPending, startTransition] = useTransition()
-
     const dropdownRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -136,7 +135,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{user.role}</p>
                                 </div>
                             </div>
-                            <NotificationToggle />
+                            {user?.role === "Участник" && <NotificationToggle />}
                         </div>
 
                         <div className="mb-6 p-3 rounded-lg bg-gray-50 dark:bg-gray-800">

@@ -15,19 +15,20 @@ interface MaterialsNavProps {
     setSearchQuery: (query: string) => void
     resetFilters: () => void
     removeFilter: (category: string) => void
+    isLoading: boolean
 }
 
-export function MaterialsNav({ metadata, selectedCategories, categoryStats, searchQuery, toggleCategory, setSearchQuery, resetFilters, removeFilter }: MaterialsNavProps) {
+export function MaterialsNav({ metadata, selectedCategories, categoryStats, searchQuery, toggleCategory, setSearchQuery, resetFilters, removeFilter, isLoading }: MaterialsNavProps) {
     const count = metadata?.total || 0
     return (
         <div className="space-y-6 mb-4 xs:mb-8">
             <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-            <DesktopFilters selectedCategories={selectedCategories} categoryStats={categoryStats} toggleCategory={toggleCategory} resetFilters={resetFilters} removeFilter={removeFilter} />
+            <DesktopFilters selectedCategories={selectedCategories} categoryStats={categoryStats} toggleCategory={toggleCategory} resetFilters={resetFilters} removeFilter={removeFilter} isLoading={isLoading} />
 
             <MobileFilters selectedCategories={selectedCategories} categoryStats={categoryStats} toggleCategory={toggleCategory} resetFilters={resetFilters} />
 
-            <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center justify-between text-sm gap-1">
                 <div className=" text-muted-foreground">
                     Найдено:{' '}<span className="font-semibold text-foreground">{count}</span>{' '}{materialsWord(count)}
                 </div>

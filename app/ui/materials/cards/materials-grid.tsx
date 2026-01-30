@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { MaterialCard } from "./card"
 import { Material } from "@/lib/types/materials"
+import { MaterialsGridSkeleton } from "@/app/ui/skeletons";
 
 interface MaterialsGridProps {
     materials: Material[],
@@ -15,6 +16,10 @@ export function MaterialsGrid({ materials, isLoading }: MaterialsGridProps) {
     useEffect(() => {
         setCurrentMaterials(materials);
     }, [materials]);
+
+    if (isLoading) {
+        return <MaterialsGridSkeleton />;
+    }
 
     if (currentMaterials.length === 0) {
         return (

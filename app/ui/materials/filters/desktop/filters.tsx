@@ -9,14 +9,15 @@ interface DesctopFiltersProps {
     toggleCategory: (category: string) => void
     resetFilters: () => void
     removeFilter: (category: string) => void
+    isLoading: boolean
 }
 
-export default function DesktopFilters({ selectedCategories, categoryStats, toggleCategory, resetFilters, removeFilter }: DesctopFiltersProps) {
+export default function DesktopFilters({ selectedCategories, categoryStats, toggleCategory, resetFilters, removeFilter, isLoading }: DesctopFiltersProps) {
     return (
         <div className="hidden lg:block bg-muted/50 rounded-xl p-4">
             <FiltersNav selectedCategories={selectedCategories} resetFilters={resetFilters} />
 
-            <FiltersGrid selectedCategories={selectedCategories} categoryStats={categoryStats} toggleCategory={toggleCategory} />
+            <FiltersGrid selectedCategories={selectedCategories} categoryStats={categoryStats} toggleCategory={toggleCategory} isLoading={isLoading} />
 
             <SelectedFilters selectedCategories={selectedCategories} resetFilters={resetFilters} removeFilter={removeFilter} />
         </div>

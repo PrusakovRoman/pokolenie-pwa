@@ -6,6 +6,11 @@ const withPWA = require('next-pwa')({
   register: true,
   skipWaiting: true,
   clientsClaim: true,
+  buildExcludes: [/chunks\/.*/, /media\/.*/],
+  exclude: [
+    /\.map$/,
+    /^_next\/static\/chunks\/.*/,
+  ],
 });
 
 const nextConfig: NextConfig = {

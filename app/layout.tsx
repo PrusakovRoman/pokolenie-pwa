@@ -46,7 +46,7 @@ export default async function RootLayout({
         <link rel="apple-touch-icon" href="/icons/ios/180.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="icon" href="favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
         <div className="min-h-screen flex flex-col justify-between bg-linear-160 from-gray-200 to-gray-30">

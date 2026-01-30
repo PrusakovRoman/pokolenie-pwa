@@ -30,7 +30,7 @@ export default function Materials() {
             <div className="container mx-auto">
                 <SectionHeader />
 
-                <MaterialsNav metadata={metadata} selectedCategories={selectedCategories} categoryStats={categoryStats} searchQuery={searchQuery} toggleCategory={toggleCategory} setSearchQuery={setSearchQuery} resetFilters={resetFilters} removeFilter={removeFilter} />
+                <MaterialsNav metadata={metadata} selectedCategories={selectedCategories} categoryStats={categoryStats} searchQuery={searchQuery} toggleCategory={toggleCategory} setSearchQuery={setSearchQuery} resetFilters={resetFilters} removeFilter={removeFilter} isLoading={isLoading} />
 
                 <MaterialsGrid materials={materials} isLoading={isLoading} />
 

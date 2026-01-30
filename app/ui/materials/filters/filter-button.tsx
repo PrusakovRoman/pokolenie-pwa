@@ -54,7 +54,7 @@ export default function FilterButton({
         <button
             className={cn(
                 baseStyles,
-                "flex items-center justify-between w-full px-4 py-3"
+                "flex items-center justify-between gap-1 w-full px-4 py-3"
             )}
             onClick={onClick}>
             <div className="flex items-center gap-3">

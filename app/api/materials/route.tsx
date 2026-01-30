@@ -1,94 +1,9 @@
 import { NextRequest } from "next/server";
 import { Redis } from '@upstash/redis';
-import webpush from 'web-push'
 
 import type { Material } from "@/lib/types/materials";
 
 const redis = Redis.fromEnv();
-
-webpush.setVapidDetails(
-    'mailto:prusakovr073@email.com',
-    // process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
-    // process.env.VAPID_PRIVATE_KEY
-    'BEjDtCgOpneLOb9_RpWDxWNvTxw3_OxMBM2_cCwfZvSomNHMjs2ZhTfwUMYLozf9wZcDus2DMEc96k5y7MHOlgQ',
-    'jvvMejQ-qq-fJ-jFzoshmRW09l94CL67oJUc2TJ4xQM'
-);
-
-interface PushSubscriptionData {
-    endpoint: string;
-    keys: {
-        p256dh: string;
-        auth: string;
-    };
-    email: string;
-    role: string;
-    enabled: boolean;
-}
-
-async function sendPushNotifications(newMaterial: Material) {
-    try {
-        // if (!process.env.VAPID_PRIVATE_KEY) {
-        //     console.log('VAPID keys not set, skipping notifications');
-        //     return;
-        // }
-        console.log('1. Starting push notifications...');
-        console.log('4. Webpush configured');
-        const keys = await redis.keys('subscription:*');
-        console.log('5. Found subscriptions:', keys.length);
-        const subscriptions = [];
-        for (const key of keys) {
-            const subscription = await redis.hgetall(key) as Partial<PushSubscriptionData>;
-            if (subscription?.enabled &&
-                subscription.role === 'Участник' &&
-                subscription.endpoint &&
-                subscription.keys &&
-                subscription.keys.p256dh &&
-                subscription.keys.auth) {
-
-                subscriptions.push(subscription as PushSubscriptionData);
-            }
-        }
-
-        const sendPromises = subscriptions.map(async (subscription) => {
-            try {
-                await webpush.sendNotification(
-                    {
-                        endpoint: subscription.endpoint,
-                        keys: {
-                            p256dh: subscription.keys.p256dh,
-                            auth: subscription.keys.auth
-                        }
-                    },
-                    JSON.stringify({
-                        title: 'Новый материал добавлен!',
-                        body: `"${newMaterial.title}" - ${newMaterial.category}`,
-                        icon: '/icons/android/android-launchericon-192-192.png',
-                        badge: '/icons/android/android-launchericon-72-72.png',
-                        tag: 'new-material',
-                        timestamp: Date.now(),
-                        data: {
-                            url: `${process.env.NEXT_PUBLIC_SITE_URL || ''}/material/${newMaterial.id}`,
-                            materialId: newMaterial.id
-                        }
-                    })
-                );
-            } catch (error) {
-                console.error(`Failed to send notification to ${subscription.email}:`, error);
-
-                // Если подписка невалидна (410 Gone) - удаляем
-                if (error instanceof Error && 'statusCode' in error && error.statusCode === 410) {
-                    console.log(`Removing invalid subscription for ${subscription.email}`);
-                    await redis.del(`subscription:${subscription.email}`);
-                }
-            }
-        });
-
-        await Promise.all(sendPromises);
-
-    } catch (error) {
-        console.error('Error sending notifications:', error);
-    }
-}
 
 async function readData(): Promise<{ materials: Material[] }> {
     try {
@@ -211,7 +126,6 @@ export async function POST(request: NextRequest) {
         const data = await readData()
         const materials: Material[] = data.materials
 
-        // 2. Добавляем новый материал
         const newMaterial: Material = {
             id: Date.now().toString(),
             ...body,
@@ -220,10 +134,7 @@ export async function POST(request: NextRequest) {
 
         materials.unshift(newMaterial);
 
-        // 3. Записываем обратно
         await writeData({ materials })
-
-        sendPushNotifications(newMaterial).catch(console.error);
 
         return Response.json({
             success: true,

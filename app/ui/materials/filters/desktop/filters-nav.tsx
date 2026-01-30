@@ -7,7 +7,7 @@ interface FiltersNavProps {
 }
 
 export default function FiltersNav({ selectedCategories, resetFilters }: FiltersNavProps) {
-    const isDisabled = selectedCategories.includes('all')
+    const isDisabled = selectedCategories.includes('Все')
     return (
         <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
