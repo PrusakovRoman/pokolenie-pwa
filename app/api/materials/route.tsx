@@ -6,15 +6,13 @@ import type { Material } from "@/lib/types/materials";
 
 const redis = Redis.fromEnv();
 
-if (!process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || !process.env.VAPID_PRIVATE_KEY) {
-    console.warn('VAPID keys are not set. Push notifications will be disabled.');
-} else {
-    webpush.setVapidDetails(
-        'mailto:prusakovvr073@email.com',
-        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
-        process.env.VAPID_PRIVATE_KEY
-    );
-}
+webpush.setVapidDetails(
+    'mailto:prusakovr073@email.com',
+    // process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
+    // process.env.VAPID_PRIVATE_KEY
+    'BEjDtCgOpneLOb9_RpWDxWNvTxw3_OxMBM2_cCwfZvSomNHMjs2ZhTfwUMYLozf9wZcDus2DMEc96k5y7MHOlgQ',
+    'jvvMejQ-qq-fJ-jFzoshmRW09l94CL67oJUc2TJ4xQM'
+);
 
 interface PushSubscriptionData {
     endpoint: string;
@@ -29,13 +27,14 @@ interface PushSubscriptionData {
 
 async function sendPushNotifications(newMaterial: Material) {
     try {
-        if (!process.env.VAPID_PRIVATE_KEY) {
-            console.log('VAPID keys not set, skipping notifications');
-            return;
-        }
-
+        // if (!process.env.VAPID_PRIVATE_KEY) {
+        //     console.log('VAPID keys not set, skipping notifications');
+        //     return;
+        // }
+        console.log('1. Starting push notifications...');
+        console.log('4. Webpush configured');
         const keys = await redis.keys('subscription:*');
-
+        console.log('5. Found subscriptions:', keys.length);
         const subscriptions = [];
         for (const key of keys) {
             const subscription = await redis.hgetall(key) as Partial<PushSubscriptionData>;
