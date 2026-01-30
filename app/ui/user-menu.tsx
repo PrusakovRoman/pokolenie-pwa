@@ -8,7 +8,7 @@ import { User, Mail, LogOut, X, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { logout } from "@/app/lib/actions"
-import NotificationToggleWrapper from "@/app/ui/notifications/toggle-wrapper"
+import NotificationToggle from "@/app/ui/notifications/toggle"
 
 interface UserMenuProps {
     user: {
@@ -136,7 +136,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{user.role}</p>
                                 </div>
                             </div>
-                            <NotificationToggleWrapper />
+                            <NotificationToggle />
                         </div>
 
                         <div className="mb-6 p-3 rounded-lg bg-gray-50 dark:bg-gray-800">
@@ -162,7 +162,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                             <Link href="/mentor" className="group">
                                 <div className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary transition-all duration-300">
                                     <div className="h-10 w-10 rounded-full overflow-hidden bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30">
-                                        <Image src="/no-photo.jpg" alt="Фото наставника" className="object-cover" width={100} height={100} />
+                                        <Image src="/profile/no-photo.jpg" alt="Фото наставника" className="object-cover" width={100} height={100} />
 
                                     </div>
                                     <div>

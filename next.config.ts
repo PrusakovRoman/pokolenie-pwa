@@ -6,12 +6,11 @@ const withPWA = require('next-pwa')({
   register: true,
   skipWaiting: true,
   clientsClaim: true,
-  swSrc: 'public/custom-sw.js',
-  swDest: 'sw.js',
 });
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: 'standalone'
 };
 
 export default withPWA(nextConfig);

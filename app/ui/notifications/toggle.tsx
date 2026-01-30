@@ -3,34 +3,52 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { BellOff, BellRing, Loader2 } from "lucide-react";
-import DebugHydration from "@/app/test/debugHydration";
 
-interface NotificationToggleProps {
-    userEmail: string
-}
-
-export default function NotificationToggle({ userEmail }: NotificationToggleProps) {
+export default function NotificationToggle() {
+    const [userEmail, setUserEmail] = useState<string | null>(null);
     const [enabled, setEnabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [pulse, setPulse] = useState(false);
-    const [showTooltip, setShowTooltip] = useState(false);
 
     useEffect(() => {
-        if (userEmail) {
+        const fetchEmail = async () => {
+            try {
+                const response = await fetch('/api/auth/email', {
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.exists && data.email) {
+                        setUserEmail(data.email);
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to fetch email:', error);
+            }
+        };
+
+        fetchEmail();
+    }, []);
+
+    useEffect(() => {
+        if (userEmail && 'serviceWorker' in navigator) {
             checkStatus();
         }
     }, [userEmail]);
 
     const checkStatus = async () => {
-        if (!('serviceWorker' in navigator)) return;
+        if (!userEmail) return;
 
         try {
-            const response = await fetch('/api/notifications/status');
+            const response = await fetch('/api/notifications/status', {
+                credentials: 'include'
+            });
+
             if (response.ok) {
                 const data = await response.json();
                 setEnabled(data.enabled);
             } else if (response.status === 401) {
-                console.warn('User not authenticated for notifications');
                 setEnabled(false);
             }
         } catch (error) {
@@ -39,7 +57,7 @@ export default function NotificationToggle({ userEmail }: NotificationToggleProp
     };
 
     const handleToggle = async () => {
-        if (isLoading || !userEmail) return;
+        if (!userEmail) return;
 
         setIsLoading(true);
 
@@ -50,10 +68,6 @@ export default function NotificationToggle({ userEmail }: NotificationToggleProp
                     alert('Разрешение на уведомления отклонено');
                     setIsLoading(false);
                     return;
-                }
-
-                if (!('serviceWorker' in navigator)) {
-                    throw new Error('Service Worker не поддерживается');
                 }
 
                 const registration = await navigator.serviceWorker.ready;
@@ -71,7 +85,8 @@ export default function NotificationToggle({ userEmail }: NotificationToggleProp
                 const res = await fetch('/api/notifications/subscribe', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ subscription })
+                    body: JSON.stringify({ subscription }),
+                    credentials: 'include'
                 });
 
                 if (!res.ok) {
@@ -94,10 +109,13 @@ export default function NotificationToggle({ userEmail }: NotificationToggleProp
                     }
 
                     const res = await fetch('/api/notifications/unsubscribe', {
-                        method: 'DELETE'
+                        method: 'DELETE',
+                        credentials: 'include'
                     });
 
                     if (!res.ok) {
+                        console.log('не ок')
+
                         const error = await res.json();
                         throw new Error(error.details || 'Failed to delete subscription');
                     }
@@ -134,20 +152,17 @@ export default function NotificationToggle({ userEmail }: NotificationToggleProp
         return (
             <button
                 disabled
-                className="p-2.5 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed"
+                className="p-2.5 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
             >
-                <BellOff className="h-5 w-5" />
+                <Loader2 className="h-5 w-5 animate-spin" />
             </button>
         );
     }
 
     return (
         <div className="relative">
-            <DebugHydration name='toggle' />
             <button
                 onClick={handleToggle}
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
                 disabled={isLoading}
                 className={cn(
                     "relative p-2.5 rounded-full transition-all duration-300",
@@ -180,15 +195,6 @@ export default function NotificationToggle({ userEmail }: NotificationToggleProp
                     </div>
                 )}
             </button>
-
-            {showTooltip && (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-800 text-white text-xs rounded-lg whitespace-nowrap shadow-lg z-50">
-                    <div className="relative">
-                        {enabled ? 'Отключить уведомления' : 'Включить уведомления'}
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45" />
-                    </div>
-                </div>
-            )}
         </div>
     );
 }
