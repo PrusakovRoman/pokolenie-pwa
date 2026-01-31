@@ -181,7 +181,7 @@ async function MaterialContent({ id }: { id: string }) {
 
             <MediaContent
                 type={contentType}
-                imageUrl={material.imageUrl}
+                imageUrl={`/${material.imageUrl}`}
                 title={material.title}
                 contentUrl={contentType !== 'video' ? material?.url : undefined}
                 embedUrl={contentType === 'video' ? material?.embedUrl : undefined}

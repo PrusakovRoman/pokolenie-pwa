@@ -27,7 +27,7 @@ export function useMaterials() {
 
         try {
             const res = await fetch(`/api/materials?${params}`, {
-                cache: 'no-store' // Добавляем для свежих данных
+                cache: 'no-store'
             })
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`)

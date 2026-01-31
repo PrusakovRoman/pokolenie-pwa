@@ -14,14 +14,14 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
+      { url: "/icons/favicon.ico" },
       { url: "/icons/android/android-launchericon-192-192.png", sizes: "192x192", type: "image/png" },
       { url: "/icons/android/android-launchericon-512-512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [
       { url: "/icons/android/android-launchericon-192-192.png", sizes: "192x192", type: "image/png" },
     ],
-    shortcut: [{ url: "/favicon.ico" }],
+    shortcut: [{ url: "/icons/favicon.ico" }],
   },
   appleWebApp: {
     capable: true,
@@ -46,7 +46,7 @@ export default async function RootLayout({
         <link rel="apple-touch-icon" href="/icons/ios/180.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/favicon.ico" />
       </head>
       <body>
         <div className="min-h-screen flex flex-col justify-between bg-linear-160 from-gray-200 to-gray-30">
