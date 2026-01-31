@@ -2,6 +2,7 @@ import "@/app/ui/globals.css";
 
 import type { Metadata, Viewport } from "next";
 import { Providers } from './providers';
+import OfflineAlert from '@/app/ui/offline-alert'
 
 export const viewport: Viewport = {
   themeColor: '#000000',
@@ -53,6 +54,7 @@ export default async function RootLayout({
         <div className="min-h-screen flex flex-col justify-between bg-linear-160 from-gray-200 to-gray-30">
           <Providers>
             {children}
+            <OfflineAlert />
           </Providers>
         </div>
       </body>

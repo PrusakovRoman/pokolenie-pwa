@@ -98,20 +98,6 @@ export function FiltersGridSkeleton() {
     );
 }
 
-export function FiltersMobileSkeleton() {
-    return (
-        <div className="space-y-2">
-            <FilterButtonSkeleton variant="mobile" />
-            <FilterButtonSkeleton variant="mobile" />
-            <FilterButtonSkeleton variant="mobile" />
-            <FilterButtonSkeleton variant="mobile" />
-            <FilterButtonSkeleton variant="mobile" />
-            <FilterButtonSkeleton variant="mobile" />
-        </div>
-    );
-}
-
-
 export function MaterialPageSkeleton() {
     return (
         <>
@@ -216,70 +202,6 @@ export function MediaContentSkeleton() {
 
                     {/* Кнопка */}
                     <div className="h-12 w-48 rounded-full bg-gray-300 dark:bg-gray-600" />
-                </div>
-            </div>
-        </div>
-    );
-}
-
-export function MaterialContentSkeleton() {
-    return (
-        <div className="container mx-auto p-4 xs:py-8 md:px-6 max-w-4xl">
-            <div className="mb-8">
-                <div className={`${shimmer} relative h-10 w-32 rounded bg-gray-100 dark:bg-gray-800`} />
-            </div>
-
-            <div className="mb-10">
-                <div className="flex items-center gap-3 mb-4">
-                    <div className={`${shimmer} relative h-7 w-24 rounded-full bg-gray-200 dark:bg-gray-700`} />
-                    <div className="flex items-center gap-2">
-                        <div className="h-4 w-4 rounded bg-gray-200 dark:bg-gray-700" />
-                        <div className="h-4 w-20 rounded bg-gray-200 dark:bg-gray-700" />
-                    </div>
-                </div>
-
-                <div className="space-y-3 mb-8">
-                    <div className="h-10 w-3/4 rounded bg-gray-200 dark:bg-gray-700" />
-                    <div className="h-10 w-2/3 rounded bg-gray-200 dark:bg-gray-700" />
-                </div>
-
-                <div className="flex items-center gap-2">
-                    <div className="h-5 w-5 rounded bg-gray-200 dark:bg-gray-700" />
-                    <div className="h-5 w-32 rounded bg-gray-200 dark:bg-gray-700" />
-                </div>
-            </div>
-
-            <div className="space-y-3 mb-8">
-                <div className="h-4 w-full rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="h-4 w-4/6 rounded bg-gray-200 dark:bg-gray-700" />
-            </div>
-
-            <MediaContentSkeleton />
-
-            <div className="h-px bg-gray-200 dark:bg-gray-800 mb-8 hidden md:block" />
-
-            <div className="space-y-4 mb-8">
-                {Array.from({ length: 6 }).map((_, i) => (
-                    <div
-                        key={i}
-                        className={`h-4 rounded bg-gray-200 dark:bg-gray-700 ${i % 2 === 0 ? 'w-full' : 'w-5/6'}`}
-                    />
-                ))}
-            </div>
-
-            <div className={`${shimmer} relative bg-gray-100 dark:bg-gray-800 rounded-2xl p-8 mb-8`}>
-                <div className="h-8 w-32 rounded bg-gray-200 dark:bg-gray-700 mb-6" />
-                <div className="space-y-3">
-                    <div className="h-4 w-full rounded bg-gray-200 dark:bg-gray-600" />
-                    <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-600" />
-                    <div className="h-4 w-4/6 rounded bg-gray-200 dark:bg-gray-600" />
-                </div>
-            </div>
-
-            <div className="mt-12 pt-8 border-t">
-                <div className="flex justify-center">
-                    <div className={`${shimmer} relative h-10 w-48 rounded bg-gray-200 dark:bg-gray-700`} />
                 </div>
             </div>
         </div>
