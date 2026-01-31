@@ -10,7 +10,7 @@ export default function OfflineAlert() {
             setIsOnline(navigator.onLine)
         }
 
-        updateOnlineStatus() // начальное состояние
+        updateOnlineStatus()
 
         window.addEventListener('online', updateOnlineStatus)
         window.addEventListener('offline', updateOnlineStatus)

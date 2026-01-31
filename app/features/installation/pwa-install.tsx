@@ -10,7 +10,6 @@ export function PWAInstall() {
     const [isIOS, setIsIOS] = useState(false)
     const [isStandalone, setIsStandalone] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
-    const [isInAppBrowser, setIsInAppBrowser] = useState(false)
 
     useEffect(() => {
         const checkStandalone = (): boolean => {
@@ -39,7 +38,6 @@ export function PWAInstall() {
         const mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua)
         const inAppBrowser = /telegram|whatsapp|facebook|twitter|instagram/i.test(ua)
 
-        setIsInAppBrowser(inAppBrowser)
         setIsIOS(ios)
         setIsMobile(mobile)
 
@@ -66,6 +64,13 @@ export function PWAInstall() {
             return
         }
 
+        const ua = navigator.userAgent.toLowerCase()
+        const inTelegram = ua.includes('telegram')
+        if (inTelegram) {
+            alert('⚠️ Для установки приложения откройте эту ссылку в браузере.')
+            return
+        }
+
         if (deferredPrompt) {
             deferredPrompt.prompt()
             const { outcome } = await deferredPrompt.userChoice
@@ -87,20 +92,7 @@ export function PWAInstall() {
 
     return (
         <>
-            {isInAppBrowser && !isStandalone && (
-                <div className="fixed bottom-4 left-4 right-4 bg-primary/20 text-gray-800 p-3 rounded-lg shadow-lg z-50">
-                    <p className="text-center text-sm">
-                        💡 Для установки приложения откройте эту страницу в браузере
-                        <button
-                            onClick={() => window.open(window.location.href, '_blank')}
-                            className="ml-2 underline font-semibold"
-                        >
-                            Открыть в браузере
-                        </button>
-                    </p>
-                </div>
-            )}
-            {showManualButton && !isInAppBrowser && (
+            {showManualButton && (
                 <Button
                     onClick={handleInstall}
                     variant="outline"
