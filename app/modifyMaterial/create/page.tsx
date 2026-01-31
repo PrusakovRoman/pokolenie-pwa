@@ -1,12 +1,30 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import MaterialForm from '@/app/ui/materials/admin/material-form';
+
+import { useSession } from 'next-auth/react';
+import { CreateMaterialPageSkeleton } from '@/app/ui/skeletons';
 
 export default function CreateMaterialPage() {
     const router = useRouter()
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const { data: session, status } = useSession();
+
+    if (status === 'loading') {
+        return <CreateMaterialPageSkeleton />;
+    }
+
+    if (!session) {
+        redirect('/login');
+        return null;
+    }
+
+    if (session.user?.role !== 'Администратор') {
+        redirect('/dashboard?error=unauthorized');
+        return null;
+    }
 
     const handleSubmit = async (formData: any) => {
         setIsSubmitting(true)

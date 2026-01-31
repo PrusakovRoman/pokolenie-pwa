@@ -88,6 +88,30 @@ export const authConfig: NextAuthConfig = {
             return session;
         },
 
+        authorized({ auth, request: { nextUrl } }) {
+            const isLoggedIn = !!auth?.user
+            const userRole = auth?.user?.role;
+            console.log('auth.ts: ', auth)
+
+            const protectedPaths = ['/dashboard', '/material', '/mentor', '/modifyMaterial', '/api']
+            const adminPaths = ['/modifyMaterial']
+            const isProtected = protectedPaths.some(path => nextUrl.pathname.startsWith(path))
+            const isAdminPath = adminPaths.some(path => nextUrl.pathname.startsWith(path))
+
+            if (isProtected && !isLoggedIn) return false
+
+            if (isLoggedIn && isAdminPath && userRole !== 'Администратор') {
+                const callbackUrl = nextUrl.pathname;
+                const redirectUrl = new URL('/dashboard/materials', nextUrl.origin);
+                redirectUrl.searchParams.set('error', 'unauthorized');
+                redirectUrl.searchParams.set('from', callbackUrl);
+
+                return Response.redirect(redirectUrl);
+            }
+
+            return true
+        },
+
         async redirect({ url, baseUrl }) {
             return url.startsWith(baseUrl) ? url : `${baseUrl}/dashboard`;
         }

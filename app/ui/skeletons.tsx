@@ -286,3 +286,87 @@ export function MaterialContentSkeleton() {
     );
 }
 
+export function CreateMaterialPageSkeleton() {
+    return (
+        <div className="space-y-6">
+            {/* Заголовок */}
+            <div className="mb-6 mt-4 md:mt-2 text-center">
+                <div className={`${shimmer} relative h-8 w-64 mx-auto rounded bg-gray-200 dark:bg-gray-800`}></div>
+            </div>
+
+            {/* Карточка формы */}
+            <div className={`${shimmer} relative rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm`}>
+                {/* Секции формы */}
+                <div className="space-y-8">
+                    {/* Основная информация */}
+                    <div className="space-y-4">
+                        <div className="h-6 w-40 rounded bg-gray-200 dark:bg-gray-800"></div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <div className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-800"></div>
+                                <div className="h-10 rounded bg-gray-100 dark:bg-gray-800"></div>
+                            </div>
+                            <div className="space-y-2">
+                                <div className="h-4 w-32 rounded bg-gray-200 dark:bg-gray-800"></div>
+                                <div className="h-10 rounded bg-gray-100 dark:bg-gray-800"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Категория */}
+                    <div className="space-y-4">
+                        <div className="h-6 w-32 rounded bg-gray-200 dark:bg-gray-800"></div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            {[...Array(6)].map((_, i) => (
+                                <div key={i} className="h-10 rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Контент */}
+                    <div className="space-y-4">
+                        <div className="h-6 w-40 rounded bg-gray-200 dark:bg-gray-800"></div>
+                        <div className="space-y-2">
+                            <div className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-800"></div>
+                            <div className="h-32 rounded bg-gray-100 dark:bg-gray-800"></div>
+                        </div>
+                    </div>
+
+                    {/* Изображение */}
+                    <div className="space-y-4">
+                        <div className="h-6 w-48 rounded bg-gray-200 dark:bg-gray-800"></div>
+                        <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-8 text-center">
+                            <div className="mx-auto h-16 w-16 rounded-full bg-gray-200 dark:bg-gray-800 mb-4"></div>
+                            <div className="h-4 w-48 mx-auto rounded bg-gray-200 dark:bg-gray-800 mb-2"></div>
+                            <div className="h-3 w-32 mx-auto rounded bg-gray-200 dark:bg-gray-800"></div>
+                        </div>
+                    </div>
+
+                    {/* Ссылки */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-4">
+                            <div className="h-6 w-40 rounded bg-gray-200 dark:bg-gray-800"></div>
+                            <div className="space-y-2">
+                                <div className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-800"></div>
+                                <div className="h-10 rounded bg-gray-100 dark:bg-gray-800"></div>
+                            </div>
+                        </div>
+                        <div className="space-y-4">
+                            <div className="h-6 w-36 rounded bg-gray-200 dark:bg-gray-800"></div>
+                            <div className="space-y-2">
+                                <div className="h-4 w-20 rounded bg-gray-200 dark:bg-gray-800"></div>
+                                <div className="h-10 rounded bg-gray-100 dark:bg-gray-800"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Кнопки */}
+                    <div className="flex flex-col sm:flex-row gap-4 justify-end pt-6 border-t border-gray-200 dark:border-gray-800">
+                        <div className="h-10 w-32 rounded bg-gray-200 dark:bg-gray-800"></div>
+                        <div className="h-10 w-40 rounded bg-gray-300 dark:bg-gray-700"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

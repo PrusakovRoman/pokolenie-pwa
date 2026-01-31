@@ -1,6 +1,7 @@
 import "@/app/ui/globals.css";
 
 import type { Metadata, Viewport } from "next";
+import { Providers } from './providers';
 
 export const viewport: Viewport = {
   themeColor: '#000000',
@@ -50,7 +51,9 @@ export default async function RootLayout({
       </head>
       <body>
         <div className="min-h-screen flex flex-col justify-between bg-linear-160 from-gray-200 to-gray-30">
-          {children}
+          <Providers>
+            {children}
+          </Providers>
         </div>
       </body>
     </html>

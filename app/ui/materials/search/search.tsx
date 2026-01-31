@@ -45,7 +45,7 @@ export default function SearchField({ searchQuery, setSearchQuery }: searchField
                 placeholder="Найти материал..."
                 className="pl-12 pr-12 h-14 text-lg rounded-xl border-2 transition-all duration-200 focus-visible:border-primary focus-visible:ring-0 focus-visible:ring-offset-0"
             />
-            {searchQuery && (
+            {(searchQuery || inputValue.length > 0) && (
                 <Button
                     variant="ghost"
                     size="icon"
