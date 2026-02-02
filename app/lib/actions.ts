@@ -41,7 +41,10 @@ export async function fetchMaterial(id: string) {
         const apiUrl = `${baseUrl}/api/material/${id}`;
 
         const response = await fetch(apiUrl, {
-            next: { revalidate: 3600 }
+            next: {
+                tags: [`material-${id}`],
+                revalidate: 3600
+            }
         })
 
         if (!response.ok) {

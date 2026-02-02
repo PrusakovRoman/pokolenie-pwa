@@ -1,9 +1,10 @@
 import { Redis } from '@upstash/redis';
 import { NextRequest, NextResponse } from "next/server"
 
+import { Material } from "@/lib/types/materials"
+
 const redis = Redis.fromEnv();
 
-import { Material } from "@/lib/types/materials"
 
 export async function GET(
     request: NextRequest,
@@ -19,10 +20,11 @@ export async function GET(
             )
         }
 
-        const materials = await redis.get<Material[]>('materials')
-        const materialsArray = materials || []
+        const material = await redis.get<Material[]>('materials')
+            .then(materials => materials?.find(m => m.id === id))
+        // const materialsArray = materials || []
 
-        const material = materialsArray.find((m: Material) => m.id === id)
+        // const material = materialsArray.find((m: Material) => m.id === id)
 
         if (!material) {
             return NextResponse.json(
@@ -35,7 +37,7 @@ export async function GET(
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
-                'Cache-Control': 'public, max-age=3600'
+                'Cache-Control': 'public, max-age=60'
             }
         })
     } catch (error) {

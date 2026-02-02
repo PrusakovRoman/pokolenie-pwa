@@ -45,7 +45,7 @@ export function MaterialCard({ material }: MaterialCardProps) {
                         </div>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3 min-h-[4rem] line-clamp-2 group-hover:text-primary group-hover:underline decoration-2 underline-offset-4 [text-decoration-skip-ink:none] transition-all duration-300">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3 min-h-[3.9rem] line-clamp-2 group-hover:text-primary group-hover:underline decoration-2 underline-offset-4 [text-decoration-skip-ink:none] transition-all duration-300">
                         {material.title}
                     </h3>
 

@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { Redis } from '@upstash/redis';
+import { revalidatePath } from "next/cache";
 
 import type { Material } from "@/lib/types/materials";
 
@@ -230,7 +231,6 @@ export async function PUT(request: NextRequest) {
             });
         }
 
-        // Обновляем материал
         materials[materialIndex] = {
             ...materials[materialIndex],
             ...body,
@@ -238,6 +238,9 @@ export async function PUT(request: NextRequest) {
         };
 
         await writeData({ materials })
+
+        revalidatePath(`/api/material/${id}`);
+        revalidatePath(`/material/${id}`);
 
         return Response.json({
             success: true,
