@@ -36,7 +36,6 @@ export function PWAInstall() {
         const ua = navigator.userAgent.toLowerCase()
         const ios = /iphone|ipad|ipod/.test(ua)
         const mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua)
-        const inAppBrowser = /telegram|whatsapp|facebook|twitter|instagram/i.test(ua)
 
         setIsIOS(ios)
         setIsMobile(mobile)
@@ -81,7 +80,7 @@ export function PWAInstall() {
             }
         } else {
             if (isMobile) {
-                alert('На Android:\n1. Откройте меню браузера (три точки)\n2. Выберите "Установить приложение"\n3. Подтвердите установку')
+                alert('На Android:\n1. Откройте меню браузера\n2. Выберите "Установить приложение"\n3. Подтвердите установку')
             } else {
                 alert('На компьютере:\n1. Нажмите на иконку 📋 в адресной строке\n2. Выберите "Установить"\n3. Подтвердите установку')
             }

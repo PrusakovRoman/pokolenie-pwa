@@ -241,7 +241,7 @@ export default function MaterialForm({
                         value={formData.imageUrl}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                        placeholder="/image.jpg"
+                        placeholder="image.jpg"
                         required
                     />
                 </div>
