@@ -67,8 +67,8 @@ async function MaterialContent({ id }: { id: string }) {
                 type={contentType}
                 imageUrl={`/${material.imageUrl}`}
                 title={material.title}
-                contentUrl={contentType !== 'video' ? material?.url : undefined}
-                embedUrl={contentType === 'video' ? material?.embedUrl : undefined}
+                textUrl={contentType !== 'video' ? material?.url : undefined}
+                videoUrl={contentType === 'video' ? "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" : undefined}
             />
 
             <Separator className="mb-8 hidden md:block" />

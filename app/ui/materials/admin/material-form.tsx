@@ -66,7 +66,7 @@ export default function MaterialForm({
         category: '',
         categoryColor: '#FF6B6B',
         type: 'article',
-        url: '',
+        url: 'https://example.com/article-eq',
         introduction: '',
         explanation: '',
         conclusion: '',
