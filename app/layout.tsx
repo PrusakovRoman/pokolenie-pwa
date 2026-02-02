@@ -1,7 +1,6 @@
 import "@/app/ui/globals.css";
 
 import type { Metadata, Viewport } from "next";
-import { Providers } from './providers';
 import OfflineAlert from '@/app/ui/offline-alert'
 
 export const viewport: Viewport = {
@@ -45,17 +44,16 @@ export default async function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
-        <link rel="apple-touch-icon" href="/icons/ios/180.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Поколение" />
+        <link rel="apple-touch-icon" href="/icons/ios/180.png" />
         <link rel="icon" href="/icons/favicon.ico" />
       </head>
       <body>
         <div className="min-h-screen flex flex-col justify-between bg-linear-160 from-gray-200 to-gray-30">
-          <Providers>
-            {children}
-            <OfflineAlert />
-          </Providers>
+          {children}
+          <OfflineAlert />
         </div>
       </body>
     </html>

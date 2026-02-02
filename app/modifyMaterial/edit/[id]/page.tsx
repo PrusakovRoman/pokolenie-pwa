@@ -1,39 +1,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter, useParams, redirect } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import MaterialForm from '@/app/ui/materials/admin/material-form';
 import LinkToMaterials from '@/app/ui/link-to-materials';
 import ConfirmDialog from '@/app/ui/materials/admin/confirm-dialog';
-import { CreateMaterialPageSkeleton } from '@/app/ui/skeletons';
+import { MaterialPageSkeleton } from '@/app/ui/skeletons';
 
 export default function EditMaterialPage() {
     const router = useRouter();
     const params = useParams();
     const materialId = params.id as string;
-    const { data: session, status } = useSession();
 
     const [isLoading, setIsLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [materialData, setMaterialData] = useState<any>(null);
-
-
-    if (status === 'loading') {
-        return <CreateMaterialPageSkeleton />;
-    }
-
-    if (!session) {
-        redirect('/login');
-        return null;
-    }
-
-    if (session.user?.role !== 'Администратор') {
-        redirect('/dashboard?error=unauthorized');
-        return null;
-    }
 
     useEffect(() => {
         const fetchMaterial = async () => {
@@ -108,13 +91,7 @@ export default function EditMaterialPage() {
         }
     };
 
-    if (isLoading) {
-        return (
-            <div className="flex justify-center items-center h-64">
-                <div className="text-gray-500">Загрузка...</div>
-            </div>
-        );
-    }
+    if (isLoading) return <MaterialPageSkeleton />
 
     if (!materialData) {
         return (

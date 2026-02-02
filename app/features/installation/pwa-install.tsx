@@ -47,7 +47,7 @@ export function PWAInstall() {
             setShowManualButton(true)
         }
 
-        if (ios) {
+        if (ios && !standalone) {
             setShowManualButton(true)
         }
 
@@ -60,7 +60,7 @@ export function PWAInstall() {
 
     const handleInstall = async () => {
         if (isIOS) {
-            alert('На iOS:\n1. Нажмите "Поделиться" (квадрат со стрелкой)\n2. Выберите "На экран «Домой»"\n3. Нажмите "Добавить"')
+            alert('На iOS:\n1. Нажмите "Поделиться"\n2. Выберите "На экран «Домой»"\n3. Нажмите "Добавить"')
             return
         }
 
