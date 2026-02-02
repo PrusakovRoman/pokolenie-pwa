@@ -22,9 +22,6 @@ export async function GET(
 
         const material = await redis.get<Material[]>('materials')
             .then(materials => materials?.find(m => m.id === id))
-        // const materialsArray = materials || []
-
-        // const material = materialsArray.find((m: Material) => m.id === id)
 
         if (!material) {
             return NextResponse.json(
