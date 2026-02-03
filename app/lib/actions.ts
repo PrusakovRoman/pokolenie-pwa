@@ -41,9 +41,11 @@ export async function fetchMaterial(id: string) {
         const apiUrl = `${baseUrl}/api/material/${id}`;
 
         const response = await fetch(apiUrl, {
-            next: {
-                tags: [`material-${id}`],
-                revalidate: 3600
+            cache: 'no-store', // ← Отключаем кэширование
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
             }
         })
 

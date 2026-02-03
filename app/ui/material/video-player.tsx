@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Play, Pause, Volume2, Maximize, X, Loader2 } from 'lucide-react'
+import { Play, Pause, Volume2, VolumeX, Maximize, X, Loader2 } from 'lucide-react'
 
 interface VideoPlayerProps {
     videoUrl: string
@@ -196,7 +196,11 @@ export function VideoPlayer({
                             onClick={toggleMute}
                             className="p-2 hover:bg-white/20 rounded-full transition"
                         >
-                            <Volume2 className="h-6 w-6 text-white" />
+                            {isMuted ? (
+                                <VolumeX className="h-6 w-6 text-white" />
+                            ) : (
+                                <Volume2 className="h-6 w-6 text-white" />
+                            )}
                         </button>
 
                         <div className="w-24">
