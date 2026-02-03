@@ -64,7 +64,7 @@ export default function LoginForm() {
                 </div>
                 <input type="hidden" name="customRedirect" value={callbackUrl} />
                 <Button className="w-full" type="submit" aria-disabled={isPending}>
-                    Войти
+                    {isPending ? 'Загрузка...' : 'Войти'}
                 </Button>
             </form>
         </>)
