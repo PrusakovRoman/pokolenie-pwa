@@ -173,7 +173,7 @@ export function UserProfileDropdown({ user }: UserMenuProps) {
                         </div>)}
 
                         <Separator className="mb-6" />
-
+                        <div className="mb-4 text-sm text-gray-500 font-semi-bold"><span className="text-red-500">*</span> Изменить персональные данные можно <a href="#https://pokolenie.info/" className="text-gray-800 underline underline-offset-2 hover:text-red-600">на сайте</a></div>
                         <Button
                             variant="outline"
                             className="w-full gap-2 border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:border-red-300 dark:hover:border-red-700"
